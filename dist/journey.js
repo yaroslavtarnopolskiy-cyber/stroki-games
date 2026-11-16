@@ -35,13 +35,6 @@
  });
  document.addEventListener('keyup',event=>{if(event.key===heldArrow)heldArrow=null});
  addEventListener('blur',()=>heldArrow=null);
- document.addEventListener('pesni:land-selected',async()=>{
-  if(!matchMedia('(max-width:999px)').matches)return;
-  const request=++storyRequest,target=document.querySelector('.land-story-focus'),image=document.querySelector('#land-illustration');
-  if(image&&!image.complete)try{await image.decode()}catch{}
-  if(request!==storyRequest||!target||target.closest('[hidden]'))return;
-  requestAnimationFrame(()=>{if(request!==storyRequest)return;target.focus({preventScroll:true});target.scrollIntoView({behavior:reduced()?'instant':'smooth',block:'center'})});
- });
  document.querySelectorAll('[data-go]').forEach(button=>button.addEventListener('click',()=>window.goToSection(button.dataset.go)));
  function syncAudio(){const playing=!backgroundAudio.paused;floatingSound.setAttribute('aria-pressed',String(playing));floatingSound.setAttribute('aria-label',playing?'Выключить фоновую музыку':'Включить фоновую музыку')}
  floatingSound.addEventListener('click',()=>document.querySelector('.sound-button').click());
@@ -50,10 +43,13 @@
 
  // Anchor to an actual point on the stem, including object-fit and bouquet rotation.
  const opening=document.querySelector('#opening'),bouquet=opening.querySelector('.flower'),thread=opening.querySelector('.hero-thread');
+ let lastThreadGeometry='';
  function drawBouquetThread(){
   if(!thread||!bouquet)return;
   const frame=opening.getBoundingClientRect(),box=bouquet.getBoundingClientRect(),image=bouquet.querySelector('img');
   const width=opening.clientWidth,height=opening.clientHeight,w=bouquet.offsetWidth,h=bouquet.offsetHeight;
+  const geometry=[width,height,w,h,box.left-frame.left,box.top-frame.top,image.naturalWidth,image.naturalHeight].join(',');
+  if(geometry===lastThreadGeometry)return;lastThreadGeometry=geometry;
   const imageWidth=image.naturalWidth||1199,imageHeight=image.naturalHeight||1312,scale=Math.min(w/imageWidth,h/imageHeight);
   const localX=(w-imageWidth*scale)/2+imageWidth*scale*.365-w/2,localY=(h-imageHeight*scale)/2+imageHeight*scale*.80-h/2;
   const matrix=new DOMMatrix(getComputedStyle(bouquet).transform),x=box.left+box.width/2-frame.left+matrix.a*localX+matrix.c*localY,y=box.top+box.height/2-frame.top+matrix.b*localX+matrix.d*localY;

@@ -1,0 +1,114 @@
+{
+  "domMs": 3526,
+  "resources": [
+    {
+      "name": "onlabel.svg",
+      "duration": 3564,
+      "size": 3882,
+      "start": 349
+    },
+    {
+      "name": "cards-embed.js?v=11",
+      "duration": 3139,
+      "size": 7561,
+      "start": 341
+    },
+    {
+      "name": "gifts-embed.js?v=6",
+      "duration": 3130,
+      "size": 7618,
+      "start": 340
+    },
+    {
+      "name": "runner-embed.js?v=19",
+      "duration": 2761,
+      "size": 8513,
+      "start": 340
+    },
+    {
+      "name": "story-matcher.mjs?v=14",
+      "duration": 2666,
+      "size": 14850,
+      "start": 339
+    },
+    {
+      "name": "album-promo.js?v=11",
+      "duration": 2649,
+      "size": 7926,
+      "start": 340
+    },
+    {
+      "name": "word-stream.js?v=24",
+      "duration": 2291,
+      "size": 22355,
+      "start": 339
+    },
+    {
+      "name": "izvod.otf",
+      "duration": 2244,
+      "size": 98752,
+      "start": 1960
+    },
+    {
+      "name": "voices.js?v=full-13",
+      "duration": 2125,
+      "size": 17177,
+      "start": 339
+    },
+    {
+      "name": "journey.js?v=full-14",
+      "duration": 2019,
+      "size": 7908,
+      "start": 339
+    },
+    {
+      "name": "games.js?v=6",
+      "duration": 1998,
+      "size": 2771,
+      "start": 339
+    },
+    {
+      "name": "app.js?v=full-7",
+      "duration": 1781,
+      "size": 3916,
+      "start": 339
+    },
+    {
+      "name": "connection-policy.js?v=4",
+      "duration": 1717,
+      "size": 2522,
+      "start": 337
+    },
+    {
+      "name": "match.mjs?v=3",
+      "duration": 1643,
+      "size": 1587,
+      "start": 336
+    },
+    {
+      "name": "data.mjs?v=5",
+      "duration": 1632,
+      "size": 2367,
+      "start": 336
+    },
+    {
+      "name": "matcher-alignment.css?v=2",
+      "duration": 1597,
+      "size": 1896,
+      "start": 341
+    },
+    {
+      "name": "cards-embed.css?v=6",
+      "duration": 1583,
+      "size": 1299,
+      "start": 341
+    },
+    {
+      "name": "gifts-embed.css?v=6",
+      "duration": 1457,
+      "size": 884,
+      "start": 340
+    }
+  ],
+  "words": 120
+}

@@ -1,0 +1,4 @@
+.vpn-notice{position:absolute;left:50%;bottom:65px;transform:translateX(-50%);margin:0;max-width:calc(100vw - 48px);width:max-content;border:1px solid var(--rule);border-radius:999px;background:var(--paper);color:var(--muted);padding:7px 13px;font:400 var(--text-caption,12px)/1.2 Glanz,Georgia,serif;text-align:center;pointer-events:auto}
+html[data-motion=static] :is(.theme-switch,.world-switch,.album-promo) *{transition-duration:0s!important}
+html[data-motion=static] :is(.album-track,.album-ensemble svg *){animation-play-state:paused!important}
+.album-ensemble img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}

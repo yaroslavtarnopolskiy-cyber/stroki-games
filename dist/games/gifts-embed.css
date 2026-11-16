@@ -1,0 +1,8 @@
+#game-gifts .gifts-stage:not(.is-expanded){aspect-ratio:16/9}
+.gifts-stage .runner-launch{font-family:Glanz,Georgia,serif}
+.gifts-stage .runner-close svg{display:block;width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8}
+.gifts-stage .runner-close{padding:0}
+.gifts-stage .game-scene{object-fit:contain;background:#111}
+#game-gifts .game-preview-link[hidden]{display:none}
+@media(max-width:760px){.gifts-stage .runner-launch{font-size:clamp(11px,3.1vw,17px);padding:8px 13px;max-width:90%}}
+.runner-open,.runner-open body{overscroll-behavior:none;touch-action:none}

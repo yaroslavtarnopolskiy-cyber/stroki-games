@@ -1,0 +1,32 @@
+[
+  {
+    "source": "Assets/KateAssets/Background.png",
+    "file": "assets/forest.png",
+    "sha256": "e4615be2a836db1d3172c70aaad0cfd24be388c12a8a79e6e5966d138aca5e70",
+    "bytes": 2912937
+  },
+  {
+    "source": "Assets/KateAssets/Подложка.png",
+    "file": "assets/card-frame.png",
+    "sha256": "8f500ede17ac2c03b026657003bffacb12eb00aaf9fe9a644513d038e40e34f6",
+    "bytes": 16095
+  },
+  {
+    "source": "Assets/KateAssets/iconHUMAN (1).png",
+    "file": "assets/human.png",
+    "sha256": "104b4b013ed405c064eb5e292ba877529bc08c8b958edd8477522f496db1e731",
+    "bytes": 16883
+  },
+  {
+    "source": "Assets/KateAssets/iconBEAR.png",
+    "file": "assets/bear.png",
+    "sha256": "0c19200f2dc720f96c45141fad9fc39ba7c489513e3ad98e139bffb047e4f220",
+    "bytes": 22226
+  },
+  {
+    "source": "Assets/Sounds/страницы (mp3cut.net).mp3",
+    "file": "assets/page-turn.mp3",
+    "sha256": "fb410ee133608a8c9f6b1277fbd452e6ff592d6e85b8a986b3198794fb231d25",
+    "bytes": 11085
+  }
+]

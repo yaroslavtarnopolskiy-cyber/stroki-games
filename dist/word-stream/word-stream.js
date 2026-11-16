@@ -3,6 +3,7 @@ import {words} from './words.js';
 import {flowConfig as config} from './config.js?v=6';
 const disclaimer='Перевод и произношение отдельных слов могут отличаться в зависимости от диалекта, контекста и языковой традиции. Проект носит художественно-просветительский характер и не является нормативным лингвистическим или фонетическим источником. Звёздочкой (*) отмечены предварительные варианты произношения.';
 const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+const motionAllowed=()=>!reduced.matches&&window.pesniConnection?.canAnimate()!==false;
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const mod=(v,d)=>((v%d)+d)%d;
 const displayWord=word=>word.toLocaleLowerCase('ru');
@@ -15,9 +16,10 @@ class WordStream{
   this.theme=document.documentElement.dataset.theme==='death'?'death':'life';
   root.innerHTML=`<h2 class="sr-only">Слова земли</h2><p id="${this.id}-help" class="sr-only">Нажмите на слово, чтобы ненадолго увидеть значение. Удерживайте пальцем, мышью, пробелом или Enter, чтобы оставить карточку открытой.</p><div class="river-stage"><svg class="river-lines" aria-hidden="true"><defs><filter id="${this.id}-ink" x="-2%" y="-10%" width="104%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".35" numOctaves="1" seed="4" result="grain"/><feDisplacementMap in="SourceGraphic" in2="grain" scale=".45"/></filter><g id="${this.id}-flower"><path class="flower-stem" d="M0 0C3-8 3-15 0-24M1-8C-8-8-10-13-12-15-5-16 0-13 1-8M2-13C10-12 13-16 14-20 6-19 3-17 2-13"/><path class="flower-petal" d="M0-23C-10-20-19-28-16-37-12-33-8-30-5-30-12-38-8-45-3-46-4-39-1-35 2-34 0-43 6-47 11-44 5-39 5-35 6-32 13-37 17-34 18-31 13-25 8-22 0-23Z"/><path class="flower-cut" d="M-12-34C-12-28-6-25 0-26M-4-39C-4-33 1-29 6-28M9-38C7-33 7-30 4-27"/></g><g id="${this.id}-bud"><path class="flower-stem" d="M0 0C-4-10-3-20 1-28M-1-9C6-10 10-14 10-18 3-17 0-14-1-9M-2-16C-8-16-11-21-10-25-4-23-3-20-2-16"/><path class="flower-petal" d="M1-27C-6-28-8-36-3-40-2-34 1-33 2-31 1-37 6-42 9-38 10-32 7-27 1-27Z"/><path class="flower-cut" d="M0-35 3-29"/></g><g id="${this.id}-sprig"><path class="flower-stem" d="M0 0C0-8-4-17-2-29M-1-8C7-7 12-12 14-18 7-19 1-15-1-8M-2-17C-12-16-16-23-15-27-7-28-3-22-2-17M-2-26C-8-31-5-38-1-42 4-37 4-31-2-26"/><path class="flower-cut" d="M1-11 10-16M-5-20-12-25"/></g></defs><g class="river-snake-back"/><g filter="url(#${this.id}-ink)"><path class="river-thread-a"/><path class="river-thread-b"/></g><g class="river-ribbon-pattern"/><g class="river-snake-front"/><g class="river-flowers"/></svg><div class="river-row" data-row="0"></div><div class="river-row" data-row="1"></div></div><div class="river-details" id="${this.id}-details" role="region" aria-label="Значение слова" aria-live="polite" hidden><h3></h3><p class="river-language"></p><p class="river-meaning"></p><p class="river-pronunciation"></p><p class="river-disclaimer" id="${this.id}-note" tabindex="-1">${disclaimer}</p></div>`;
   this.stage=root.querySelector('.river-stage');this.details=root.querySelector('.river-details');
-  this.resize=new ResizeObserver(()=>this.measure());this.resize.observe(root);
-  const map=root.id==='word-river'?document.querySelector('#voices'):null;if(map){this.mapResize=new ResizeObserver(()=>this.alignAfterMap());this.mapResize.observe(map);this.mapResize.observe(map.querySelector('.voices-inner'))}
-  this.observer=new IntersectionObserver(entries=>{this.visible=entries[0].isIntersecting;if(this.visible&&this.pendingTheme){this.pendingTheme=false;this.build()}if(this.visible&&!this.viewed){this.viewed=true;this.emit('word_stream_view')}this.wake()},{threshold:.1});this.observer.observe(root);
+  this.resize=new ResizeObserver(()=>{if(this.measureFrame)return;this.measureFrame=requestAnimationFrame(()=>{this.measureFrame=0;this.measure()})});this.resize.observe(root);
+  const map=root.id==='word-river'?document.querySelector('#voices'):null;if(map){this.mapResize=new ResizeObserver(()=>{if(this.alignFrame)return;this.alignFrame=requestAnimationFrame(()=>{this.alignFrame=0;this.alignAfterMap()})});this.mapResize.observe(map);this.mapResize.observe(map.querySelector('.voices-inner'))}
+  this.observer=new IntersectionObserver(entries=>{this.visible=entries[0].isIntersecting;if(this.visible)this.measureFrames();if(this.visible&&this.pendingTheme){this.pendingTheme=false;this.build()}if(this.visible&&!this.viewed){this.viewed=true;this.emit('word_stream_view')}this.wake()},{threshold:.1});this.observer.observe(root);
+  window.addEventListener('pesni:connection-change',()=>this.wake());
   document.addEventListener('visibilitychange',()=>{if(document.hidden)this.release();this.wake()});
   document.addEventListener('keydown',event=>{if(event.key==='Escape'&&this.selected){event.preventDefault();this.release()}});
   window.addEventListener('pointerup',event=>this.finishHold(event.pointerId));
@@ -100,6 +102,7 @@ class WordStream{
   });this.measure();this.wake();
  }
  measureFrames(){
+  if(!this.visible){this.frames=[];return}
   const stage=this.stage.getBoundingClientRect();this.frames=[...document.querySelectorAll('.game-header,.game-window-group')].map(el=>{const b=el.getBoundingClientRect();return {left:b.left-stage.left,top:b.top-stage.top,width:b.width,height:b.height}}).filter(b=>b.top+b.height>-250&&b.top<this.height+250);
  }
  measure(){
@@ -133,10 +136,10 @@ class WordStream{
   if(this.selected){this.emit('word_details_close');this.selected.button.setAttribute('aria-expanded','false');this.selected=null;this.details.hidden=true;this.root.classList.remove('has-selection')}
   this.focusPaused=false;this.wake();
  }
- changeTheme(){const theme=document.documentElement.dataset.theme==='death'?'death':'life';if(theme===this.theme)return;this.release();this.theme=theme;this.emit('word_mode_change');if(!this.visible){clearTimeout(this.themeTimer);this.pendingTheme=true;return}this.root.classList.add('is-changing');clearTimeout(this.themeTimer);this.themeTimer=setTimeout(()=>{this.build();this.root.classList.remove('is-changing')},reduced.matches?0:config.transitionMs)}
+ changeTheme(){const theme=document.documentElement.dataset.theme==='death'?'death':'life';if(theme===this.theme)return;this.release();this.theme=theme;this.emit('word_mode_change');if(!this.visible){clearTimeout(this.themeTimer);this.pendingTheme=true;return}this.root.classList.add('is-changing');clearTimeout(this.themeTimer);this.themeTimer=setTimeout(()=>{this.build();this.root.classList.remove('is-changing')},motionAllowed()?config.transitionMs:0)}
  wake(){
-  cancelAnimationFrame(this.frame);this.last=0;if(!this.visible||document.hidden||reduced.matches){this.render(0);return}
-  const tick=now=>{const dt=this.last?Math.min(64,now-this.last)/1000:0;this.last=now;this.render(dt);if(this.velocity>0||!(this.selected||this.focusPaused))this.frame=requestAnimationFrame(tick)};this.frame=requestAnimationFrame(tick);
+  cancelAnimationFrame(this.frame);this.last=0;if(!this.visible||document.hidden||!motionAllowed()){this.render(0);return}
+  const tick=now=>{const dt=this.last?Math.min(64,now-this.last)/1000:0;this.last=now;this.render(dt);if(motionAllowed()&&(this.velocity>0||!(this.selected||this.focusPaused)))this.frame=requestAnimationFrame(tick)};this.frame=requestAnimationFrame(tick);
  }
  render(dt){
   const p=config[this.theme],target=this.selected||this.focusPaused?0:1;this.velocity+=(target-this.velocity)*Math.min(1,dt*14);if(!target&&this.velocity<.002)this.velocity=0;
@@ -163,6 +166,10 @@ class WordStream{
   for(const row of this.rows)for(const item of row.items){const shift=(shifts.get(item)||0)*(row.index?1:-1),safe=safeWordPlacement({x:item.x+item.bendX,y:item.y+shift,sx:item.sx,sy:item.sy,width:item.width,height:item.height,rotation:item.rotation,skew:item.skew,stageHeight:this.height},this.frames||[]);item.button.style.transform=`translate3d(${safe.x}px,${safe.y}px,0) translate(-50%,-50%) rotate(${item.rotation}deg) skewX(${item.skew}deg) scale(${safe.sx},${safe.sy})`}
  }
 }
-await document.fonts.ready;
-await document.fonts.load('300 38px RiverRoot');
-document.querySelectorAll('[data-word-stream]').forEach(root=>new WordStream(root));
+// A stalled unrelated font must never prevent the rivers from starting.
+const riverFont=document.fonts.load('300 38px RiverRoot').catch(()=>[]);
+let fontWait;
+await Promise.race([riverFont,new Promise(resolve=>{fontWait=setTimeout(resolve,1200)})]);
+clearTimeout(fontWait);
+const streams=[...document.querySelectorAll('[data-word-stream]')].map(root=>new WordStream(root));
+riverFont.then(()=>streams.forEach(stream=>stream.measure()));

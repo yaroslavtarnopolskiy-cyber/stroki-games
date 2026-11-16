@@ -1,0 +1,380 @@
+[
+  {
+    "choice_number": 1,
+    "cardName": null,
+    "text": "Твоя человеческая и звериная тоска успокаиваются в обътиях девушки. Но кто она?...",
+    "portraitName": "Тян",
+    "left": {
+      "label": null,
+      "scale": 0,
+      "consequence": null
+    },
+    "right": {
+      "label": null,
+      "scale": 0,
+      "consequence": null
+    },
+    "type": null,
+    "url": null,
+    "musicName": "пение",
+    "portraitUrl": "assets/00.png",
+    "musicUrl": "assets/01.mp3"
+  },
+  {
+    "choice_number": 2,
+    "cardName": null,
+    "text": "Однажды привезли пама, твоего названного отца, израненного стрелами. Уложили на постель под сводом небес. Там он умер.",
+    "portraitName": "Event",
+    "left": {
+      "label": null,
+      "scale": 0,
+      "consequence": null
+    },
+    "right": {
+      "label": null,
+      "scale": 0,
+      "consequence": null
+    },
+    "type": null,
+    "url": null,
+    "musicName": "шаман",
+    "portraitUrl": "assets/02.png",
+    "musicUrl": "assets/03.mp3"
+  },
+  {
+    "choice_number": 3,
+    "cardName": "Селение",
+    "text": "Жители селения беспокоятся. Кто должен стать следующим памом? Кого нам выбрать теперь, если не Кудым-Оша? Но он еще молод. К тому же, в жилах его медвежья кровь. Может, стоит выбрать кого-то опытнее?",
+    "portraitName": "Чувакм",
+    "left": {
+      "label": "Моя сила — послужит на благо",
+      "scale": -10,
+      "consequence": null
+    },
+    "right": {
+      "label": "Моя мудрость — поможет людям",
+      "scale": 10,
+      "consequence": null
+    },
+    "type": null,
+    "url": null,
+    "musicName": null,
+    "portraitUrl": "assets/04.png",
+    "musicUrl": null
+  },
+  {
+    "choice_number": 4,
+    "cardName": null,
+    "text": "Народ назначил памом тебя. Ты поклялся защищать селение любой ценой.",
+    "portraitName": "Event",
+    "left": {
+      "label": null,
+      "scale": 0,
+      "consequence": null
+    },
+    "right": {
+      "label": null,
+      "scale": 0,
+      "consequence": null
+    },
+    "type": null,
+    "url": null,
+    "musicName": null,
+    "portraitUrl": "assets/02.png",
+    "musicUrl": null
+  },
+  {
+    "choice_number": 5,
+    "cardName": "Русак",
+    "text": "Ты стал заботиться о селении и руководить охотой. Ты видишь как в куст сиганул русак.",
+    "portraitName": "HaseSprite",
+    "left": {
+      "label": "Вцепиться в зайца зубами",
+      "scale": -10,
+      "consequence": null
+    },
+    "right": {
+      "label": "Застрелить из лука",
+      "scale": 10,
+      "consequence": null
+    },
+    "type": null,
+    "url": null,
+    "musicName": null,
+    "portraitUrl": "assets/05.png",
+    "musicUrl": null
+  },
+  {
+    "choice_number": 6,
+    "cardName": null,
+    "text": "Ты оказался хорошим памом: и на охоту у тебя было чутьё, и на рыбалку. Даже зимы стали казаться мягче. Так прожили год, другой, третий. Но с очередными холодами что-то изменилось: зима больше не приносила облегчения, а тебя постоянно мучили звериные сны.",
+    "portraitName": "Event",
+    "left": {
+      "label": null,
+      "scale": 0,
+      "consequence": null
+    },
+    "right": {
+      "label": null,
+      "scale": 0,
+      "consequence": null
+    },
+    "type": null,
+    "url": null,
+    "musicName": null,
+    "portraitUrl": "assets/02.png",
+    "musicUrl": null
+  },
+  {
+    "choice_number": 7,
+    "cardName": "Колдунья Пэвсин",
+    "text": "Рядом с тобой села обеспокоенная мать: «Тебе нужна хорошая жена, быть может, спокойнее будет спаться»",
+    "portraitName": "MumSprite",
+    "left": {
+      "label": "Я только причиню ей зло",
+      "scale": -10,
+      "consequence": " "
+    },
+    "right": {
+      "label": "Откуда ты знаешь?",
+      "scale": 10,
+      "consequence": null
+    },
+    "type": null,
+    "url": null,
+    "musicName": null,
+    "portraitUrl": "assets/06.png",
+    "musicUrl": null
+  },
+  {
+    "choice_number": 8,
+    "cardName": null,
+    "text": "Шаманка Чикыш поведала тебе, что у князя вогулов есть дочь, дева Костэ. Она дивной красоты, а еще ей суждено родить лишь одного сына — богатыря. \nИ медвежье, и человеческое чутье, наконец, находятся в согласии и чувствуют, что это судьба твоя.",
+    "portraitName": "Event",
+    "left": {
+      "label": null,
+      "scale": 0,
+      "consequence": null
+    },
+    "right": {
+      "label": null,
+      "scale": 0,
+      "consequence": null
+    },
+    "type": null,
+    "url": null,
+    "musicName": null,
+    "portraitUrl": "assets/02.png",
+    "musicUrl": null
+  },
+  {
+    "choice_number": 9,
+    "cardName": "Лодка",
+    "text": "И вот ты отправился в селение вогулов. Река тут неспокойная. Сложно плыть. Мужики, которых ты взял с собой, стали переживать.",
+    "portraitName": "Река",
+    "left": {
+      "label": "Поплывём дальше. Я буду сторожить",
+      "scale": -10,
+      "consequence": null
+    },
+    "right": {
+      "label": "Устроим привал и напьёмся медовухи",
+      "scale": 10,
+      "consequence": null
+    },
+    "type": null,
+    "url": null,
+    "musicName": null,
+    "portraitUrl": "assets/07.png",
+    "musicUrl": null
+  },
+  {
+    "choice_number": 10,
+    "cardName": "Вокуль",
+    "text": "Когда вы почти добрались до селения, перед вами предстало грозное существо. «Я Вокуль. Хозяин этой реки. Зачем ты тревожишь мою рыбу?»",
+    "portraitName": "Вакуоль",
+    "left": {
+      "label": "Я отпущу рыбу и угощу тебя мёдом",
+      "scale": -10,
+      "consequence": null
+    },
+    "right": {
+      "label": "Мои мужики не должны голодать",
+      "scale": 10,
+      "consequence": "Вокуль переворачивает лодку"
+    },
+    "type": null,
+    "url": null,
+    "musicName": null,
+    "portraitUrl": "assets/08.png",
+    "musicUrl": null
+  },
+  {
+    "choice_number": 11,
+    "cardName": null,
+    "text": "Ты доплываешь до селения вогулов. Оно было огорожено частоколом. С каждого бревна скалился весело череп. Больше всего было выбеленных, иссушенных солнцем, выклеванных птицами. Но встречались и те, на которых виднелись еще обрывки волос, куски плоти.",
+    "portraitName": "Event",
+    "left": {
+      "label": null,
+      "scale": 0,
+      "consequence": null
+    },
+    "right": {
+      "label": null,
+      "scale": 0,
+      "consequence": null
+    },
+    "type": null,
+    "url": null,
+    "musicName": null,
+    "portraitUrl": "assets/02.png",
+    "musicUrl": null
+  },
+  {
+    "choice_number": 12,
+    "cardName": "Асыка, князь вогулов",
+    "text": "Перед тобой сразу же предстал князь Вогулов — Асыка: «Кто ты, воин?»",
+    "portraitName": "OldmanSprite",
+    "left": {
+      "label": "Медведь с реки Ку",
+      "scale": -10,
+      "consequence": null
+    },
+    "right": {
+      "label": "Сын колдуньи Пэвсин",
+      "scale": 10,
+      "consequence": null
+    },
+    "type": null,
+    "url": null,
+    "musicName": null,
+    "portraitUrl": "assets/09.png",
+    "musicUrl": null
+  },
+  {
+    "choice_number": 13,
+    "cardName": "Асыка, князь вогулов",
+    "text": "Откажись от своей затеи. Попросив руки дочери, ты мне дашь обещание. А не выполнив обещание окажешься среди этих\nчерепов.",
+    "portraitName": "OldmanSprite",
+    "left": {
+      "label": "Вот так ты относишься к гостям?",
+      "scale": -10,
+      "consequence": null
+    },
+    "right": {
+      "label": "Я не нарушаю обещаний",
+      "scale": 10,
+      "consequence": null
+    },
+    "type": null,
+    "url": null,
+    "musicName": null,
+    "portraitUrl": "assets/09.png",
+    "musicUrl": null
+  },
+  {
+    "choice_number": 14,
+    "cardName": null,
+    "text": "Князь вогулов опустил взгляд и сказал, сдаваясь: - Ты нравишься мне, сын одноглазой колдуньи и медведя. Я рассказал тебе все, что знаю. Выбор за тобой.",
+    "portraitName": "Event",
+    "left": {
+      "label": null,
+      "scale": 0,
+      "consequence": null
+    },
+    "right": {
+      "label": null,
+      "scale": 0,
+      "consequence": null
+    },
+    "type": null,
+    "url": null,
+    "musicName": null,
+    "portraitUrl": "assets/02.png",
+    "musicUrl": null
+  },
+  {
+    "choice_number": 15,
+    "cardName": "Концовка: Костэ",
+    "text": "Ты зашёл в чум. Перед тобой предстала девушка, чьи руки были закрыты длинными рукавами, а лицо покрывалом.",
+    "portraitName": "Final",
+    "left": {
+      "label": null,
+      "scale": 0,
+      "consequence": null
+    },
+    "right": {
+      "label": null,
+      "scale": 0,
+      "consequence": null
+    },
+    "type": "ending_final",
+    "url": null,
+    "musicName": null,
+    "portraitUrl": "assets/10.png",
+    "musicUrl": null
+  },
+  {
+    "choice_number": -1,
+    "cardName": "Концовка: Медведь",
+    "text": "Звериная часть тебя одержала верх. Когда ты очнулся, всё вокруг тебя было покрыто кровью близких тебе людей.",
+    "portraitName": "Ending",
+    "left": {
+      "label": null,
+      "scale": 0,
+      "consequence": null
+    },
+    "right": {
+      "label": null,
+      "scale": 0,
+      "consequence": null
+    },
+    "type": "ending_high",
+    "url": null,
+    "musicName": null,
+    "portraitUrl": "assets/11.png",
+    "musicUrl": null
+  },
+  {
+    "choice_number": -2,
+    "cardName": "Концовка: Человек",
+    "text": "Зверь внутри тебя затих, и впервые в жизни ты чувствуешь себя настоящим человеком. Но когда ты приходишь свататься к Костэ, она даже не пускает тебя в чум. Её мать объясняет: Костэ давно утратила доверие к людям.",
+    "portraitName": "Ending",
+    "left": {
+      "label": null,
+      "scale": 0,
+      "consequence": null
+    },
+    "right": {
+      "label": null,
+      "scale": 0,
+      "consequence": null
+    },
+    "type": "ending_low",
+    "url": null,
+    "musicName": null,
+    "portraitUrl": "assets/11.png",
+    "musicUrl": null
+  },
+  {
+    "choice_number": -1000,
+    "cardName": null,
+    "text": "Читай историю полностью в КИОН Строки.",
+    "portraitName": "Обложка",
+    "left": {
+      "label": "Играть заново",
+      "scale": 0,
+      "consequence": null
+    },
+    "right": {
+      "label": "Читать",
+      "scale": 0,
+      "consequence": null
+    },
+    "type": "book",
+    "url": "https://mtsbooks.onelink.me/zdZb/t75hb4td",
+    "musicName": null,
+    "portraitUrl": "assets/12.png",
+    "musicUrl": null
+  }
+]

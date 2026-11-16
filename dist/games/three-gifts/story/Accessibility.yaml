@@ -1,0 +1,4 @@
+# Optional a11y labels for RenJS screen reader layer
+buttons: {}
+sliders: {}
+choices: {}

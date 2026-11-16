@@ -6,7 +6,7 @@ const speedSlider = document.getElementById("speed-slider");
 const speedValue = document.getElementById("speed-value");
 const startScreen = document.getElementById("start-screen");
 const tutorialOverlay = document.getElementById("tutorial-overlay");
-const jumpPreparationMs = 50;
+const jumpPreparationMs = 0;
 
 const spriteFrames = {
   human: {
@@ -407,6 +407,7 @@ function resetCaveWall(obstacle) {
 }
 
 function resetRun() {
+  window.runnerTouchInput?.cancel();
   running = gameStarted;
   worldX = 0;
   world.style.transform = "translate3d(0, 0, 0)";
@@ -472,18 +473,24 @@ tutorialOverlay.addEventListener("keydown", (event) => {
   }
 });
 
-game.addEventListener("pointerdown", (event) => {
-  if (event.pointerType !== "mouse" || event.target.closest("#speed-control, #start-screen, #tutorial-overlay")) return;
-  if (event.button === 0) startJump();
-  else if (event.button === 2) toggleHeroForm();
+window.runnerMouseInput = createRunnerMouseInput({
+  jump: startJump,
+  changeForm: toggleHeroForm,
+  canAct: () => gameStarted && running && !tutorialActive
 });
+game.addEventListener("pointerdown", window.runnerMouseInput.pointerDown);
+game.addEventListener("click", window.runnerMouseInput.click);
 
 game.addEventListener("contextmenu", (event) => {
   event.preventDefault();
 });
 
+window.runnerTouchInput=createRunnerTouchInput({jump:startJump,changeForm:toggleHeroForm,canAct:()=>gameStarted&&running&&!tutorialActive});
+window.addEventListener('blur',()=>window.runnerTouchInput.cancel());
+document.addEventListener('visibilitychange',()=>{if(document.hidden)window.runnerTouchInput.cancel()});
+game.addEventListener('touchcancel',()=>{touchStart=null;window.runnerTouchInput.cancel()});
 game.addEventListener("touchstart", (event) => {
-  if (event.target.closest("#speed-control, #start-screen, #tutorial-overlay")) return;
+  if (event.target.closest("#speed-control, #start-screen, #tutorial-overlay, #result-screen, button, a, input")) return;
   if (!gameStarted || !running) return;
   const touch = event.changedTouches[0];
   touchStart = { x: touch.clientX, y: touch.clientY, time: performance.now() };
@@ -491,7 +498,7 @@ game.addEventListener("touchstart", (event) => {
 }, { passive: false });
 
 game.addEventListener("touchend", (event) => {
-  if (event.target.closest("#speed-control, #start-screen, #tutorial-overlay")) return;
+  if (event.target.closest("#speed-control, #start-screen, #tutorial-overlay, #result-screen, button, a, input")) return;
   if (!touchStart || !gameStarted || !running) return;
   const touch = event.changedTouches[0];
   const dx = touch.clientX - touchStart.x;
@@ -500,8 +507,8 @@ game.addEventListener("touchend", (event) => {
   const isUpSwipe = dy < -45 && Math.abs(dy) > Math.abs(dx) * 1.15 && elapsed < 650;
   touchStart = null;
   event.preventDefault();
-  if (isUpSwipe) startJump();
-  else toggleHeroForm();
+  if (isUpSwipe) window.runnerTouchInput.swipeUp();
+  else if(Math.abs(dx)<28&&Math.abs(dy)<28&&elapsed<450) window.runnerTouchInput.tap(touch.clientX,touch.clientY);
 }, { passive: false });
 
 window.addEventListener("keydown", (event) => {
@@ -517,6 +524,7 @@ window.addEventListener("keydown", (event) => {
     event.preventDefault();
     startJump();
   } else if (event.code === "KeyE" || event.code === "ArrowDown") {
+    event.preventDefault();
     toggleHeroForm();
   }
 });
@@ -548,6 +556,12 @@ function breakCaveWall(obstacle) {
       obstacle.element.style.visibility = "hidden";
     }
   }, 75);
+}
+
+// Trim 9% from the collision span of stumps and bushes; scenery and form rules stay intact.
+function obstacleCollisionHalfWidth(obstacle) {
+  const forgiving = ["stump", "blue-bush", "red-bush", "cave-blue-bush", "cave-red-bush"].includes(obstacle.id);
+  return obstacle.element.offsetWidth * (obstacle.gapFactor ?? 0.4) * (forgiving ? 0.91 : 1);
 }
 
 function updateObstacleCollisions(previousCenter, center, now, speed, landedJump = null) {
@@ -604,7 +618,7 @@ function updateObstacleCollisions(previousCenter, center, now, speed, landedJump
     }
 
     if (["ravine", "bear-jump", "any-jump"].includes(obstacle.mode)) {
-      const halfGap = obstacle.element.offsetWidth * (obstacle.gapFactor ?? 0.4);
+      const halfGap = obstacleCollisionHalfWidth(obstacle);
       const gapStart = obstacle.x - halfGap;
       const gapEnd = obstacle.x + halfGap;
 

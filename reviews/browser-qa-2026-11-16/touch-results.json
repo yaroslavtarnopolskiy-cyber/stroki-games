@@ -1,0 +1,18 @@
+[
+  {
+    "engine": "chromium",
+    "jump": true,
+    "form": "human",
+    "running": true,
+    "scrollY": 0,
+    "errors": []
+  },
+  {
+    "engine": "webkit",
+    "jump": true,
+    "form": "human",
+    "running": true,
+    "scrollY": 0,
+    "errors": []
+  }
+]

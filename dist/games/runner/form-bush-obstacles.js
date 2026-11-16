@@ -110,7 +110,7 @@
       ].includes(obstacle.id);
       if (!isStump && !isBush) continue;
 
-      const halfGap = obstacle.element.offsetWidth * (obstacle.gapFactor ?? 0.4);
+      const halfGap = obstacleCollisionHalfWidth(obstacle);
       const gapStart = obstacle.x - halfGap;
       if (!(previousCenter < gapStart && center >= gapStart)) continue;
 

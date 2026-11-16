@@ -1,0 +1,122 @@
+[
+  {
+    "engine": "chromium",
+    "widths": [
+      {
+        "viewport": 320,
+        "scroll": 320
+      },
+      {
+        "viewport": 360,
+        "scroll": 360
+      },
+      {
+        "viewport": 390,
+        "scroll": 390
+      },
+      {
+        "viewport": 768,
+        "scroll": 768
+      },
+      {
+        "viewport": 1440,
+        "scroll": 1440
+      }
+    ],
+    "games": [
+      {
+        "path": "runner",
+        "size": {
+          "width": 844,
+          "height": 390,
+          "scrollWidth": 844,
+          "canvas": false
+        },
+        "state": "paused"
+      },
+      {
+        "path": "three-gifts",
+        "size": {
+          "width": 844,
+          "height": 390,
+          "scrollWidth": 844,
+          "canvas": true
+        },
+        "state": "paused"
+      },
+      {
+        "path": "human-beast",
+        "size": {
+          "width": 390,
+          "height": 844,
+          "scrollWidth": 390,
+          "canvas": false
+        },
+        "state": "idle"
+      }
+    ],
+    "errors": [],
+    "bad": [],
+    "gameRequests": 3
+  },
+  {
+    "engine": "webkit",
+    "widths": [
+      {
+        "viewport": 320,
+        "scroll": 320
+      },
+      {
+        "viewport": 360,
+        "scroll": 360
+      },
+      {
+        "viewport": 390,
+        "scroll": 390
+      },
+      {
+        "viewport": 768,
+        "scroll": 768
+      },
+      {
+        "viewport": 1440,
+        "scroll": 1440
+      }
+    ],
+    "games": [
+      {
+        "path": "runner",
+        "size": {
+          "width": 844,
+          "height": 390,
+          "scrollWidth": 844,
+          "canvas": false
+        },
+        "state": "paused"
+      },
+      {
+        "path": "three-gifts",
+        "size": {
+          "width": 844,
+          "height": 390,
+          "scrollWidth": 844,
+          "canvas": true
+        },
+        "state": "paused"
+      },
+      {
+        "path": "human-beast",
+        "size": {
+          "width": 390,
+          "height": 844,
+          "scrollWidth": 390,
+          "canvas": false
+        },
+        "state": "idle"
+      }
+    ],
+    "errors": [],
+    "bad": [],
+    "gameRequests": 3
+  }
+]

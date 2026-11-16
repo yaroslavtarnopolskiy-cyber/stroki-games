@@ -1,0 +1,80 @@
+[
+  {
+    "source": "Assets/Characters/Тян.png",
+    "file": "assets/00.png",
+    "bytes": 152902,
+    "sha256": "0dffe5148bc3cd50aebc8707e737e9a186c6a7b52b629787e206e1b923910ab0"
+  },
+  {
+    "source": "Assets/Sounds/пение.mp3",
+    "file": "assets/01.mp3",
+    "bytes": 3618322,
+    "sha256": "22df6a26c6cea381333032fffddaeab64c6a0738b05047da2ba39d9204311c34"
+  },
+  {
+    "source": "Assets/Characters/Event.png",
+    "file": "assets/02.png",
+    "bytes": 39041,
+    "sha256": "f233a90b0a4b80180f57a653bd1001e1b2d40f69710cd3a5d4377f21be4849ac"
+  },
+  {
+    "source": "Assets/Sounds/шаман.mp3",
+    "file": "assets/03.mp3",
+    "bytes": 4431979,
+    "sha256": "d9df8844a189c668a5cb927e3cd3a1e82d40f9b7f1e10b65c8a514c39c290c71"
+  },
+  {
+    "source": "Assets/Characters/Чувакм.png",
+    "file": "assets/04.png",
+    "bytes": 647772,
+    "sha256": "f7cc1b81169994db07e7ea23053dcbba8346a459e390fe8c2088652051d67817"
+  },
+  {
+    "source": "Assets/Characters/HaseSprite.png",
+    "file": "assets/05.png",
+    "bytes": 422229,
+    "sha256": "661a50571e4d734815cc474eb0eef978ae55c26ad25b4b134b079638cb83fa44"
+  },
+  {
+    "source": "Assets/Characters/MumSprite.png",
+    "file": "assets/06.png",
+    "bytes": 269805,
+    "sha256": "232b762ab83fb96704c3a750006bbf99d4dbcc2f1a5617b5c0127ad41422fe2e"
+  },
+  {
+    "source": "Assets/Characters/Река.png",
+    "file": "assets/07.png",
+    "bytes": 1170232,
+    "sha256": "35cd6555297a0476c07eae92b897668312f9bda72983360a7aff7bd8e1ce320a"
+  },
+  {
+    "source": "Assets/Characters/Вакуоль.png",
+    "file": "assets/08.png",
+    "bytes": 863906,
+    "sha256": "e52ffdb4708423436ac7556cd9e3fe3945a72937d7e3d303ceeea843e6e7c928"
+  },
+  {
+    "source": "Assets/Characters/OldmanSprite.png",
+    "file": "assets/09.png",
+    "bytes": 288331,
+    "sha256": "12829a8c6467e24a8e00dfe01cce68a1850fec025d90a7ddaa31913ae24d9d4d"
+  },
+  {
+    "source": "Assets/Characters/Final.png",
+    "file": "assets/10.png",
+    "bytes": 368428,
+    "sha256": "be5a7568996c3f30d0bcd966d9ece101d1971a30153e41488a8b532ed28509e0"
+  },
+  {
+    "source": "Assets/Characters/Ending.png",
+    "file": "assets/11.png",
+    "bytes": 52825,
+    "sha256": "9d6e79bcba7cacd507fd0fa9309f9f4c83230b82aeeabe9eb5e10c4e8523707b"
+  },
+  {
+    "source": "Assets/Characters/Обложка.png",
+    "file": "assets/12.png",
+    "bytes": 659350,
+    "sha256": "3a779a5d1f2b55362bca8ff5e94c3a385d98bf844b09b947e154fcc64ed0dc4f"
+  }
+]

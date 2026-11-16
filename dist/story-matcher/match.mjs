@@ -1,4 +1,4 @@
-import {weights,stories} from './data.mjs';
+import {weights,stories} from './data.mjs?v=5';
 export function calculateStoryMatch(answers){
  if(answers.length!==3||answers.some(a=>!Number.isInteger(a)||a<0||a>3))return null;
  const ranks=stories.map((story,index)=>({story,score:answers.reduce((sum,answer,q)=>sum+weights[q][answer][index],0),tie:[2,1,0].map(q=>weights[q][answers[q]][index])}));

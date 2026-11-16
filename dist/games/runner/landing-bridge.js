@@ -32,6 +32,7 @@
   const active=requested&&!document.hidden;
   if(active&&paused){offset+=native.now()-pausedAt;paused=false;for(const job of jobs.values())arm(job)}
   else if(!active&&!paused){pausedAt=native.now();paused=true;for(const job of jobs.values())(job.kind==='frame'?native.caf:native.clear)(job.handle)}
+  if(paused)window.runnerMouseInput?.cancel();
   document.documentElement.classList.toggle('runner-paused',paused);
   document.documentElement.dataset.runnerState=paused?'paused':'active';
   send('state',{state:paused?'paused':'active',clock:now()});
@@ -42,6 +43,12 @@
   const message=event.data;
   if(message.type==='resume'){requested=true;sync();if(message.start&&typeof startGame==='function')startGame()}
   if(message.type==='pause'){requested=false;sync()}
+  if(message.type==='finish'){requested=true;sync();window.runnerFinishRun?.()}
+  if(message.type==='control'&&!paused&&typeof gameStarted!=='undefined'&&gameStarted){
+   if(window.runnerContinueWitchScene?.())return;
+   if(['ArrowUp','Space'].includes(message.code)&&typeof startJump==='function')startJump();
+   if(['ArrowDown','KeyE'].includes(message.code)&&typeof toggleHeroForm==='function')toggleHeroForm();
+  }
   if(message.type==='configure'&&typeof message.shareUrl==='string'){
    try{const url=new URL(message.shareUrl);if(url.origin===location.origin)window.runnerLandingUrl=url.href}catch{}
   }

@@ -53,6 +53,8 @@
     overlay.style.background = "rgba(0, 0, 0, 1)";
 
     window.setTimeout(() => {
+      if(!window.finalSequenceActive)return;
+      if(!window.finalSequenceActive)return;
       finalImageReady = true;
       overlay.style.pointerEvents = "auto";
       image.style.opacity = "1";
@@ -99,6 +101,8 @@
     const startedAt = performance.now();
 
     function moveHero(now) {
+      if(!window.finalSequenceActive||window.runnerResultVisible)return;
+      if(!window.finalSequenceActive)return;
       const progress = Math.max(0, Math.min((now - startedAt) / duration, 1));
       const left = startLeft + distance * progress;
       hero.style.left = `${left}px`;
@@ -117,7 +121,7 @@
   }
 
   function watchFinalScene() {
-    if (!triggered && !window.infiniteMode && gameStarted && !tutorialActive) {
+    if (!triggered && !window.infiniteMode && gameStarted && running && !window.runnerResultVisible && !tutorialActive) {
       const maxScroll = Math.max(0, world.scrollWidth - game.clientWidth);
       const backgroundAtEnd = maxScroll > 0 && worldX >= maxScroll - 1;
 
@@ -127,5 +131,16 @@
     if (!triggered) requestAnimationFrame(watchFinalScene);
   }
 
+  window.runnerResetFinalScene=()=>{
+    const wasTriggered=triggered;triggered=false;finalImageReady=false;window.finalSequenceActive=false;
+    overlay.style.visibility='hidden';overlay.style.pointerEvents='none';overlay.style.background='rgba(0,0,0,0)';
+    image.style.opacity='0';hero.style.left='';
+    if(wasTriggered)requestAnimationFrame(watchFinalScene);
+  };
+  window.runnerResetFinalScene=()=>{
+    const wasTriggered=triggered;triggered=false;finalImageReady=false;window.finalSequenceActive=false;
+    hero.style.left='';overlay.style.visibility='hidden';overlay.style.pointerEvents='none';overlay.style.background='rgba(0,0,0,0)';image.style.opacity='0';
+    if(wasTriggered)requestAnimationFrame(watchFinalScene);
+  };
   requestAnimationFrame(watchFinalScene);
 })();

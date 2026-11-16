@@ -23,6 +23,7 @@
   const resetRunFromStart = resetRun;
 
   resetRun = function resetRunFromCheckpoint() {
+    window.runnerMouseInput?.cancel();
     if (!checkpointActive) {
       resetRunFromStart();
       return;

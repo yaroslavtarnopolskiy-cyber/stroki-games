@@ -1,0 +1,62 @@
+[
+  {
+    "engine": "chromium",
+    "initial": {
+      "snap": "none",
+      "touch": "manipulation",
+      "zoom": 1
+    },
+    "selected": {
+      "scrollY": 874,
+      "focus": "marker",
+      "outline": "none"
+    },
+    "zoom": 1,
+    "regionSwipe": "Калязин",
+    "exits": [
+      {
+        "game": "runner",
+        "reset": true,
+        "freshRelaunch": true
+      },
+      {
+        "game": "three-gifts",
+        "reset": true,
+        "freshRelaunch": true
+      }
+    ],
+    "guideAboveCard": true,
+    "soundBottom": 120,
+    "errors": []
+  },
+  {
+    "engine": "webkit",
+    "initial": {
+      "snap": "none",
+      "touch": "manipulation",
+      "zoom": 1
+    },
+    "selected": {
+      "scrollY": 874,
+      "focus": "",
+      "outline": "none"
+    },
+    "zoom": 1,
+    "regionSwipe": "Калязин",
+    "exits": [
+      {
+        "game": "runner",
+        "reset": true,
+        "freshRelaunch": true
+      },
+      {
+        "game": "three-gifts",
+        "reset": true,
+        "freshRelaunch": true
+      }
+    ],
+    "guideAboveCard": true,
+    "soundBottom": 120,
+    "errors": []
+  }
+]

@@ -1,0 +1,718 @@
+{
+  "title": "Три Дара",
+  "startScene": "start",
+  "scenes": {
+    "start": [
+      {
+        "show": "narrator",
+        "with": "FADE"
+      },
+      {
+        "text": "В одном ауле жила молодая девушка по имени Амипат."
+      },
+      {
+        "text": "Она полюбила сразу троих друзей. И все трое были влюблены в неё."
+      },
+      {
+        "text": "Чтобы решить, кому стать её мужем, друзья договорились отправиться на рынок. Каждый принесёт подарок, и лучший дар определит, кто станет её мужем."
+      },
+      {
+        "scene": "meeting"
+      }
+    ],
+    "meeting": [
+      {
+        "show": "meeting_amipat",
+        "with": "FADETOBLACK"
+      },
+      {
+        "showCharacter": "amipat_stand",
+        "look": "normal",
+        "at": "AMIPAT_STAND",
+        "with": "FADE"
+      },
+      {
+        "showCharacter": "ostap",
+        "look": "normal_far",
+        "from": "OUTLEFT_FAR",
+        "at": "MAN1",
+        "with": "MOVE"
+      },
+      {
+        "showCharacter": "nazar",
+        "look": "normal_far",
+        "from": "OUTLEFT_FAR",
+        "at": "MAN2",
+        "with": "MOVE"
+      },
+      {
+        "showCharacter": "timofey",
+        "look": "normal_far",
+        "from": "OUTLEFT_FAR",
+        "at": "MAN3",
+        "with": "MOVE"
+      },
+      {
+        "say": {
+          "character": "amipat",
+          "look": "talk",
+          "text": "Вы все трое дороги мне. Я не могу выбрать одного.",
+          "portrait": true
+        }
+      },
+      {
+        "say": {
+          "character": "ostap",
+          "look": "talk_far",
+          "text": "Мы пойдём искать для тебя подарок.",
+          "restore": "normal_far"
+        }
+      },
+      {
+        "say": {
+          "character": "nazar",
+          "look": "talk_far",
+          "text": "А потом вернёмся сюда.",
+          "restore": "normal_far"
+        }
+      },
+      {
+        "say": {
+          "character": "timofey",
+          "look": "talk_far",
+          "text": "Посмотрим, чей окажется лучше.",
+          "restore": "normal_far"
+        }
+      },
+      {
+        "scene": "departure"
+      }
+    ],
+    "departure": [
+      {
+        "hideCharacter": "timofey",
+        "look": "back_far",
+        "to": "OUTLEFT_FAR",
+        "with": "MOVE"
+      },
+      {
+        "hideCharacter": "nazar",
+        "look": "back_far",
+        "to": "OUTLEFT_FAR",
+        "with": "MOVE"
+      },
+      {
+        "hideCharacter": "ostap",
+        "look": "back_far",
+        "to": "OUTLEFT_FAR",
+        "with": "MOVE"
+      },
+      {
+        "text": "Так друзья отправились на поиски."
+      },
+      {
+        "call": "fadeOutTogether",
+        "params": {
+          "chars": [
+            "amipat",
+            "amipat_stand",
+            "ostap",
+            "nazar",
+            "timofey"
+          ]
+        }
+      },
+      {
+        "scene": "plot_roads"
+      }
+    ],
+    "plot_roads": [
+      {
+        "show": "narrator",
+        "with": "FADE"
+      },
+      {
+        "text": "Первый друг искал дар, равного которому не будет ни у кого. Дорога привела его к саду старого торговца."
+      },
+      {
+        "scene": "trader_yard"
+      }
+    ],
+    "trader_yard": [
+      {
+        "call": "yardAppear"
+      },
+      {
+        "say": {
+          "character": "ostap",
+          "look": "talk_yard",
+          "text": "Мне нужен подарок для любимой. Такой, какого больше нигде не найти.",
+          "restore": "normal_yard",
+          "at": "HERO_YARD"
+        }
+      },
+      {
+        "say": {
+          "character": "trader_face",
+          "look": "talk",
+          "text": "Есть у меня семечко чудесной яблони. Её плод способен вернуть жизнь.",
+          "portrait": true,
+          "at": "TRADER_FACE"
+        }
+      },
+      {
+        "say": {
+          "character": "ostap",
+          "look": "talk_yard",
+          "text": "Продай мне его!",
+          "restore": "normal_yard",
+          "at": "HERO_YARD"
+        }
+      },
+      {
+        "say": {
+          "character": "trader_face",
+          "look": "talk",
+          "text": "Такое (italic)яблоко(end) не купишь. Посади семечко и вырасти яблоню сам.",
+          "portrait": true,
+          "at": "TRADER_FACE"
+        }
+      },
+      {
+        "hideCharacter": "ostap",
+        "with": "CUT",
+        "continue": true
+      },
+      {
+        "hideCharacter": "trader",
+        "with": "CUT"
+      },
+      {
+        "call": "appleQuest"
+      },
+      {
+        "scene": "apple_done"
+      }
+    ],
+    "apple_done": [
+      {
+        "call": "yardAppear"
+      },
+      {
+        "say": {
+          "character": "trader_face",
+          "look": "talk",
+          "text": "Вот оно – (italic)яблоко(end), которое возвращает жизнь. Береги его.",
+          "portrait": true,
+          "at": "TRADER_FACE"
+        }
+      },
+      {
+        "text": "Первый друг нашёл необыкновенный дар – (italic)яблоко(end), способное вернуть жизнь."
+      },
+      {
+        "say": {
+          "character": "ostap",
+          "look": "talk_yard",
+          "text": "Если Амипат когда-нибудь понадобится помощь, этот дар спасёт её.",
+          "restore": "normal_yard",
+          "at": "HERO_YARD"
+        }
+      },
+      {
+        "call": "fadeOutTogether",
+        "params": {
+          "chars": [
+            "ostap",
+            "trader"
+          ]
+        }
+      },
+      {
+        "scene": "plot_horse"
+      }
+    ],
+    "plot_horse": [
+      {
+        "show": "narrator",
+        "with": "FADE"
+      },
+      {
+        "text": "Второй друг пошёл к конному двору. Он искал дар, который поможет быстро добраться до Амипат."
+      },
+      {
+        "scene": "horse_yard"
+      }
+    ],
+    "horse_yard": [
+      {
+        "call": "horseYardAppear"
+      },
+      {
+        "say": {
+          "character": "nazar",
+          "look": "talk",
+          "text": "Мне нужен тот, кто мчит быстрее ветра.",
+          "at": "NAZAR_YARD"
+        }
+      },
+      {
+        "say": {
+          "character": "trader_face",
+          "look": "talk",
+          "text": "Этот (italic)конь(end) – быстрее ветра. Цена – одна монета. Нет монеты – заработай её в конюшне, вон за тем забором.",
+          "portrait": true,
+          "at": "TRADER_FACE"
+        }
+      },
+      {
+        "say": {
+          "character": "nazar",
+          "look": "talk",
+          "text": "Заработаю. Жди меня.",
+          "at": "NAZAR_YARD"
+        }
+      },
+      {
+        "say": {
+          "character": "trader_face",
+          "look": "talk",
+          "text": "Конь подождёт. Ступай.",
+          "portrait": true,
+          "at": "TRADER_FACE"
+        }
+      },
+      {
+        "call": "fadeOutTogether",
+        "params": {
+          "chars": [
+            "nazar",
+            "trader2_stand",
+            "horse_yard"
+          ]
+        }
+      },
+      {
+        "call": "horseQuest"
+      },
+      {
+        "scene": "horse_done"
+      }
+    ],
+    "horse_done": [
+      {
+        "call": "horseYardAppear",
+        "params": {
+          "bg": "horse_yard_end"
+        }
+      },
+      {
+        "say": {
+          "character": "trader_face",
+          "look": "talk",
+          "text": "Монета честная. (italic)Конь(end) твой.",
+          "portrait": true,
+          "at": "TRADER_FACE"
+        }
+      },
+      {
+        "text": "Второй друг нашёл (italic)коня(end), который мог домчать до любимой быстрее ветра."
+      },
+      {
+        "say": {
+          "character": "nazar",
+          "look": "talk",
+          "text": "На таком (italic)коне(end) я мигом доберусь до Амипат.",
+          "at": "NAZAR_YARD"
+        }
+      },
+      {
+        "call": "fadeOutTogether",
+        "params": {
+          "chars": [
+            "nazar",
+            "trader2_stand",
+            "horse_yard"
+          ]
+        }
+      },
+      {
+        "scene": "plot_mirror"
+      }
+    ],
+    "plot_mirror": [
+      {
+        "show": "narrator",
+        "with": "FADE"
+      },
+      {
+        "text": "Третий друг пришёл на рынок, где торговали диковинками. Поговаривали, что одна лавочница владеет волшебным (italic)зеркалом(end)."
+      },
+      {
+        "scene": "mirror_square"
+      }
+    ],
+    "mirror_square": [
+      {
+        "call": "mirrorSquareAppear",
+        "params": {
+          "bg": "mirror_forest"
+        }
+      },
+      {
+        "say": {
+          "character": "timofey",
+          "look": "talk",
+          "text": "Не думаю, что смогу его просто купить, попробую поговорить с лавочницей.",
+          "at": "HERO_MIRROR"
+        }
+      },
+      {
+        "call": "fadeOutTogether",
+        "params": {
+          "chars": [
+            "timofey"
+          ]
+        }
+      },
+      {
+        "call": "mirrorQuest"
+      },
+      {
+        "scene": "mirror_done"
+      }
+    ],
+    "mirror_done": [
+      {
+        "call": "mirrorSquareAppear",
+        "params": {
+          "bg": "mirror_forest"
+        }
+      },
+      {
+        "text": "Третий друг нашёл на рынке необыкновенное (italic)зеркало(end). В нём можно было увидеть любимую, как бы далеко она ни находилась."
+      },
+      {
+        "say": {
+          "character": "timofey",
+          "look": "talk",
+          "text": "Увидеть Амипат, даже если она далеко…",
+          "at": "HERO_MIRROR"
+        }
+      },
+      {
+        "call": "fadeOutTogether",
+        "params": {
+          "chars": [
+            "timofey"
+          ]
+        }
+      },
+      {
+        "scene": "rescue_market"
+      }
+    ],
+    "rescue_market": [
+      {
+        "show": "market_meeting",
+        "with": "FADETOBLACK"
+      },
+      {
+        "showCharacter": "ostap",
+        "look": "normal_mid",
+        "at": "TRIO1",
+        "with": "FADE",
+        "continue": true
+      },
+      {
+        "showCharacter": "nazar",
+        "look": "normal_mid",
+        "at": "TRIO2",
+        "with": "FADE",
+        "continue": true
+      },
+      {
+        "showCharacter": "timofey",
+        "look": "normal_mid",
+        "at": "TRIO3",
+        "with": "FADE"
+      },
+      {
+        "text": "Друзья встретились и показали друг другу свои подарки."
+      },
+      {
+        "say": {
+          "character": "timofey",
+          "look": "talk_mid",
+          "text": "В моём (italic)зеркале(end) можно увидеть любимую.",
+          "at": "TRIO3",
+          "restore": "normal_mid"
+        }
+      },
+      {
+        "say": {
+          "character": "nazar",
+          "look": "talk_mid",
+          "text": "Мой (italic)конь(end) домчит до неё быстрее ветра.",
+          "at": "TRIO2",
+          "restore": "normal_mid"
+        }
+      },
+      {
+        "say": {
+          "character": "ostap",
+          "look": "talk_mid",
+          "text": "А моё (italic)яблоко(end) может вернуть жизнь.",
+          "at": "TRIO1",
+          "restore": "normal_mid"
+        }
+      },
+      {
+        "say": {
+          "character": "timofey",
+          "look": "talk_mid",
+          "text": "Посмотрим на Амипат.",
+          "at": "TRIO3",
+          "restore": "normal_mid"
+        }
+      },
+      {
+        "hideCharacter": "ostap",
+        "with": "FADE",
+        "continue": true
+      },
+      {
+        "hideCharacter": "nazar",
+        "with": "FADE",
+        "continue": true
+      },
+      {
+        "hideCharacter": "timofey",
+        "with": "FADE"
+      },
+      {
+        "call": "giftPrompt",
+        "params": {
+          "gift": "mirror",
+          "text": "Нажмите на зеркало.",
+          "x": 960,
+          "bottom": 900
+        }
+      },
+      {
+        "scene": "rescue_vision"
+      }
+    ],
+    "rescue_vision": [
+      {
+        "call": "fadeOutTogether",
+        "params": {
+          "chars": [
+            "ostap",
+            "nazar",
+            "timofey"
+          ],
+          "bg": "black",
+          "cover": false
+        }
+      },
+      {
+        "call": "videoBg",
+        "params": {
+          "src": "assets/video/amipat_mirror_mobile.mp4",
+          "rate": 1,
+          "pause": 2200
+        }
+      },
+      {
+        "wait": 1500
+      },
+      {
+        "text": "Друзья заглянули в (italic)зеркало(end) и увидели: Амипат умирает."
+      },
+      {
+        "say": {
+          "character": "all_three",
+          "text": "Амипат!",
+          "hideSprite": true
+        }
+      },
+      {
+        "say": {
+          "character": "nazar",
+          "look": "talk",
+          "text": "Скорее! Мой (italic)конь(end) доставит нас к ней.",
+          "hideSprite": true,
+          "face": "sad"
+        }
+      },
+      {
+        "show": "black",
+        "with": "FADE"
+      },
+      {
+        "wait": 500
+      },
+      {
+        "show": "market_meeting",
+        "with": "FADE"
+      },
+      {
+        "call": "giftPrompt",
+        "params": {
+          "gift": "horse",
+          "text": "Выберите коня.",
+          "x": 960,
+          "bottom": 1030
+        }
+      },
+      {
+        "scene": "rescue_house"
+      }
+    ],
+    "rescue_house": [
+      {
+        "show": "finale_yard",
+        "with": "FADETOBLACK"
+      },
+      {
+        "showCharacter": "timofey",
+        "look": "finale",
+        "at": "FIN_TIMOFEY",
+        "with": "FADE",
+        "continue": true
+      },
+      {
+        "showCharacter": "amipat_stand",
+        "look": "sit",
+        "at": "FIN_AMIPAT",
+        "with": "FADE",
+        "continue": true
+      },
+      {
+        "showCharacter": "nazar",
+        "look": "finale",
+        "at": "FIN_NAZAR",
+        "with": "FADE",
+        "continue": true
+      },
+      {
+        "showCharacter": "ostap",
+        "look": "finale",
+        "at": "FIN_OSTAP",
+        "with": "FADE"
+      },
+      {
+        "text": "Они сели на (italic)коня(end) и вмиг оказались рядом с ней."
+      },
+      {
+        "say": {
+          "character": "ostap",
+          "look": "finale",
+          "restore": "finale",
+          "text": "Дайте ей откусить (italic)яблоко(end).",
+          "face": "sad"
+        }
+      },
+      {
+        "call": "useInHand",
+        "params": {
+          "char": "ostap",
+          "look": "finale_apple",
+          "hover": "finale_apple_hl2",
+          "after": "finale",
+          "hitEllipse": [
+            618,
+            314,
+            118,
+            92
+          ]
+        }
+      },
+      {
+        "wait": 800
+      },
+      {
+        "text": "Амипат откусила (italic)яблоко(end) и ожила."
+      },
+      {
+        "say": {
+          "character": "amipat",
+          "look": "talk2",
+          "portrait": true,
+          "text": "Вы здесь… Я слышала ваши голоса, но не могла ответить."
+        }
+      },
+      {
+        "say": {
+          "character": "amipat",
+          "look": "talk2",
+          "portrait": true,
+          "text": "Я думала, что больше вас не увижу."
+        }
+      },
+      {
+        "say": {
+          "character": "timofey",
+          "look": "finale",
+          "restore": "finale",
+          "text": "Мы увидели тебя в (italic)зеркале(end) и сразу бросились к тебе."
+        }
+      },
+      {
+        "say": {
+          "character": "nazar",
+          "look": "finale",
+          "restore": "finale",
+          "text": "(italic)Конь(end) домчал нас быстрее ветра."
+        }
+      },
+      {
+        "say": {
+          "character": "ostap",
+          "look": "finale",
+          "restore": "finale",
+          "text": "А (italic)яблоко(end) вернуло тебе жизнь."
+        }
+      },
+      {
+        "say": {
+          "character": "amipat",
+          "look": "talk",
+          "portrait": true,
+          "text": "Значит, каждый из вас помог мне вернуться… Спасибо, мои любимые."
+        }
+      },
+      {
+        "say": {
+          "character": "amipat",
+          "look": "talk",
+          "portrait": true,
+          "text": "Я ждала вас с подарками. Думала, увижу их – и пойму, кого выбрать."
+        }
+      },
+      {
+        "say": {
+          "character": "amipat",
+          "look": "talk",
+          "portrait": true,
+          "text": "Но без (italic)зеркала(end) вы бы не узнали о беде. Без (italic)коня(end) не успели бы. А без (italic)яблока(end) я бы не открыла глаза."
+        }
+      },
+      {
+        "say": {
+          "character": "amipat",
+          "look": "talk2",
+          "portrait": true,
+          "text": "Как же выбрать одного, если жизнью я обязана всем троим?"
+        }
+      },
+      {
+        "call": "chooseHusband"
+      },
+      {
+        "call": "finalScreen"
+      }
+    ]
+  }
+}

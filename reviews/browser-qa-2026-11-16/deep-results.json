@@ -1,0 +1,66 @@
+[
+  {
+    "engine": "chromium",
+    "choice": {
+      "score": "50",
+      "after": "60",
+      "preview": "bear"
+    },
+    "cancelStalledLoad": true,
+    "blockedFontsWords": 120,
+    "offlineTheme": true,
+    "runtime": {
+      "keys": [
+        "plugins",
+        "pluginsRJS",
+        "storyLog",
+        "interruptAction",
+        "resolveAction",
+        "storyConfig",
+        "storyAccessibility",
+        "story",
+        "guiSetup",
+        "gui"
+      ],
+      "plugins": [
+        "game",
+        "plugins",
+        "_len",
+        "_i"
+      ]
+    },
+    "errors": []
+  },
+  {
+    "engine": "webkit",
+    "choice": {
+      "score": "50",
+      "after": "60",
+      "preview": "bear"
+    },
+    "cancelStalledLoad": true,
+    "blockedFontsWords": 120,
+    "offlineTheme": true,
+    "runtime": {
+      "keys": [
+        "plugins",
+        "pluginsRJS",
+        "storyLog",
+        "interruptAction",
+        "resolveAction",
+        "storyConfig",
+        "storyAccessibility",
+        "story",
+        "guiSetup",
+        "gui"
+      ],
+      "plugins": [
+        "game",
+        "plugins",
+        "_len",
+        "_i"
+      ]
+    },
+    "errors": []
+  }
+]

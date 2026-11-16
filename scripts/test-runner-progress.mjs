@@ -1,0 +1,15 @@
+import fs from 'node:fs';import vm from 'node:vm';import assert from 'node:assert/strict';import {createRequire} from 'node:module';
+const source=fs.readFileSync(new URL('../dist/games/runner/route-progress.js',import.meta.url),'utf8');
+const {routeProgress}=createRequire(import.meta.url)('../dist/games/runner/route-progress.js');
+for(const [position,total,view,expected] of [[0,10000,1000,0],[4500,10000,1000,.5],[9000,10000,1000,1],[10000,10000,1000,1],[-100,10000,1000,0],[0,100,100,0],[NaN,1000,100,0]])assert.equal(routeProgress(position,total,view),expected);
+let next,element;const attributes={},path={setAttribute:(name,value)=>attributes.path=value};
+const c={gameStarted:false,infiniteMode:false,worldX:0,world:{scrollWidth:10000},game:{clientWidth:1000},document:{body:{appendChild:e=>element=e},createElement:()=>({setAttribute:(name,value)=>attributes[name]=value,querySelector:()=>path})},requestAnimationFrame:fn=>next=fn};
+vm.createContext(c);vm.runInContext(source,c);const tick=()=>next();
+tick();assert(element.hidden);c.gameStarted=true;tick();assert(!element.hidden);assert.equal(attributes['aria-valuenow'],'0');
+c.worldX=4500;tick();assert.equal(attributes['aria-valuenow'],'150');assert(attributes.path.includes('500 40'));
+c.infiniteMode=true;tick();assert(element.hidden);c.worldX=999999;tick();assert(element.hidden);
+c.infiniteMode=false;c.worldX=0;tick();assert(!element.hidden);assert.equal(attributes['aria-valuenow'],'0');
+c.finalSequenceActive=true;tick();assert(element.hidden,'Hidden on eyes finale');c.finalSequenceActive=false;c.runnerResultVisible=true;tick();assert(element.hidden,'Hidden on results');c.runnerResultVisible=false;
+c.worldX=9000;tick();assert.equal(attributes.path,'M0 0H1000V80H0Z');assert.equal(attributes['aria-valuenow'],'300');
+c.worldX=4500;c.game.clientWidth=5000;tick();assert.equal(attributes['aria-valuenow'],'270');
+console.log('PASS: progress tracks actual route, clamps edges, resets/recalculates on viewport changes, hides before launch and in endless mode');

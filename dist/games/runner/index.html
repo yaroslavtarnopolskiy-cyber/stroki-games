@@ -10,9 +10,10 @@
 
   <title>Маска человека</title>
 
-  <link rel="stylesheet" href="fonts.css" />
+  <link rel="stylesheet" href="fonts.css?v=7" />
+  <link rel="stylesheet" href="route-progress.css?v=1" />
   <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="tutorial-overrides.css" />
+  <link rel="stylesheet" href="tutorial-overrides.css?v=3" />
   <style>
     /* Препятствия стоят почти у нижней границы экрана. */
     #world .obstacle {
@@ -84,50 +85,12 @@
   <div id="tutorial-overlay" class="is-hidden" role="button" tabindex="0" aria-hidden="true">
     <div class="tutorial-card">
       <div class="tutorial-controls tutorial-controls--desktop">
-        <div class="tutorial-gesture-card tutorial-gesture-card--desktop">
-          <div class="tutorial-gesture-icon-wrap tutorial-gesture-icon-wrap--desktop">
-            <img
-              class="tutorial-gesture-icon tutorial-gesture-icon--desktop"
-              src="assets/UI/ЛКМ.png"
-              alt="ЛКМ — прыжок"
-            />
-          </div>
-          <div class="tutorial-gesture-label">Прыжок</div>
-        </div>
-
-        <div class="tutorial-gesture-card tutorial-gesture-card--desktop">
-          <div class="tutorial-gesture-icon-wrap tutorial-gesture-icon-wrap--desktop">
-            <img
-              class="tutorial-gesture-icon tutorial-gesture-icon--desktop"
-              src="assets/UI/ПКМ.png"
-              alt="ПКМ — смена облика"
-            />
-          </div>
-          <div class="tutorial-gesture-label">Смена облика</div>
-        </div>
+        <div class="tutorial-gesture-card"><div class="tutorial-gesture-label">Прыжок</div><div class="tutorial-shortcuts"><kbd aria-label="Стрелка вверх">↑</kbd><kbd>пробел</kbd></div><p class="tutorial-help">клавиша ↑, пробел или один клик</p></div>
+        <div class="tutorial-gesture-card"><div class="tutorial-gesture-label">Смена облика</div><div class="tutorial-shortcuts"><kbd aria-label="Стрелка вниз">↓</kbd><kbd>E</kbd></div><p class="tutorial-help">клавиша ↓, E, двойной клик или ПКМ</p></div>
       </div>
       <div class="tutorial-controls tutorial-controls--touch">
-        <div class="tutorial-gesture-card">
-          <div class="tutorial-gesture-icon-wrap">
-            <img
-              class="tutorial-gesture-icon tutorial-gesture-icon--jump"
-              src="assets/UI/свайп.png"
-              alt="Свайп вверх — прыжок"
-            />
-          </div>
-          <div class="tutorial-gesture-label">Прыжок</div>
-        </div>
-
-        <div class="tutorial-gesture-card">
-          <div class="tutorial-gesture-icon-wrap">
-            <img
-              class="tutorial-gesture-icon tutorial-gesture-icon--tap"
-              src="assets/UI/тап (1).png"
-              alt="Тап — смена облика"
-            />
-          </div>
-          <div class="tutorial-gesture-label">Смена облика</div>
-        </div>
+        <div class="tutorial-gesture-card"><div class="tutorial-gesture-label">Прыжок</div><div class="tutorial-shortcuts"><kbd>↑</kbd></div><p class="tutorial-help">свайп вверх</p></div>
+        <div class="tutorial-gesture-card"><div class="tutorial-gesture-label">Смена облика</div><div class="tutorial-shortcuts"><kbd>тап</kbd></div><p class="tutorial-help">коснитесь экрана</p></div>
       </div>
       <div class="tutorial-continue">Нажмите, чтобы продолжить</div>
     </div>
@@ -141,21 +104,26 @@
   <div id="hero-image" class="hero-sprite" role="img" aria-label="Кудым-Ош в облике человека"></div>
 </div>
 
-  <script src="landing-bridge.js"></script>
-  <script src="game.js"></script>
+  <script src="landing-bridge.js?v=5"></script>
+  <script src="mouse-input.js?v=3"></script>
+  <script src="palette.js?v=1"></script>
+  <script src="touch-input.js?v=1"></script>
+  <script src="game.js?v=6"></script>
   <script src="river-jump.js"></script>
   <script src="cave-layout.js"></script>
   <script src="route-layout.js"></script>
   <script src="remove-bushes.js"></script>
-  <script src="form-bush-obstacles.js"></script>
+  <script src="form-bush-obstacles.js?v=2"></script>
   <script src="jump-visual.js"></script>
   <script src="checkpoint.js"></script>
-  <script src="result-screen.js"></script>
-  <script src="witch-scene.js"></script>
+  <script src="result-layout.js?v=1"></script>
+  <script src="result-screen.js?v=10"></script>
+  <script src="witch-scene.js?v=3"></script>
   <script src="adaptive-scale.js"></script>
   <script src="speed-progression.js"></script>
-  <script src="final-scene.js"></script>
-  <script src="tutorial-flow.js"></script>
+  <script src="final-scene.js?v=2"></script>
+  <script src="tutorial-flow.js?v=5"></script>
   <script src="endless-mode.js"></script>
+  <script src="route-progress.js?v=2"></script>
 </body>
 </html>

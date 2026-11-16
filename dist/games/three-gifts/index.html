@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Cache-Control" content="no-cache" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="theme-color" content="#0c0b0a" />
+    <title>Три Дара</title>
+    <link rel="icon" href="data:," />
+    <link rel="preload" href="../../assets/fonts/glanz.otf" as="font" type="font/otf" crossorigin />
+    <link rel="preload" href="../../assets/fonts/izvod.otf" as="font" type="font/otf" crossorigin />
+    <link rel="stylesheet" href="assets/gui/fonts.css?v=site2" />
+    <link rel="stylesheet" href="site-integration.css?v=3" />
+  </head>
+  <body>
+    <div id="game-root"></div>
+    <div class="game-frame" aria-hidden="true"></div>
+    <div class="game-corner-actions" aria-label="Действия">
+      <button type="button" id="btn-history" class="game-corner-btn" title="Прошедшие реплики">
+        История
+      </button>
+      <button type="button" id="btn-share" class="game-corner-btn game-corner-icon" title="Поделиться" aria-label="Поделиться">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M14 4 22 11 14 18V14C8.5 14 5 15.6 2.5 20.5 3.2 13 7 8.6 14 8Z" />
+        </svg>
+      </button>
+      <button type="button" id="btn-kion" class="game-corner-btn" title="К истории">
+        К истории
+      </button>
+    </div>
+    <div id="final-screen" class="final-screen" hidden>
+      <div class="fs-stage">
+        <img class="fs-bg" alt="" />
+        <img class="fs-dim" src="assets/characters/dialog_dim.webp" alt="" />
+        <img class="fs-hero" alt="" />
+        <img class="fs-gift" alt="" />
+        <div class="fs-copy">
+          <p class="fs-question">Как же сложится судьба Амипат на&nbsp;самом деле?</p>
+          <p class="fs-book">«Ради тебя, любовь-нелюбовь» · Денис Лукьянов</p>
+          <div class="fs-actions">
+            <button type="button" id="final-kion" class="fs-btn">К истории →</button>
+            <button type="button" id="final-restart" class="fs-link">Пройти ещё раз</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="history-panel" class="history-panel" role="dialog" aria-modal="true" aria-labelledby="hist-title" hidden>
+      <div class="hist-window">
+        <div class="hist-head">
+          <h2 id="hist-title" class="hist-title">История</h2>
+          <button type="button" class="hist-close" aria-label="Закрыть">✕</button>
+        </div>
+        <div class="hist-list"></div>
+      </div>
+    </div>
+    <div id="boot-error" hidden></div>
+    <script src="site-bridge.js?v=5"></script>
+    <script src="RenJS/renjs.min.js"></script>
+    <script src="js/story-from-json.js?v=88"></script>
+    <script src="js/apple-quest.js?v=103"></script>
+    <script src="js/horse-quest.js?v=101"></script>
+    <script src="js/mirror-quest.js?v=112"></script>
+    <script src="js/story-extras.js?v=92"></script>
+    <script src="js/dialog-history.js?v=2"></script>
+    <script src="js/keyboard.js?v=2"></script>
+    <script src="js/final-actions.js?v=1"></script>
+    <script src="boot.js?v=site5"></script>
+  </body>
+</html>

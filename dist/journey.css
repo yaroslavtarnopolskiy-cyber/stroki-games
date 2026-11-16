@@ -136,3 +136,13 @@ body{overflow-x:clip}
 .opening-section>.hero-thread .bouquet-thread-path{stroke:none;fill:url(#bouquet-thread-color)}
 
 @media(max-width:999px){.voices-section .land-story-focus{scroll-snap-align:center;scroll-snap-stop:normal}}
+
+/* Touch devices keep the user's scroll position instead of snapping to sections. */
+@media(max-width:760px),(pointer:coarse){
+ html{scroll-snap-type:none}
+ .page-section,.word-river,.river-connector,.matcher-question,.matcher-display,.land-story-focus{scroll-snap-align:none;scroll-snap-stop:normal}
+}
+html{touch-action:manipulation}
+.voices-section .land-story-focus:focus{outline:none}
+.voices-section .land-story-focus{touch-action:pan-y pinch-zoom}
+.voices-section .land-artwork img{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}

@@ -3,7 +3,7 @@
  let trigger=null;
  function closePreview(){dialog.close();trigger?.focus({preventScroll:true})}
  document.querySelectorAll('[data-open-preview]').forEach(button=>button.addEventListener('click',()=>{
-  if(button.dataset.openPreview==='games')return;
+  if(['games','game-gifts','game-human-beast'].includes(button.dataset.openPreview))return;
   const game=document.getElementById(button.dataset.openPreview);if(!game)return;
   trigger=button;
   dialog.querySelector('h2').textContent=game.querySelector('h2').textContent;
@@ -24,6 +24,8 @@
    if(after?.classList.contains('game-section')){const section=after.getBoundingClientRect(),content=after.querySelector('.game-inner').getBoundingClientRect();river.style.marginBottom=-Math.max(0,content.top-section.top-12)+'px'}
   });
  }
- const spacingObserver=new ResizeObserver(spaceRivers);gameSections.forEach(section=>{spacingObserver.observe(section);spacingObserver.observe(section.querySelector('.game-inner'))});
+ let spacingFrame=0;
+ function scheduleSpacing(){if(spacingFrame)return;spacingFrame=requestAnimationFrame(()=>{spacingFrame=0;spaceRivers()})}
+ const spacingObserver=new ResizeObserver(scheduleSpacing);gameSections.forEach(section=>{spacingObserver.observe(section);spacingObserver.observe(section.querySelector('.game-inner'))});
  addEventListener('resize',spaceRivers);document.fonts.ready.then(spaceRivers);spaceRivers();
 })();

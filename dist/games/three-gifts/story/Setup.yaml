@@ -1,0 +1,172 @@
+backgrounds:
+  title: assets/backgrounds/title.webp
+  forest: assets/backgrounds/forest.webp
+  narrator: assets/backgrounds/narrator.webp
+  market_meeting: assets/backgrounds/market_meeting.webp
+  mirror_vision: assets/backgrounds/mirror_vision.webp
+  village: assets/backgrounds/village.webp
+  stable: assets/backgrounds/stable.webp
+  horse_yard_start: assets/backgrounds/horse_yard_start.webp
+  # тот же фон без лошади — лошадь стоит отдельным спрайтом (катсцена 2-го квеста)
+  horse_yard_start_clean: assets/backgrounds/horse_yard_start_clean.webp
+  horse_yard_end: assets/backgrounds/horse_yard_end.webp
+  mirror_forest: assets/backgrounds/mirror_forest.webp
+  meeting: assets/backgrounds/meeting_amipat_quests.webp
+  meeting_amipat: assets/backgrounds/meeting_amipat_quests.webp
+  garden: assets/quest/apple/bg.webp
+  black: assets/backgrounds/black.webp
+  # Финал у дома Амипат — ближе к дому, как на макете (кусок meeting, увеличенный)
+  finale_yard: assets/backgrounds/finale_yard.webp
+
+characters:
+  # Рассказчик: только табличка с именем, без спрайта
+  storyteller:
+    displayName: Рассказчик
+    speechColour: "#F5F5F5"
+    looks: {}
+  # Три друга хором: только табличка с именем, без спрайта
+  all_three:
+    displayName: Все трое
+    speechColour: "#F5F5F5"
+    looks: {}
+  amipat:
+    displayName: Амипат
+    speechColour: "#F5F5F5"
+    looks:
+      # портрет в диалогах (уменьшен, как у торговца); normal* — молчит, talk* — говорит
+      normal: assets/characters/amipat_face_normal.webp
+      talk: assets/characters/amipat_face_talk.webp
+      normal2: assets/characters/amipat_face_normal2.webp
+      talk2: assets/characters/amipat_face_talk2.webp
+      bad: assets/characters/amipat_face_bad.webp
+  amipat_stand:
+    displayName: Амипат
+    speechColour: "#F5F5F5"
+    looks:
+      normal: assets/characters/amipat_stand.webp
+      dying: assets/characters/amipat_dying.webp
+      # финал: сидит на земле
+      sit: assets/characters/amipat_sit.webp
+  # Затемнение сцены под большим портретом Амипат
+  dialog_dim:
+    displayName: ""
+    looks:
+      normal: assets/characters/dialog_dim.webp
+  # Портрет торговца (1-й квест) — поверх затемнения, как у Амипат
+  trader_face:
+    displayName: Торговец
+    speechColour: "#F5F5F5"
+    looks:
+      normal: assets/characters/trader_face_silent_v3.webp
+      silent: assets/characters/trader_face_silent_v3.webp
+      talk: assets/characters/trader_face_v3.webp
+  trader:
+    displayName: Торговец
+    speechColour: "#F5F5F5"
+    looks:
+      normal: assets/characters/trader_yard_normal.webp
+      talk: assets/characters/trader_yard_talk.webp
+  # Лица друзей в диалогах — слева, напротив портретов Амипат и торговцев.
+  # normal — молчит, talk — говорит, sad — грустит
+  ostap_face:
+    displayName: Первый друг
+    speechColour: "#F5F5F5"
+    looks:
+      normal: assets/characters/ostap_face_normal.webp
+      talk: assets/characters/ostap_face_talk.webp
+      sad: assets/characters/ostap_face_sad.webp
+  nazar_face:
+    displayName: Второй друг
+    speechColour: "#F5F5F5"
+    looks:
+      normal: assets/characters/nazar_face_normal.webp
+      talk: assets/characters/nazar_face_talk.webp
+      sad: assets/characters/nazar_face_sad.webp
+  timofey_face:
+    displayName: Третий друг
+    speechColour: "#F5F5F5"
+    looks:
+      normal: assets/characters/timofey_face_normal.webp
+      talk: assets/characters/timofey_face_talk.webp
+      sad: assets/characters/timofey_face_sad.webp
+  # Торговец лошадьми: trader2 — крупный портрет в репликах, trader2_stand — фигура в сцене
+  trader2:
+    displayName: Торговец
+    speechColour: "#F5F5F5"
+    looks:
+      normal: assets/characters/trader2_face_normal.webp
+      talk: assets/characters/trader2_face_talk.webp
+  trader2_stand:
+    displayName: Торговец
+    speechColour: "#F5F5F5"
+    looks:
+      normal: assets/characters/trader2_horse_normal.webp
+      talk: assets/characters/trader2_horse_talk.webp
+  # Лошадь во дворе торговца (начальная катсцена 2-го квеста), вырезана из фона и увеличена
+  horse_yard:
+    displayName: Лошадь
+    speechColour: "#F5F5F5"
+    looks:
+      normal: assets/characters/horse_yard.webp
+  horse:
+    displayName: Лошадь
+    speechColour: "#F5F5F5"
+    looks:
+      normal: assets/characters/horse_normal.webp
+  ostap:
+    displayName: Первый друг
+    speechColour: "#F5F5F5"
+    looks:
+      normal: assets/characters/ostap_normal.webp
+      talk: assets/characters/ostap_talk.webp
+      # уменьшенные (80%) — встреча друзей на рынке
+      normal_mid: assets/characters/ostap_normal_mid.webp
+      talk_mid: assets/characters/ostap_talk_mid.webp
+      back: assets/characters/ostap_back.webp
+      normal_far: assets/characters/ostap_normal_far.webp
+      talk_far: assets/characters/ostap_talk_far.webp
+      back_far: assets/characters/ostap_back_far.webp
+      # финал у дома: на коленях / склонился над Амипат; _hl — с обводкой при выборе мужа
+      finale: assets/characters/ostap_finale.webp
+      finale_hl: assets/characters/ostap_finale_hl.webp
+      finale_apple: assets/characters/ostap_finale_apple.webp
+      finale_apple_hl: assets/characters/ostap_finale_apple_hl.webp
+      # обводка только вокруг яблока в руке
+      finale_apple_hl2: assets/characters/ostap_finale_apple_hl2.webp
+      normal_yard: assets/characters/ostap_normal_yard.webp
+      talk_yard: assets/characters/ostap_talk_yard.webp
+  nazar:
+    displayName: Второй друг
+    speechColour: "#F5F5F5"
+    looks:
+      normal: assets/characters/nazar_normal.webp
+      talk: assets/characters/nazar_talk.webp
+      # уменьшенные (80%) — встреча друзей на рынке
+      normal_mid: assets/characters/nazar_normal_mid.webp
+      talk_mid: assets/characters/nazar_talk_mid.webp
+      back: assets/characters/nazar_back.webp
+      normal_far: assets/characters/nazar_normal_far.webp
+      talk_far: assets/characters/nazar_talk_far.webp
+      back_far: assets/characters/nazar_back_far.webp
+      # финал у дома: на коленях / склонился над Амипат; _hl — с обводкой при выборе мужа
+      finale: assets/characters/nazar_finale.webp
+      finale_hl: assets/characters/nazar_finale_hl.webp
+  timofey:
+    displayName: Третий друг
+    speechColour: "#F5F5F5"
+    looks:
+      normal: assets/characters/timofey_normal.webp
+      talk: assets/characters/timofey_talk.webp
+      # уменьшенные (80%) — встреча друзей на рынке
+      normal_mid: assets/characters/timofey_normal_mid.webp
+      talk_mid: assets/characters/timofey_talk_mid.webp
+      back: assets/characters/timofey_back.webp
+      normal_far: assets/characters/timofey_normal_far.webp
+      talk_far: assets/characters/timofey_talk_far.webp
+      back_far: assets/characters/timofey_back_far.webp
+      # финал у дома: на коленях / склонился над Амипат; _hl — с обводкой при выборе мужа
+      finale: assets/characters/timofey_finale.webp
+      finale_hl: assets/characters/timofey_finale_hl.webp
+
+cgs:
+  shards: assets/cgs/shards.webp

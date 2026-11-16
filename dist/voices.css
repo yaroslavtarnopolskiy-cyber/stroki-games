@@ -233,3 +233,21 @@
 .voices-section .marker .marker-number{font-family:Glanz,Georgia,serif;font-size:12px;font-weight:400;line-height:1;font-variant-numeric:tabular-nums;min-width:19px;height:19px;padding-top:1px}
 @media(max-width:760px){.voices-section .marker .marker-number{font-size:11px;min-width:18px;height:18px}
 }
+
+/* Make the story destination visibly interactive for pointer, touch and keyboard. */
+.voices-section .land-card a.story-link{cursor:pointer;text-decoration:none;transition:color .18s,transform .18s}
+.voices-section .land-card a.story-link span{text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:1px}
+.voices-section .land-card a.story-link svg{transition:transform .18s;pointer-events:none}
+.voices-section .land-card a.story-link:hover{color:var(--red)}
+.voices-section .land-card a.story-link:hover span{text-decoration-thickness:2px}
+.voices-section .land-card a.story-link:hover svg{transform:translateX(5px)}
+.voices-section .land-card a.story-link:active{transform:translateY(2px)}
+.voices-section .land-card a.story-link:focus-visible{outline:2px solid var(--red);outline-offset:5px;border-radius:3px}
+
+/* Tap immediately without the browser's double-tap zoom delay; retain vertical scrolling. */
+.theme-switch,.world-switch,.theme-option,.world-mode-option{touch-action:manipulation}
+.voices-section .selection-art{contain:layout paint}
+
+.voices-section .map-column>.world-switch{max-width:100%;min-height:0;aspect-ratio:400/106}
+.voices-section .map-column>.world-switch .world-switch-art{height:100%}
+.voices-section .map-column>.world-switch .world-mode-option{min-height:0}

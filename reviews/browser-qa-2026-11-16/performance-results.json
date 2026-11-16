@@ -1,0 +1,42 @@
+[
+  {
+    "engine": "chromium",
+    "cpuThrottle": 4,
+    "animation": {
+      "samples": 128,
+      "p50": 16.799999999999727,
+      "p95": 33.299999999999955,
+      "max": 116.59999999999991,
+      "over50": 4
+    },
+    "video": {
+      "time": 0.742247,
+      "width": 1920,
+      "height": 1080,
+      "muted": true
+    },
+    "slow": {
+      "latency": 300,
+      "downloadBytesPerSecond": 200000,
+      "domAndRiversMs": 4347
+    }
+  },
+  {
+    "engine": "webkit",
+    "cpuThrottle": 1,
+    "animation": {
+      "samples": 150,
+      "p50": 17,
+      "p95": 20,
+      "max": 58,
+      "over50": 1
+    },
+    "video": {
+      "time": 0.6878574583465308,
+      "width": 1920,
+      "height": 1080,
+      "muted": true
+    },
+    "slow": null
+  }
+]

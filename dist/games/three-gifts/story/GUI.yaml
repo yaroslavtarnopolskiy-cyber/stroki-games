@@ -1,0 +1,150 @@
+name: TriDara
+resolution:
+  - 1920
+  - 1080
+madeWithRenJSBuilder: true
+assetsPath: assets/gui/
+config:
+  loader:
+    background:
+      id: loaderbackground
+      assetType: images
+    loading-bar:
+      id: loading-bar
+      height: '36'
+      width: '800'
+      y: 820
+      x: 560
+      assetType: spritesheets
+  main:
+    background:
+      id: titlebg
+      assetType: images
+    buttons:
+      - id: startbtn
+        sfx: none
+        slot: '0'
+        binding: start
+        height: '87'
+        width: '555'
+        y: 344
+        x: 682
+        assetType: spritesheets
+  hud:
+    message-box:
+      id: messagebox
+      text-width: '1440'
+      offset-y: '69'
+      offset-x: '168'
+      align: left
+      color: '#0E0E0E'
+      font: golostext
+      size: '38'
+      lineSpacing: 3
+      sfx: none
+      y: 797
+      x: 56
+      assetType: images
+    name-box:
+      id: namebox
+      offset-y: '0'
+      offset-x: '0'
+      align: left
+      color: '#F5F5F5'
+      font: ponomar
+      size: 50
+      y: 746
+      x: 224
+      isTextCentered: true
+      assetType: images
+    ctc:
+      id: ctc
+      height: '99'
+      width: '99'
+      y: 860
+      x: 1691
+      animationStyle: none
+      assetType: spritesheets
+    choice:
+      id: choice
+      offset-y: '0'
+      offset-x: '0'
+      align: left
+      chosen-color: '#d7251f'
+      color: '#1E1A18'
+      font: literata
+      size: 30
+      separation: '14'
+      height: '80'
+      width: '900'
+      sfx: none
+      isTextCentered: true
+      isBoxCentered: true
+      assetType: spritesheets
+      sample: 2
+    interrupt:
+      id: choice
+      offset-y: '0'
+      offset-x: '0'
+      align: left
+      color: '#1E1A18'
+      font: literata
+      size: 30
+      separation: ''
+      height: '80'
+      width: '900'
+      sfx: none
+      y: 0
+      x: 0
+      isTextCentered: true
+      isBoxCentered: false
+      textStyleAsChoice: true
+      textPositionAsChoice: true
+      inlineWithChoice: true
+      assetType: spritesheets
+assets:
+  images:
+    loaderbackground:
+      name: loaderbackground
+      fileName: loaderbg.webp
+    titlebg:
+      name: titlebg
+      fileName: titlebg_start.webp
+    messagebox:
+      name: messagebox
+      fileName: messagebox_v4.webp
+    namebox:
+      name: namebox
+      fileName: namebox_v2.webp
+  spritesheets:
+    loading-bar:
+      name: loading-bar
+      fileName: loading-bar.webp
+      w: 800
+      h: 36
+    startbtn:
+      name: startbtn
+      fileName: startbtn_start.webp
+      w: 555
+      h: 87
+    ctc:
+      name: ctc
+      fileName: ctc_v3.webp
+      w: 99
+      h: 99
+    choice:
+      name: choice
+      fileName: choice.webp
+      w: 900
+      h: 80
+  fonts:
+    literata:
+      fileName: Literata-Regular.ttf
+      name: literata
+    golostext:
+      fileName: Golos-Text_Regular.ttf
+      name: golostext
+    ponomar:
+      fileName: PonomarUnicode.ttf
+      name: ponomar
+  audio: {}

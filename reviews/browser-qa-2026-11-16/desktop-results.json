@@ -1,0 +1,22 @@
+[
+  {
+    "engine": "chromium",
+    "version": "138.0.7204.168",
+    "desktopMusic": {
+      "inlineFigures": 4,
+      "runningAnimations": 14
+    },
+    "naturalEndingSteps": 10,
+    "errors": []
+  },
+  {
+    "engine": "webkit",
+    "version": "27.2",
+    "desktopMusic": {
+      "inlineFigures": 4,
+      "runningAnimations": 14
+    },
+    "naturalEndingSteps": 10,
+    "errors": []
+  }
+]

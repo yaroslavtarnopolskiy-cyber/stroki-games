@@ -56,3 +56,9 @@ body{transition:background-color .35s ease}
 .album-listen,.footer-links a{display:inline-flex;align-items:center;gap:12px}
 .world-switch-art>g{filter:none}
 @media(max-width:760px){.album-processions{contain-intrinsic-block-size:auto 83px}.river-lines>g[filter]{filter:none}}
+
+/* The reveal and the selected cover share the mobile carousel's centre. */
+@media(max-width:760px){
+ .story-matcher .matcher-reveal{box-sizing:border-box;width:calc(100% + 64px);margin-left:-48px}
+ .story-matcher .matcher-reveal h2{width:100%;text-align:center}
+}

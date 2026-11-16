@@ -1,0 +1,30 @@
+[
+  {
+    "engine": "chromium",
+    "earlyTapBooks": 0,
+    "explicitClickBooks": 2,
+    "openCalls": [
+      [
+        "https://mtsbooks.onelink.me/zdZb/t75hb4td",
+        "_blank",
+        "noopener,noreferrer"
+      ]
+    ],
+    "restartHeight": 44,
+    "errors": []
+  },
+  {
+    "engine": "webkit",
+    "earlyTapBooks": 0,
+    "explicitClickBooks": 1,
+    "openCalls": [
+      [
+        "https://mtsbooks.onelink.me/zdZb/t75hb4td",
+        "_blank",
+        "noopener,noreferrer"
+      ]
+    ],
+    "restartHeight": 44,
+    "errors": []
+  }
+]

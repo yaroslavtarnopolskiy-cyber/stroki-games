@@ -66,3 +66,14 @@
 .game-secondary+.game-secondary{padding-top:64px;padding-bottom:44px}
 @media(max-width:999px){.game-secondary .game-inner{grid-template-columns:1fr;max-width:650px;gap:20px}.game-secondary .game-header{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr)}.game-secondary+.game-secondary{padding-top:40px}}
 @media(max-width:600px){.game-secondary{padding-top:25px;padding-bottom:25px}.game-secondary .game-inner{gap:18px}.game-secondary .game-art,.game-secondary .game-emblem{height:160px}.game-secondary+.game-secondary{padding-top:42px;padding-bottom:25px}.game-secondary .game-window-caption p{font-size:21px}.game-secondary .game-window-symbol{display:none}}
+.game-emblem.story-emblem{position:relative;color:var(--ink)}
+.story-emblem img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.story-emblem .game-life-art{opacity:1}.story-emblem .game-death-art{opacity:0}
+[data-theme=death] .story-emblem .game-life-art{opacity:0}[data-theme=death] .story-emblem .game-death-art{opacity:1}
+
+/* Keep the primary illustration on the same axis as its text column. */
+@media(min-width:1000px){
+ .game-primary .game-copy{width:100%;max-width:none}
+ .game-primary .game-description{max-width:none}
+ .game-primary .game-art{align-self:center;margin-inline:auto}
+}

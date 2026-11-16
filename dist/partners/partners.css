@@ -1,0 +1,43 @@
+/* One responsive lockup: supplied SVG geometry and HSE colourways stay intact. */
+.partner-mark{display:block;flex:none}
+.partner-mark img,.co-brand-kion img{display:block;width:100%;height:100%;object-fit:contain}
+.partner-mark .partner-logo--dark,.co-brand-kion .partner-logo--dark{display:none}
+[data-theme=death] .partner-logo--light{display:none}
+[data-theme=death] .partner-mark .partner-logo--dark,[data-theme=death] .co-brand-kion .partner-logo--dark{display:block}
+[data-theme=death] .partner-on img{filter:invert(1)}
+.co-brand{display:grid;grid-template-columns:minmax(0,6.5fr) .35fr minmax(0,1fr) .35fr minmax(0,1fr);align-items:center;gap:clamp(3px,.6vw,8px);min-width:0}
+.co-brand>a{display:block;min-width:0;text-decoration:none}
+.co-brand .co-brand-kion{position:relative;width:100%;height:auto;aspect-ratio:242/30}
+.co-brand .co-brand-kion img{position:absolute;inset:0}
+.co-brand .partner-mark{width:100%;height:auto;aspect-ratio:1}
+.co-brand-cross{color:var(--ink);font:400 clamp(9px,1.2vw,18px)/1 Arial,sans-serif;text-align:center}
+.opening-section .header{gap:16px}
+.opening-section .header .header-branding{width:clamp(220px,26vw,340px);flex:none}
+.footer-cobrand{width:min(100%,340px);margin-bottom:20px}
+.site-footer .footer-inner{row-gap:26px}
+.footer-legal{display:grid;gap:8px}
+.footer-legal a{color:inherit;text-decoration-thickness:1px;text-underline-offset:3px}
+.footer-legal a:hover{color:var(--red)}
+.album-partnership a{text-decoration:none}
+@media(max-width:700px){
+ .opening-section .header{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,1fr);grid-template-rows:auto auto;gap:6px 8px;height:100px;min-height:0;padding-block:0;align-content:center}
+ .opening-section .header .header-branding{grid-column:1;grid-row:1;width:100%;max-width:none}
+ .opening-section .header .header-branding .brand{width:100%;max-width:none;height:auto}
+ .opening-section .header .header-actions{grid-column:2;grid-row:1;min-width:0;width:100%;margin:0}
+ .header-actions .theme-switch{width:100%;height:clamp(32px,8.5vw,40px);padding:0;gap:0}
+ .header-actions .theme-option{width:50%;min-width:0;height:100%;padding:0;gap:4px;justify-content:center;font-size:clamp(13px,3.7vw,17px)}
+ .header-actions .theme-option span{font-size:inherit}
+ .header-actions .theme-option svg{width:12px;height:12px;flex:none}
+ .header .desktop-nav{grid-column:1/-1;grid-row:2}
+ .co-brand{gap:clamp(3px,1vw,5px)}
+ .co-brand-cross{font-size:10px}
+ .footer-cobrand{width:min(100%,310px);margin-bottom:18px}
+ .footer-cobrand .co-brand-cross{font-size:15px}
+ .footer-legal{gap:8px}
+}
+@media(min-width:701px) and (max-width:900px){.opening-section .header .header-branding{width:clamp(180px,24vw,220px)}}
+/* Support belongs to the project description at every breakpoint. */
+.site-footer .footer-inner{grid-template-columns:minmax(0,1fr)}
+.site-footer .footer-about{max-width:850px}
+.site-footer .footer-about .footer-links{margin-top:18px;align-items:flex-start;gap:0}
+.site-footer .footer-about .footer-links a{display:inline-flex;align-items:center;gap:12px}

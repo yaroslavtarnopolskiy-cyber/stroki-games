@@ -1,0 +1,6 @@
+import assert from 'node:assert/strict';import {createRequire} from 'node:module';const require=createRequire(import.meta.url);const {createRegionSwipe}=require('../dist/region-swipe.js');
+let now=0,enabled=true;const handlers={},changes=[];const root={addEventListener:(name,fn)=>handlers[name]=fn,setPointerCapture(){}};createRegionSwipe({element:root,canSwipe:()=>enabled,onSwipe:n=>changes.push(n),now:()=>now});
+function event(x,y=100,link=false){return {pointerId:1,button:0,isPrimary:true,clientX:x,clientY:y,target:{closest:()=>link},cancelable:true,preventDefault(){}}}
+function swipe(dx,dy=0){handlers.pointerdown(event(150));handlers.pointermove(event(150+dx,100+dy));now+=200;handlers.pointerup(event(150+dx,100+dy))}
+swipe(-70);swipe(70);assert.deepEqual(changes,[1,-1]);swipe(12);swipe(80,120);assert.equal(changes.length,2);enabled=false;swipe(-100);assert.equal(changes.length,2);enabled=true;handlers.pointerdown(event(150,100,true));handlers.pointerup(event(50));assert.equal(changes.length,2);handlers.pointerdown(event(150));handlers.pointercancel();handlers.pointerup(event(50));assert.equal(changes.length,2);
+console.log('PASS: left/right region navigation, vertical scroll and small moves preserved, links and cancellations ignored, desktop guard');

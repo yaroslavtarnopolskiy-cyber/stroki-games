@@ -4,7 +4,7 @@ const reduced=matchMedia('(prefers-reduced-motion: reduce)');
 const mobile=matchMedia('(max-width:760px)');
 
 const connection=navigator.connection;
-const canAnimate=()=>!reduced.matches&&!connection?.saveData&&!/^(slow-2g|2g)$/.test(connection?.effectiveType||'');
+const canAnimate=()=>!reduced.matches&&window.pesniConnection?.canAnimate()!==false;
 let loaded=false,viewed=false,serial=0,count=0,templates,ensembleLoaded=false,sectionVisible=false;
 function syncMotion(){root.dataset.motion=canAnimate()?'animated':'static';root.style.setProperty('--album-play',sectionVisible&&!document.hidden&&canAnimate()?'running':'paused');syncBandImages()}
 function emit(name){root.dispatchEvent(new CustomEvent('pesni:analytics',{bubbles:true,detail:{name,section:'album_promo',album:'istochnik',artist:'on_label',theme:document.documentElement.dataset.theme,placement:'landing_footer'}}))}
@@ -27,7 +27,7 @@ function instance(source,theme,phase){
  return document.importNode(node,true);
 }
 function buildEnsemble(){
- for(const character of ['dancer','guslar']){const layer=root.querySelector(`.ensemble-${character}`);if(!layer)return;for(const theme of ['life','death'])layer.append(instance(templates[`${character}-${theme}`],theme,character==='dancer'?-.9:0))}
+ for(const character of ['dancer','guslar']){const layer=root.querySelector(`.ensemble-${character}`);if(!layer)return;layer.replaceChildren();for(const theme of ['life','death'])layer.append(instance(templates[`${character}-${theme}`],theme,character==='dancer'?-.9:0))}
 }
 function buildRows(){
  const size=innerWidth<=760?88.8:126.8,next=Math.max(6,Math.ceil(root.clientWidth/size/6)*6);if(count===next)return;count=next;
@@ -55,12 +55,12 @@ function buildRows(){
 function syncBandImages(){
  const theme=document.documentElement.dataset.theme==='death'?'death':'life';
  const suffix='-static.svg';
- root.querySelectorAll('.album-processions').forEach(band=>{const r=band.getBoundingClientRect(),visible=!document.hidden&&(band.dataset.inView==='true'||(r.bottom>-30&&r.top<innerHeight+30));band.style.setProperty('--album-play',visible&&canAnimate()?'running':'paused');
- band.querySelectorAll('.album-character>img').forEach(image=>{if(visible&&image.classList.contains(`album-${theme}`)){const src=image.dataset.src.replace(/\.svg$/,suffix);if(image.getAttribute('src')!==src)image.src=src}else image.removeAttribute('src')});
+ root.querySelectorAll('.album-processions').forEach(band=>{const visible=!document.hidden&&band.dataset.inView==='true';band.style.setProperty('--album-play',visible&&canAnimate()?'running':'paused');
+ band.querySelectorAll('.album-character>img').forEach(image=>{if(visible&&image.classList.contains(`album-${theme}`)){const src=image.dataset.src.replace(/\.svg$/,suffix);if(image.getAttribute('src')!==src)image.src=src}});
  });
 }
 async function ensureEnsemble(){
- if(ensembleLoaded||mobile.matches)return;ensembleLoaded=true;
+ if(ensembleLoaded||mobile.matches||!canAnimate())return;ensembleLoaded=true;
  try{templates=Object.fromEntries(await Promise.all(['guslar','dancer'].flatMap(c=>['life','death'].map(async t=>{const response=await fetch(`album-promo/assets/album_${c}_${t}.svg`);if(!response.ok)throw Error('Missing album character');return [`${c}-${t}`,await response.text()]}))));
  const mount=()=>{buildEnsemble();syncMotion()};
  if('requestIdleCallback' in window)requestIdleCallback(mount,{timeout:500});else setTimeout(mount,0);
@@ -71,9 +71,10 @@ function load(){
  // Warm the tiny static ribbon variants near the section, not at page startup.
  const themes=canAnimate()?['life','death']:[document.documentElement.dataset.theme==='death'?'death':'life'];
  for(const character of config.characters)for(const theme of themes){const image=new Image();image.decoding='async';image.src=`album-promo/assets/album_${character}_${theme}-static.svg`;if(image.decode)image.decode().catch(()=>{})}
+ for(const character of ['guslar','dancer']){const layer=root.querySelector(`.ensemble-${character}`);if(layer&&!layer.children.length)for(const theme of ['life','death']){const image=new Image();image.className=`album-${theme}`;image.src=`album-promo/assets/album_${character}_${theme}-static.svg`;image.alt='';image.decoding='async';layer.append(image)}}
  buildRows();ensureEnsemble();new ResizeObserver(()=>{buildRows();syncBandImages()}).observe(root);
 }
-const preload=new IntersectionObserver(entries=>{if(entries.some(e=>e.isIntersecting)){load();preload.disconnect()}},{rootMargin:'600px'});preload.observe(root);
+const preload=new IntersectionObserver(entries=>{if(entries.some(e=>e.isIntersecting)){load();preload.disconnect()}},{rootMargin:'120px'});preload.observe(root);
 const visibility=new IntersectionObserver(entries=>{const visible=entries.some(e=>e.isIntersecting);sectionVisible=visible;syncMotion();if(visible&&!viewed){viewed=true;emit('album_promo_view')}},{threshold:.08});visibility.observe(root);
 
 const bandVisibility=new IntersectionObserver(entries=>{for(const entry of entries)entry.target.dataset.inView=String(entry.isIntersecting);syncBandImages()},{rootMargin:"30px"});root.querySelectorAll(".album-processions").forEach(band=>bandVisibility.observe(band));
@@ -81,7 +82,7 @@ const bandVisibility=new IntersectionObserver(entries=>{for(const entry of entri
 new MutationObserver(syncBandImages).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
 document.addEventListener('visibilitychange',syncMotion);
 reduced.addEventListener('change',syncMotion);
-connection?.addEventListener('change',syncMotion);
+window.addEventListener('pesni:connection-change',()=>{syncMotion();if(loaded)ensureEnsemble()});
 mobile.addEventListener('change',()=>{if(loaded)ensureEnsemble()});
 syncMotion();
 

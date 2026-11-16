@@ -1,15 +1,36 @@
-@font-face {
-  font-family: "Balkara Condensed";
-  src: url("assets/ofont.ru_Balkara%20Condensed%20(1).ttf") format("truetype");
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-}
+@font-face{font-family:Izvod;src:url('../../assets/fonts/izvod.otf') format('opentype');font-style:normal;font-weight:400;font-display:swap}
+@font-face{font-family:Glanz;src:url('../../assets/fonts/glanz.otf') format('opentype');font-style:normal;font-weight:400;font-display:swap}
+body,button,input,label,output{font-family:Glanz,Georgia,serif}
+.tutorial-title,.tutorial-gesture-label,.tutorial-continue,#result-distance,.runner-result-button{font-family:Izvod,Glanz,Georgia,serif!important;font-weight:400!important}
+.tutorial-help,.obstacle-hint{font-family:Glanz,Georgia,serif!important}
+.runner-palette,#hero-image{filter:url('#runner-palette')}
+:root{--runner-red:#d7251f;--runner-blue:#286d9e}
 
-.tutorial-title,
-.tutorial-controls,
-.tutorial-gesture-label,
-.tutorial-continue,
-#result-distance {
-  font-family: "Balkara Condensed", Georgia, "Times New Roman", serif !important;
-}
+.runner-result-button{display:flex;align-items:center;justify-content:center;gap:.35em;padding:0 .35em;border:0;border-radius:.3em;background:#080808;color:#fff;font:400 3.2em/1.2 Izvod,Glanz,Georgia,serif;cursor:pointer;white-space:nowrap;appearance:none}
+.runner-result-button svg{width:1.15em;height:1.15em;flex:none;fill:none;stroke:currentColor;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round}
+.runner-result-button.is-compact{gap:.2em;padding:0 .15em}
+.runner-result-button.is-compact svg{width:1.05em;height:1.05em}
+.runner-result-button:active{transform:scale(.97)}
+.runner-result-button:focus-visible{outline:2px solid #fff;outline-offset:3px}
+
+.runner-result-button.is-compact{flex-direction:column;gap:.15em;padding:.15em;font-size:1.65em;line-height:1.1}
+.runner-result-button.is-compact svg{width:1.6em;height:1.6em}
+.runner-result-button.is-compact span{display:block;white-space:normal;text-align:center}
+
+/* Quiet record action beneath the distance, separated from the replay actions. */
+.runner-result-button.is-record{font:400 1.6em/1.15 Glanz,Georgia,serif!important;background:transparent;border:1px solid #ffffff38;border-radius:.6em;color:#e0ded9;gap:.3em;padding:0 .4em}
+.runner-result-button.is-record svg{width:1em;height:1em}
+.runner-result-button.is-record svg[style]{color:inherit!important}
+.runner-result-button.is-compact:not(:last-child){font-size:2em}
+
+/* One quiet partner lockup inside the paper, clear of the host close button. */
+.runner-result-brand-paper{position:absolute;left:49.2%;top:10.5%;width:46.7%;height:26.5%;z-index:1;pointer-events:none;background:#f6f5f1 url('assets/UI/эеран успеха.png') 100% 75%/220% 460% no-repeat;clip-path:polygon(0 0,100% 44%,100% 100%,0 100%)}
+.runner-result-brands{position:absolute;left:52.5%;top:12.5%;width:38%;height:20%;z-index:2;display:grid;grid-template-columns:35% auto minmax(0,1fr);align-items:center;gap:.7em;color:#777168;font:400 1.6em/1 Glanz,Georgia,serif;pointer-events:none}
+.runner-result-brands img{display:block;min-width:0;max-width:100%;object-fit:contain}
+.runner-result-brands .result-project-logo{width:100%;height:100%}
+.runner-result-partners{display:flex;align-items:center;gap:.65em;min-width:0}
+.runner-result-partners .result-hse-logo{width:18%;height:auto;flex:none}
+.runner-result-partners .result-kion-logo{width:0;height:auto;flex:1}
+.runner-result-partners .result-kion-link{display:block;flex:1;min-width:0;pointer-events:auto}
+.runner-result-partners .result-kion-link>.result-kion-logo{width:100%;height:auto}
+.runner-result-partners .result-kion-link:focus-visible{outline:2px solid var(--runner-red);outline-offset:4px}

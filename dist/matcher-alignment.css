@@ -1,0 +1,20 @@
+/* Every result element shares the question column's centre, including the wider carousel. */
+.story-matcher .matcher-display{display:flex;flex-direction:column;align-items:center;width:100%;min-width:0;text-align:center}
+.story-matcher .matcher-display>.matcher-reveal{width:100%;max-width:none;margin-inline:0;text-align:center;align-items:center}
+.story-matcher .matcher-display>.matcher-reveal h2{width:100%;max-width:none;text-align:center}
+.story-matcher .matcher-display>.story-carousel{align-self:center;flex:none;margin-inline:0}
+.story-matcher .matcher-display>.matcher-browse{width:100%;margin-inline:0;justify-content:center;flex:none}
+.story-matcher .matcher-display>.matcher-story{width:100%;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;text-align:center;margin-inline:0}
+.story-matcher .matcher-display>.matcher-story h3{width:100%;max-width:38ch;text-align:center}
+.story-matcher .matcher-display>.matcher-story .matcher-author{width:100%;text-align:center}
+.story-matcher .matcher-display>.matcher-story .matcher-read{align-self:center;display:inline-flex;justify-content:center;margin-inline:auto}
+@media(min-width:761px){
+ .story-matcher .matcher-inner{align-items:center}
+ .story-matcher .matcher-questions,.story-matcher .matcher-display{align-self:center}
+}
+@media(max-width:760px){
+ .story-matcher .matcher-display{margin-inline:auto}
+ .story-matcher .matcher-display>.story-carousel{width:calc(100% + 64px)}
+}
+/* The wider carousel stays centred on the questions without widening the mobile viewport. */
+.story-matcher{overflow-x:clip}

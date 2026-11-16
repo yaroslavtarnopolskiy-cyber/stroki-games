@@ -19,4 +19,9 @@ let ticks=0;const id=context.setInterval(()=>ticks++,20);advance(40);assert.equa
 const cancelled=context.requestAnimationFrame(()=>assert.fail('Cancelled frame executed'));context.cancelAnimationFrame(cancelled);advance(20);
 document.hidden=true;docHandlers.visibilitychange();const hiddenTime=context.performance.now();advance(500);assert.equal(context.performance.now(),hiddenTime);document.hidden=false;docHandlers.visibilitychange();advance(20);assert.equal(context.performance.now(),hiddenTime+20);
 send('configure',{shareUrl:'https://other.test/'});assert.equal(context.runnerLandingUrl,undefined);send('configure',{shareUrl:'http://example.test/#games'});assert.equal(context.runnerLandingUrl,'http://example.test/#games');
+let jumps=0,forms=0;context.gameStarted=true;context.startJump=()=>jumps++;context.toggleHeroForm=()=>forms++;
+send('control',{code:'ArrowUp'});send('control',{code:'ArrowDown'});assert.equal(jumps,1);assert.equal(forms,1);
+send('pause');send('control',{code:'ArrowUp'});assert.equal(jumps,1);send('resume');
+handlers.message({source:{},origin:context.location.origin,data:{channel:'pesni-runner',type:'control',code:'ArrowDown'}});assert.equal(forms,1);
+let finishes=0;context.runnerFinishRun=()=>finishes++;send('pause');send('finish');assert.equal(finishes,1);assert.equal(document.documentElement.dataset.runnerState,'active');
 console.log('PASS: pause/resume freezes game clock, RAF, timeouts, intervals; cancellation, tab visibility and origin checks');

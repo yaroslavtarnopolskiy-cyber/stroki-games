@@ -1,0 +1,7 @@
+import fs from 'node:fs';import vm from 'node:vm';import assert from 'node:assert/strict';
+const source=fs.readFileSync(new URL('../dist/app.js',import.meta.url),'utf8');let resolvePlay;const events={},attrs={};let paused=true;
+const audio={volume:0,play(){paused=false;return new Promise(resolve=>resolvePlay=resolve)},pause(){paused=true},addEventListener(){}};const button={disabled:false,addEventListener(){},setAttribute:(key,value)=>attrs[key]=value},status={};
+const c={document:{querySelector:s=>s==='#background-music'?audio:s==='.sound-button'?button:status,addEventListener:(name,fn)=>events[name]=fn}};vm.createContext(c);vm.runInContext(source.slice(source.indexOf('const audio='),source.indexOf('const menu=')),c);
+const play=c.toggleSound();events['pesni:game-activate']({detail:{id:'games'}});assert(paused);assert.equal(attrs['aria-pressed'],'false');resolvePlay();await play;assert.equal(attrs['aria-pressed'],'false','Late play promise cannot restore music state');assert(!button.disabled);
+const manual=c.toggleSound();resolvePlay();await manual;assert(!paused);assert.equal(attrs['aria-pressed'],'true');for(const id of ['games','game-gifts','game-human-beast']){events['pesni:game-activate']({detail:{id}});assert(paused);assert.equal(attrs['aria-pressed'],'false')}
+console.log('PASS: launching any game pauses landing music; pending playback cannot restore it; manual playback remains available');

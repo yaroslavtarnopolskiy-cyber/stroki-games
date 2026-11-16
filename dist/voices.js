@@ -1,4 +1,5 @@
 (function(){
+const storyUrls={'komi': 'https://mtsbooks.onelink.me/zdZb/2y5x9p54', 'kalyazin': 'https://mtsbooks.onelink.me/zdZb/jce0jbvp', 'chuvashia': 'https://mtsbooks.onelink.me/zdZb/j74qgr6x', 'caucasus': 'https://mtsbooks.onelink.me/zdZb/2ui31gw4', 'moscow': 'https://mtsbooks.onelink.me/zdZb/t8zxvuww', 'udmurtia': 'https://mtsbooks.onelink.me/zdZb/53p6oe0h', 'kazan': 'https://mtsbooks.onelink.me/zdZb/y2t4ofj7'};
 const lands=[
 {id:'komi',name:'Урал',x:1200,y:180,question:'В тебе живут человек и зверь. Кто из них однажды возьмёт верх?',description:'Богатырь страдает от своей двойственной природы и хочет жениться на человеческой девушке, чтобы обуздать животную сущность.',story:'«Маска человека» · Мария Воробьи'},
 {id:'kalyazin',name:'Калязин',x:360,y:240,question:'Новая жизнь — по ту сторону болота. Осмелишься пойти?',description:'1654 год. Вокруг свирепствует мор, а в болотах близ Калязина, по преданию, спрятаны древние сокровища.',story:'«Сладки ягоды, да смертью пахнут» · Екатерина Звонцова'},
@@ -25,11 +26,9 @@ document.querySelector('.composition').classList.add('awaiting-selection');
 const markers=document.querySelector('#markers'),dots=document.querySelector('#overview-dots');
 // Keep the approved sheet drawings intact; SVG viewports isolate each object.
 const engravingCrops={"komi": [25, 30, 380, 400], "kalyazin": [435, 25, 320, 410], "chuvashia": [727, 60, 430, 365], "caucasus": [1200, 0, 310, 435], "moscow": [45, 505, 470, 430], "udmurtia": [555, 515, 420, 420], "kazan": [1015, 525, 485, 410]};
-document.body.insertAdjacentHTML('afterbegin',`<svg width="0" height="0" aria-hidden="true" style="position:absolute;pointer-events:none"><defs><filter id="engraving-life" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -.2126 -.7152 -.0722 1 0"/></filter><filter id="engraving-death" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  .2126 .7152 .0722 -.067 0"/></filter></defs></svg>`);
 function engravingIcon(id){
  const [x,y,w,h]=engravingCrops[id];
- const clip=id==='kalyazin'?'<path d="M435 25H755V155H705V435H435Z"/>':`<rect x="${x}" y="${y}" width="${w}" height="${h}"/>`;
- return `<svg viewBox="${x} ${y} ${w} ${h}" aria-hidden="true" class="engraved-marker"><defs><clipPath id="engraving-crop-${id}" clipPathUnits="userSpaceOnUse">${clip}</clipPath></defs><g clip-path="url(#engraving-crop-${id})"><image class="engraving-life" href="map-study/assets/markers/engraved-sheet-life-v1.webp" width="1536" height="1024" filter="url(#engraving-life)"/><image class="engraving-death" href="map-study/assets/markers/engraved-sheet-death-v1.webp" width="1536" height="1024" filter="url(#engraving-death)"/></g></svg>`;
+ return `<svg viewBox="0 0 ${w} ${h}" aria-hidden="true" class="engraved-marker"><image class="engraving-life" href="map-study/assets/markers/${id}-life-baked.webp" width="${w}" height="${h}"/><image class="engraving-death" href="map-study/assets/markers/${id}-death-baked.webp" width="${w}" height="${h}"/></svg>`;
 }
 
 lands.forEach((land,index)=>{const marker=document.createElement('button');marker.className='marker';marker.style.left=land.x/1536*100+'%';marker.style.top=land.y/1024*100+'%';marker.setAttribute('aria-label',`${String(index+1).padStart(2,'0')}. ${land.name}`);marker.setAttribute('aria-controls','land-title');marker.setAttribute('aria-pressed','false');marker.dataset.index=index;marker.innerHTML=`<span class="marker-symbol">${engravingIcon(land.id)}<span class="marker-number">${String(index+1).padStart(2,'0')}</span></span><span class="marker-label">${land.name}</span>`;marker.addEventListener('click',()=>select(index,true));markers.append(marker);const dot=document.createElement('span');dot.className='map-dot';dot.style.left=marker.style.left;dot.style.top=marker.style.top;dots.append(dot)});
@@ -38,7 +37,7 @@ if('IntersectionObserver' in window){
  const mapHint=new IntersectionObserver(entries=>{
   if(!entries.some(entry=>entry.isIntersecting))return;
   mapHint.disconnect();
-  if(matchMedia('(prefers-reduced-motion: reduce)').matches||markers.querySelector('[aria-pressed="true"]'))return;
+  if((matchMedia('(prefers-reduced-motion: reduce)').matches||window.pesniConnection?.canAnimate()===false)||markers.querySelector('[aria-pressed="true"]'))return;
   const symbol=markers.querySelector('[data-index="2"] .marker-symbol');
   symbol?.animate([{transform:'scale(1)'},{transform:'scale(1.16)',offset:.45},{transform:'scale(1)'}],{duration:1300,easing:'ease-in-out'});
  },{threshold:.45});
@@ -49,21 +48,28 @@ if('IntersectionObserver' in window){
 const mapSvg=document.querySelector('.selection-art');
 const mapDefs=mapSvg.querySelector('defs');
 mapDefs.insertAdjacentHTML('beforeend',`<radialGradient id="water-front"><stop offset="0" stop-color="white"/><stop offset=".72" stop-color="white"/><stop offset="1" stop-color="white" stop-opacity="0"/></radialGradient><filter id="water-ripple" x="-15%" y="-15%" width="130%" height="130%"><feTurbulence type="fractalNoise" baseFrequency=".012 .018" numOctaves="2" seed="8" result="grain"/><feDisplacementMap in="SourceGraphic" in2="grain" scale="26" xChannelSelector="R" yChannelSelector="G"/></filter>`);
-const waterCircles=new Map();
+const waterCircles=new Map(),waterRegions=new Map();
 lands.forEach(land=>{
  const ns='http://www.w3.org/2000/svg';
+ const region=mapSvg.querySelector('[data-land="'+land.id+'"]');
+ const bounds=region.getBBox(),padding=32;
+ // Fixed filter bounds prevent an expanding circle from allocating an enormous offscreen bitmap.
+ const filter=mapDefs.querySelector('#water-ripple').cloneNode(true);
+ filter.id='water-ripple-'+land.id;filter.setAttribute('filterUnits','userSpaceOnUse');
+ for(const [key,value] of Object.entries({x:bounds.x-padding,y:bounds.y-padding,width:bounds.width+2*padding,height:bounds.height+2*padding}))filter.setAttribute(key,value);
+ mapDefs.append(filter);
+ waterRegions.set(land.id,region);
  const mask=document.createElementNS(ns,'mask');
  mask.id='water-'+land.id;
  mask.setAttribute('maskUnits','userSpaceOnUse');
- mask.setAttribute('x','-100');mask.setAttribute('y','-100');
- mask.setAttribute('width','1736');mask.setAttribute('height','1224');
+ for(const [key,value] of Object.entries({x:bounds.x-padding,y:bounds.y-padding,width:bounds.width+2*padding,height:bounds.height+2*padding}))mask.setAttribute(key,value);
  mask.style.maskType='alpha';
  const circle=document.createElementNS(ns,'circle');
  circle.setAttribute('cx',land.x);circle.setAttribute('cy',land.y);
  circle.setAttribute('r','0');circle.setAttribute('fill','url(#water-front)');
- circle.setAttribute('filter','url(#water-ripple)');
+ circle.setAttribute('filter','url(#'+filter.id+')');
  mask.append(circle);mapDefs.append(mask);
- mapSvg.querySelector('[data-land="'+land.id+'"]').setAttribute('mask','url(#'+mask.id+')');
+ region.setAttribute('mask','url(#'+mask.id+')');
  waterCircles.set(land.id,circle);
 });
 let waterFrame=0, floodedLand=null;
@@ -71,9 +77,10 @@ function floodRegion(id){
  if(id===floodedLand)return;
  floodedLand=id;cancelAnimationFrame(waterFrame);
  const circle=waterCircles.get(id);
+ const region=waterRegions.get(id);region.setAttribute('mask','url(#water-'+id+')');
  const land=lands.find(item=>item.id===id);
  const extent=Math.hypot(Math.max(land.x,1536-land.x),Math.max(land.y,1024-land.y))*1.45;
- if(matchMedia('(prefers-reduced-motion: reduce)').matches){circle.setAttribute('r',extent);return}
+ if((matchMedia('(prefers-reduced-motion: reduce)').matches||window.pesniConnection?.canAnimate()===false)){circle.setAttribute('r',extent);region.removeAttribute('mask');return}
  circle.setAttribute('r','0');
  const started=performance.now();
  function frame(now){
@@ -81,11 +88,19 @@ function floodRegion(id){
   // Ease gently into the flood, then let the water settle at its boundary.
   const eased=t*t*(3-2*t);
   circle.setAttribute('r',extent*eased);
-  if(t<1)waterFrame=requestAnimationFrame(frame);
+  if(t<1)waterFrame=requestAnimationFrame(frame);else region.removeAttribute('mask');
  }
  waterFrame=requestAnimationFrame(frame);
 }
-function select(index,focusStory=false){document.querySelector('.land-panel').hidden=false;document.querySelector('.composition').classList.remove('awaiting-selection');selected=(index+lands.length)%lands.length;const land=lands[selected];floodRegion(land.id);const artwork=document.querySelector('#land-artwork');const artDescriptions={kazan:'Извивающийся змей с тонкими усиками и фактурной чешуёй',moscow:'Парусный корабль с наполненными парусами на завитках волн',caucasus:'Женский профиль с круглым височным украшением и длинными подвесками',chuvashia:'Женская фигура с текучими волосами и силуэтом воды, кувшинки у основания',kalyazin:'Девушка с длинной косой в полный рост, держащая серп за спиной',udmurtia:'Робкий шаг женских ног среди крупных цветов, лоза вдоль щиколотки',komi:'Лицо мужчины в медвежьей маске, фактурная печатная графика'};artwork.hidden=!artDescriptions[land.id];document.querySelector('.land-card').classList.toggle('has-artwork',!artwork.hidden);if(!artwork.hidden){const illustration=document.querySelector('#land-illustration');illustration.src='map-study/assets/'+land.id+'-'+worldMode+(land.id==='kalyazin'&&worldMode==='life'?'-v2':'')+'.webp';illustration.alt=artDescriptions[land.id];illustration.removeAttribute('width');illustration.removeAttribute('height')};document.querySelector('#counter').textContent=`${String(selected+1).padStart(2,'0')} / 07`;document.querySelector('#land-title').textContent=land.name;document.querySelector('#question').textContent=worldMode==='death'?deathQuestions[land.id]:land.question;document.querySelector('#description').textContent=land.description;document.querySelector('#story').textContent=land.story;document.querySelectorAll('.land-region').forEach(region=>region.classList.toggle('selected',region.dataset.land===land.id));document.querySelectorAll('[data-index]').forEach(button=>button.setAttribute('aria-pressed',String(Number(button.dataset.index)===selected)));if(focusStory)document.dispatchEvent(new CustomEvent('pesni:land-selected',{detail:{land:land.id}}))}
+function select(index,focusStory=false){document.querySelector('.land-panel').hidden=false;document.querySelector('.composition').classList.remove('awaiting-selection');selected=(index+lands.length)%lands.length;const land=lands[selected];floodRegion(land.id);const artwork=document.querySelector('#land-artwork');const artDescriptions={kazan:'Извивающийся змей с тонкими усиками и фактурной чешуёй',moscow:'Парусный корабль с наполненными парусами на завитках волн',caucasus:'Женский профиль с круглым височным украшением и длинными подвесками',chuvashia:'Женская фигура с текучими волосами и силуэтом воды, кувшинки у основания',kalyazin:'Девушка с длинной косой в полный рост, держащая серп за спиной',udmurtia:'Робкий шаг женских ног среди крупных цветов, лоза вдоль щиколотки',komi:'Лицо мужчины в медвежьей маске, фактурная печатная графика'};artwork.hidden=!artDescriptions[land.id];document.querySelector('.land-card').classList.toggle('has-artwork',!artwork.hidden);if(!artwork.hidden){const illustration=document.querySelector('#land-illustration');illustration.src='map-study/assets/'+land.id+'-'+worldMode+(land.id==='kalyazin'&&worldMode==='life'?'-v2':'')+'.webp';illustration.alt=artDescriptions[land.id];illustration.removeAttribute('width');illustration.removeAttribute('height')};document.querySelector('#counter').textContent=`${String(selected+1).padStart(2,'0')} / 07`;document.querySelector('#land-title').textContent=land.name;document.querySelector('#question').textContent=worldMode==='death'?deathQuestions[land.id]:land.question;document.querySelector('#description').textContent=land.description;document.querySelector('#story').textContent=land.story;const storyLink=document.querySelector('.story-link');storyLink.href=storyUrls[land.id];storyLink.setAttribute('aria-label','Читать '+land.story);document.querySelectorAll('.land-region').forEach(region=>region.classList.toggle('selected',region.dataset.land===land.id));document.querySelectorAll('[data-index]').forEach(button=>button.setAttribute('aria-pressed',String(Number(button.dataset.index)===selected)));if(focusStory)document.dispatchEvent(new CustomEvent('pesni:land-selected',{detail:{land:land.id}}))}
+const regionCard=document.querySelector('.land-story-focus');
+let regionTransition;
+window.createRegionSwipe?.({element:regionCard,canSwipe:()=>selected>=0&&matchMedia('(max-width:760px), (pointer:coarse)').matches,onSwipe:direction=>{
+ select(selected+direction);
+ regionTransition?.cancel();
+ if(window.pesniConnection?.canAnimate()!==false&&!matchMedia('(prefers-reduced-motion: reduce)').matches)regionTransition=regionCard.animate([{opacity:.65,transform:`translateX(${direction*12}px)`},{opacity:1,transform:'translateX(0)'}],{duration:180,easing:'ease-out'});
+}});
+document.querySelector('#land-illustration').draggable=false;
 document.querySelector('#previous').addEventListener('click',()=>select(selected-1,true));document.querySelector('#next').addEventListener('click',()=>select(selected+1,true));document.querySelector('#view-toggle').addEventListener('click',event=>{const overview=document.querySelector('.map-viewport').classList.toggle('overview');event.currentTarget.setAttribute('aria-pressed',String(overview));event.currentTarget.textContent=overview?'К землям':'Общий вид'});
 
 
@@ -97,17 +112,24 @@ let flowOpacity=[...fadeShapes[worldMode]];
 const flowFadeStops=[...document.querySelectorAll('.flow-fade-stop')];
 function applyFlowFade(values){flowFadeStops.forEach((stop,i)=>stop.setAttribute('stop-opacity',values[i%values.length]))}
 function flowPath(a){return 'M 0 '+a[0]+' C '+[1,7,13].map(i=>a.slice(i,i+6).join(' ')).join(' C ')+' L 400 108 H 0 Z'}
-function animateSwitchShape(mode){
+const inViewSwitches=new Set();
+if('IntersectionObserver' in window){
+ const switchVisibility=new IntersectionObserver(entries=>{for(const entry of entries){if(entry.isIntersecting)inViewSwitches.add(entry.target);else inViewSwitches.delete(entry.target)}},{rootMargin:'40px'});
+ document.querySelectorAll('.flow-liquid').forEach(shape=>switchVisibility.observe(shape));
+}
+function visibleSwitchShapes(){return [...inViewSwitches]}
+
+function animateSwitchShape(mode,visible){
  const allShapes=[...document.querySelectorAll('.flow-liquid')];
  // Morph only switches in view; synchronize the others once at completion.
- const shapes=allShapes.filter(shape=>{const r=shape.getBoundingClientRect();return r.width>0&&r.height>0&&r.bottom>0&&r.top<innerHeight});
+ const shapes=visible||visibleSwitchShapes();
  const visibleStops=flowFadeStops.filter(stop=>shapes.some(shape=>shape.ownerSVGElement===stop.ownerSVGElement));
  const applyShape=(coordinates,all=false)=>{const d=flowPath(coordinates);(all?allShapes:shapes).forEach(shape=>shape.setAttribute('d',d))};
  const applyVisibleFade=values=>visibleStops.forEach((stop,i)=>stop.setAttribute('stop-opacity',values[i%values.length]));
  cancelAnimationFrame(flowFrame);
  const from=[...flowCoordinates],to=switchShapes[mode];
  const fadeFrom=[...flowOpacity],fadeTo=fadeShapes[mode];
- const duration=switchReady&&!matchMedia('(prefers-reduced-motion: reduce)').matches?360:0;
+ const duration=switchReady&&!(matchMedia('(prefers-reduced-motion: reduce)').matches||window.pesniConnection?.canAnimate()===false)?360:0;
  switchReady=true;
  if(!duration){flowCoordinates=[...to];flowOpacity=[...fadeTo];applyFlowFade(flowOpacity);applyShape(to,true);return}
  const start=performance.now();
@@ -116,9 +138,12 @@ function animateSwitchShape(mode){
 }
 
 function setWorldMode(mode){
- worldMode=mode==='death'?'death':'life';
+ const nextMode=mode==='death'?'death':'life';
+ if(switchReady&&worldMode===nextMode)return;
+ const visible=visibleSwitchShapes();
+ worldMode=nextMode;
  document.documentElement.dataset.worldMode=worldMode;
- animateSwitchShape(worldMode);
+ animateSwitchShape(worldMode,visible);
  document.querySelectorAll('[data-map-mode]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.mapMode===worldMode)));
  if(window.setSiteTheme&&document.documentElement.dataset.theme!==worldMode)window.setSiteTheme(worldMode);
  try{localStorage.setItem('pesni-theme',worldMode)}catch{}
