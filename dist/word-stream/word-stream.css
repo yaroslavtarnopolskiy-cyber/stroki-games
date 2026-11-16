@@ -1,0 +1,44 @@
+@font-face{font-family:RiverRoot;src:url('fonts/pt-root-ui-light.ttf') format('truetype');font-weight:300;font-style:normal;font-display:swap}
+.word-river{position:relative;z-index:12;padding:24px 0 32px;color:var(--ink);background:transparent;scroll-snap-align:start;scroll-snap-stop:always;isolation:isolate;font-family:RiverRoot,'Times New Roman',serif}
+.river-stage{width:100%;height:260px;position:relative;overflow:clip;touch-action:pan-y;transition:opacity .26s ease;mask-image:linear-gradient(to right,transparent 0,#000 50px,#000 calc(100% - 20px),transparent 100%)}
+.word-river.is-changing .river-stage{opacity:0}
+.river-row{position:absolute;inset:0;pointer-events:none;overflow:clip}
+.flowing-word{pointer-events:auto;position:absolute;top:0;left:0;min-height:48px;padding:8px 12px;white-space:nowrap;font:300 38px/1 RiverRoot,'Times New Roman',serif;font-synthesis:none;transform-origin:center center;will-change:transform;transition:opacity .2s,color .2s;text-align:center;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;touch-action:pan-y}
+
+.flowing-word:focus-visible{outline:1px solid var(--red);outline-offset:1px;border-radius:3px}
+.flowing-word[aria-expanded=true]{color:var(--red)}
+.word-river.has-selection .flowing-word:not([aria-expanded=true]){opacity:.25}
+.river-lines{position:absolute;inset:0;display:block;width:100%;height:100%;overflow:visible;pointer-events:none;color:var(--red)}
+.river-lines path{fill:none;stroke:currentColor;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.river-thread-a{stroke-width:8;opacity:.9}
+.river-thread-b{stroke-width:2.1;opacity:.8}
+.river-flowers{opacity:.82}.river-flowers .flower-stem{stroke-width:.8;fill:none}.river-flowers .flower-petal{fill:currentColor;stroke-width:.4}.river-flowers .flower-cut{stroke:var(--paper);stroke-width:1.1;fill:none}
+.river-details{max-height:calc(100dvh - 24px);overflow-y:auto;overscroll-behavior:contain;position:fixed;z-index:50;width:min(320px,calc(100vw - 76px));margin:0;padding:18px 20px;border:1px solid var(--rule);border-radius:4px;background:var(--paper);color:var(--ink);font:16px/1.3 'Times New Roman',Times,serif;box-shadow:0 7px 26px #00000014;pointer-events:auto}
+.river-details[hidden]{display:none}
+.river-details h3{font-size:27px;font-weight:400;margin:0 0 5px;color:var(--red)}
+.river-details p{margin:5px 0}
+.river-details .river-language{font-size:13px;color:var(--muted);margin-bottom:10px}
+.river-star-note{padding:0 4px;min-width:24px;min-height:28px;vertical-align:baseline;color:var(--red);font:inherit;cursor:help}
+.river-details .river-disclaimer{margin:14px 0 0;padding:12px 0 0;border-top:1px solid var(--rule);font:8.8px/1.35 Glanz,Georgia,serif;color:var(--muted)}
+.river-disclaimer:focus{outline:1px solid var(--red);outline-offset:5px}
+.word-river.is-reduced .river-stage{height:auto;min-height:260px;padding:18px 0}
+.word-river.is-reduced .river-lines{height:100%;opacity:.4}
+.word-river.is-reduced .river-row{position:relative;min-height:94px;display:flex;flex-wrap:wrap;justify-content:center;gap:4px 12px;padding:18px 48px}
+.word-river.is-reduced .flowing-word{position:static!important;transform:none!important;will-change:auto;font-size:14px!important}
+@media(max-width:760px){.word-river{padding-top:18px;padding-bottom:24px}.river-stage{height:240px}.river-details{font-size:15px}.river-details h3{font-size:25px}}
+@media(prefers-reduced-motion:reduce){.word-river *{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+
+[data-theme=death] .river-lines{color:#ff5147}
+
+/* Filled, scaled body: silver graphite by day, pale engraving by night. */
+.river-lines{--snake-ink:#85817b;--snake-scale:#d4d0c9}
+[data-theme=death] .river-lines{--snake-ink:#dedbd5;--snake-scale:#77746f}
+.river-lines .river-ribbon-pattern path{stroke:var(--paper);stroke-width:.75;opacity:.85;fill:none}
+.river-lines .snake-body{fill:var(--snake-ink);stroke:var(--snake-ink);stroke-width:.65}
+.river-lines .snake-clear{fill:var(--paper);stroke:var(--paper);stroke-width:2.4}
+.river-lines .snake-head{fill:var(--snake-ink);stroke:var(--snake-ink);stroke-width:.7}
+.river-lines .snake-scale{stroke:var(--snake-scale);stroke-width:.6;fill:none;opacity:.85}
+.river-lines .snake-eye{stroke:var(--paper);stroke-width:1.6}
+.river-lines .snake-tongue{stroke:var(--snake-ink);stroke-width:.8}
+
+:root:not([data-theme=death]) :is(#word-river-2,#word-river-3,#word-river-4) .river-lines{--snake-ink:#55524d;--snake-scale:#bcb6ac}

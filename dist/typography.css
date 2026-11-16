@@ -1,0 +1,94 @@
+/* Final shared text roles. Keep after all section styles; no layout rules here.
+   Section heading / card heading / reading text / metadata / hints / fine print.
+   The illustrated logo, ethnic controls and flowing words retain their own artwork. */
+:root{
+ --text-subheading:var(--text-card-title);
+ --text-caption:13px;
+ --text-fine:11px;
+ --text-nav:18px;
+}
+@media(min-width:701px) and (max-width:1000px){:root{--text-nav:16px}}
+@media(max-width:760px){:root{--text-fine:10px}}
+@media(max-width:700px){:root{--text-nav:14px}}
+@media(max-width:370px){:root{--text-nav:13px}}
+
+.voices-section .section-heading h1,
+.game-section .game-copy h2,
+.story-matcher .matcher-heading,
+.album-promo #album-heading,
+.story-bot #bot-heading,
+.project-media #media-heading,
+.game-dialog-heading h2{
+ font:400 var(--text-heading)/1.08 Glanz,Georgia,serif;
+ letter-spacing:-.02em;
+}
+.voices-section #land-title,
+.story-matcher .matcher-story h3,
+.project-media .media-card h3,
+.word-river .river-details h3,
+.menu-dialog .menu-heading{
+ font:400 var(--text-subheading)/1.16 Glanz,Georgia,serif;
+ letter-spacing:-.01em;
+}
+.opening-section .intro,
+.opening-section .intro p,
+.opening-section .intro p:first-child,
+.voices-section .land-panel #question,
+.voices-section .land-card #description,
+.game-section .game-description,
+.story-matcher .matcher-question legend,
+.album-promo .album-description,
+.album-promo .album-description p,
+.story-bot .bot-copy>p:not(.bot-kicker),
+.word-river .river-details,
+.game-dialog-description{
+ font:400 var(--text-body)/1.3 Glanz,Georgia,serif;
+}
+.voices-section .land-card .story-link,
+.voices-section .land-card .story-link>span,
+.game-section .game-preview-link,
+.story-matcher .matcher-story .matcher-read,
+.album-promo .album-listen,
+.story-bot .afterword-link,
+.project-media .media-read,
+.site-footer .footer-links a{
+ font:400 var(--text-body)/1.25 Glanz,Georgia,serif;
+}
+.game-preview-link>span{font-size:1em}
+.opening-section .sound-text{font-size:var(--text-body);line-height:1.25}
+
+.voices-section .land-card #story,
+.voices-section .land-counter,
+.voices-section .land-counter>span:first-child,
+.voices-section .marker-label,
+.game-section .game-kicker,
+.story-matcher .matcher-answer,
+.story-matcher .matcher-story .matcher-author,
+.story-matcher .matcher-reveal h2,
+.project-media .media-topic,
+.story-bot .bot-kicker,
+.word-river .river-details .river-language,
+.site-footer .footer-about p,
+.site-footer .footer-bottom,
+.site-footer .footer-bottom span,
+.menu-dialog .menu-note{
+ font:400 var(--text-note)/1.3 Glanz,Georgia,serif;
+}
+.opening-section .down-cue>span,
+.voices-section .map-instruction,
+.story-matcher .matcher-position,
+.game-section .game-window-top,
+.game-section .game-window-note,
+.game-dialog-label,
+.game-dialog-note,
+.menu-dialog .menu-caption,
+.menu-dialog nav small{
+ font:400 var(--text-caption)/1.3 Glanz,Georgia,serif;
+}
+.voices-section .map-footnote,
+.word-river .river-details .river-disclaimer{
+ font:400 var(--text-fine)/1.35 Glanz,Georgia,serif;
+}
+.game-section .game-window-caption p{font:400 var(--text-subheading)/1.16 Glanz,Georgia,serif}
+.header .desktop-nav button{font-size:var(--text-nav);line-height:1.25}
+.menu-dialog nav button{font-family:Glanz,Georgia,serif;font-size:var(--text-body);line-height:1.3}

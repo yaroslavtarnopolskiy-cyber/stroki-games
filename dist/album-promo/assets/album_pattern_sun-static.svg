@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 240 240" fill="none" role="img" aria-labelledby="sun-title sun-desc" focusable="false">
+<title id="sun-title">Солнце — орнамент для Песен Земли</title>
+<desc id="sun-desc">Красный геометрический мотив «Солнце» по предоставленному образцу: ромб с продолженными сторонами и четырьмя короткими наружными лучами. Прозрачный фон.</desc>
+<g stroke="#d92b1b" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M19 134L139 37M101 37L221 134M19 106L139 203M101 203L221 106"/>
+<path d="M79 87L65 72M161 87L175 72M79 153L65 168M161 153L175 168"/>
+</g>
+<style>*{animation:none!important}</style></svg>

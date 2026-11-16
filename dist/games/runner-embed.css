@@ -1,0 +1,22 @@
+.runner-stage{isolation:isolate}
+.runner-frame{position:absolute;inset:0;width:100%;height:100%;border:0;background:#111;z-index:4}
+.runner-launch,.runner-pause{position:absolute;z-index:8;left:50%;top:50%;transform:translate(-50%,-50%);font:400 var(--text-body)/1.25 Glanz,Georgia,serif;border:1px solid #f8f6f2;border-radius:40px;background:#f8f6f2;color:#191817;padding:12px 27px;min-height:44px;white-space:nowrap}
+.runner-pause{box-shadow:0 0 0 100vmax #0007}
+.runner-stage :is(.runner-launch,.runner-pause,.runner-loading,.runner-close,.runner-toggle)[hidden]{display:none}
+.runner-loading{position:absolute;inset:0;z-index:7;background:#111e;color:#f8f6f2;display:grid;place-content:center;text-align:center;font:400 var(--text-body)/1.3 Glanz,Georgia,serif;padding:30px 18px}
+.runner-stage .game-expand{z-index:9}
+.runner-stage[data-state=loading] .game-expand{display:none}
+.runner-stage.is-expanded{position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;max-width:none!important;aspect-ratio:auto!important;border:0;border-radius:0;z-index:200;background:#111;transform:none!important}
+.runner-close{position:absolute;top:max(12px,env(safe-area-inset-top));right:max(12px,env(safe-area-inset-right));width:44px;height:44px;border:1px solid #ffffff70;border-radius:50%;background:#111c;color:white;z-index:15;display:grid;place-items:center}
+.runner-open,.runner-open body{overflow:hidden!important;scroll-snap-type:none!important}
+.runner-open .journey-tools{visibility:hidden}
+.runner-touch-tip{display:none}
+@media(pointer:coarse){.runner-touch-tip{display:inline}.runner-desktop-tip{display:none}}
+@media(orientation:portrait){.runner-stage.is-expanded .runner-frame{width:100dvh;height:100vw;left:50%;top:50%;right:auto;bottom:auto;transform:translate(-50%,-50%) rotate(90deg)}}
+
+#games .runner-stage:not(.is-expanded){aspect-ratio:16/9}
+
+.runner-toggle{position:absolute;z-index:10;top:12px;left:12px;display:grid;place-items:center;width:36px;height:36px;background:#111b;border:1px solid #ffffff70;border-radius:50%;color:#fff;padding:7px}
+@media(max-width:760px){.runner-touch-tip{display:inline}.runner-desktop-tip{display:none}}
+
+.runner-stage .game-expand[hidden]{display:none}

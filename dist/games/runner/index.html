@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+  />
+
+  <title>Маска человека</title>
+
+  <link rel="stylesheet" href="fonts.css" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="tutorial-overrides.css" />
+  <style>
+    /* Препятствия стоят почти у нижней границы экрана. */
+    #world .obstacle {
+      top: auto !important;
+      bottom: 30px !important;
+      transform: translateX(-50%) !important;
+    }
+
+    /* Толпа немного уменьшена и поднята выше остальных препятствий. */
+    #world .obstacle--crowd {
+      bottom: 40px !important;
+      transform: translateX(-50%) scale(0.9) !important;
+      transform-origin: 50% 100%;
+    }
+
+    /* Ползунок скорости временно скрыт. */
+    #speed-control {
+      display: none !important;
+    }
+  </style>
+<style>.runner-paused *{animation-play-state:paused!important;transition:none!important}</style></head>
+
+<body>
+
+  <div id="rotate-message">
+    Поверните устройство горизонтально
+  </div>
+
+<div id="game">
+
+  <div id="world">
+    <section class="location-scene" aria-hidden="true"><img src="assets/locations/den.png" alt=""></section>
+    <section class="location-scene" aria-hidden="true"><img src="assets/locations/forest-start.png" alt=""></section>
+    <section class="location-scene" aria-hidden="true"><img src="assets/locations/forest-center.png" alt=""></section>
+    <section class="location-scene" aria-hidden="true"><img src="assets/locations/forest-end.png" alt=""></section>
+
+    <!-- Курган: слой с цифрой 2 находится внутри секции и работает как фон. -->
+    <section class="location-scene location-scene--mound" aria-hidden="true">
+      <img class="mound-layer mound-layer--back" src="assets/locations/ПЗ_Курган_начало_2.png?v=20261016-4" alt="">
+    </section>
+    <section class="location-scene location-scene--mound" aria-hidden="true">
+      <img class="mound-layer mound-layer--back" src="assets/locations/ПЗ_Курган_центр_2.png?v=20261016-4" alt="">
+    </section>
+    <section class="location-scene location-scene--mound" aria-hidden="true">
+      <img class="mound-layer mound-layer--back" src="assets/locations/ПЗ_Курган_конец2.png?v=20261016-4" alt="">
+    </section>
+
+    <section class="location-scene" aria-hidden="true"><img src="assets/locations/river.png" alt=""></section>
+    <section class="location-scene" aria-hidden="true"><img src="assets/locations/settlement-start.png" alt=""></section>
+    <section class="location-scene" aria-hidden="true"><img src="assets/locations/settlement-end.png" alt=""></section>
+    <section class="location-scene" aria-hidden="true"><img src="assets/locations/bride-chum.png" alt=""></section>
+
+    <!-- Верхние слои кургана вынесены из секций в #world.
+         Поэтому препятствия (z-index 3–4) действительно оказываются
+         между нижним фоном и этим foreground-слоем (z-index 8). -->
+    <img class="mound-front-overlay mound-front-overlay--start" src="assets/locations/ПЗ_Курган_начало.png?v=20261016-4" alt="" aria-hidden="true">
+    <img class="mound-front-overlay mound-front-overlay--center" src="assets/locations/ПЗ_Курган_центр.png?v=20261016-4" alt="" aria-hidden="true">
+    <img class="mound-front-overlay mound-front-overlay--end" src="assets/locations/ПЗ_Курган_конец.png?v=20261016-4" alt="" aria-hidden="true">
+  </div>
+
+  <div
+    id="start-screen"
+    role="button"
+    tabindex="0"
+    aria-label="Начать игру"
+    style="padding:0; cursor:pointer; background:#000 url('assets/UI/start-screen.png') center / cover no-repeat;"
+  ></div>
+
+  <div id="tutorial-overlay" class="is-hidden" role="button" tabindex="0" aria-hidden="true">
+    <div class="tutorial-card">
+      <div class="tutorial-controls tutorial-controls--desktop">
+        <div class="tutorial-gesture-card tutorial-gesture-card--desktop">
+          <div class="tutorial-gesture-icon-wrap tutorial-gesture-icon-wrap--desktop">
+            <img
+              class="tutorial-gesture-icon tutorial-gesture-icon--desktop"
+              src="assets/UI/ЛКМ.png"
+              alt="ЛКМ — прыжок"
+            />
+          </div>
+          <div class="tutorial-gesture-label">Прыжок</div>
+        </div>
+
+        <div class="tutorial-gesture-card tutorial-gesture-card--desktop">
+          <div class="tutorial-gesture-icon-wrap tutorial-gesture-icon-wrap--desktop">
+            <img
+              class="tutorial-gesture-icon tutorial-gesture-icon--desktop"
+              src="assets/UI/ПКМ.png"
+              alt="ПКМ — смена облика"
+            />
+          </div>
+          <div class="tutorial-gesture-label">Смена облика</div>
+        </div>
+      </div>
+      <div class="tutorial-controls tutorial-controls--touch">
+        <div class="tutorial-gesture-card">
+          <div class="tutorial-gesture-icon-wrap">
+            <img
+              class="tutorial-gesture-icon tutorial-gesture-icon--jump"
+              src="assets/UI/свайп.png"
+              alt="Свайп вверх — прыжок"
+            />
+          </div>
+          <div class="tutorial-gesture-label">Прыжок</div>
+        </div>
+
+        <div class="tutorial-gesture-card">
+          <div class="tutorial-gesture-icon-wrap">
+            <img
+              class="tutorial-gesture-icon tutorial-gesture-icon--tap"
+              src="assets/UI/тап (1).png"
+              alt="Тап — смена облика"
+            />
+          </div>
+          <div class="tutorial-gesture-label">Смена облика</div>
+        </div>
+      </div>
+      <div class="tutorial-continue">Нажмите, чтобы продолжить</div>
+    </div>
+  </div>
+
+<label id="speed-control" for="speed-slider">Скорость <output id="speed-value">1.0×</output>
+  <input id="speed-slider" type="range" min="0.4" max="2.5" step="0.1" value="1">
+</label>
+
+<div id="hero" class="human running" data-form="human">
+  <div id="hero-image" class="hero-sprite" role="img" aria-label="Кудым-Ош в облике человека"></div>
+</div>
+
+  <script src="landing-bridge.js"></script>
+  <script src="game.js"></script>
+  <script src="river-jump.js"></script>
+  <script src="cave-layout.js"></script>
+  <script src="route-layout.js"></script>
+  <script src="remove-bushes.js"></script>
+  <script src="form-bush-obstacles.js"></script>
+  <script src="jump-visual.js"></script>
+  <script src="checkpoint.js"></script>
+  <script src="result-screen.js"></script>
+  <script src="witch-scene.js"></script>
+  <script src="adaptive-scale.js"></script>
+  <script src="speed-progression.js"></script>
+  <script src="final-scene.js"></script>
+  <script src="tutorial-flow.js"></script>
+  <script src="endless-mode.js"></script>
+</body>
+</html>

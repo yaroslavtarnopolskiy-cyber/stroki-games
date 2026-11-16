@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="450" viewBox="0 0 760 450" role="img" aria-labelledby="gusli-title gusli-desc" focusable="false">
+<title id="gusli-title">Гусли — Песни Земли</title>
+<desc id="gusli-desc">Крыловидные гусли с веером струн, цветочной резонаторной розеткой и красными лентами. Графитовый контур и светлая дека на прозрачном фоне. Инструмент едва покачивается, ленты мягко колышутся. Бесшовный цикл четыре секунды. При предпочтении уменьшенного движения анимация отключена.</desc>
+<style>
+.ink{fill:#272623}.paper{fill:#f5f0ea}.red{fill:#b82719}
+.instrument{transform-origin:410px 260px;animation:rock 4s ease-in-out infinite}
+.ribbons{transform-origin:177px 183px;animation:ribbon 4s ease-in-out infinite}
+@keyframes rock{0%,100%{transform:rotate(-.5deg) translateY(0)}50%{transform:rotate(.5deg) translateY(-2px)}}
+@keyframes ribbon{0%,100%{transform:rotate(-1deg)}50%{transform:rotate(1.5deg)}}
+@media(prefers-reduced-motion:reduce){.instrument,.ribbons{animation:none;transform:none}}
+</style>
+<defs>
+<clipPath id="soundboard-clip"><path d="M221 117Q398 122 634 170Q665 177 684 200Q697 219 687 238Q683 247 660 253L213 339Q192 344 189 330Q185 317 193 286Z"/></clipPath>
+</defs>
+<g id="gusli" class="instrument">
+<g id="red-ribbons" class="ribbons">
+<path class="red" d="M183 167Q153 177 133 206Q106 242 72 226Q43 212 20 233Q41 201 73 206Q112 216 128 187Q149 157 181 155Z"/>
+<path class="red" d="M180 176Q152 197 139 237Q126 276 92 282Q56 283 36 312Q44 272 78 262Q114 255 121 221Q129 183 173 164Z"/>
+<path class="paper" d="M153 183Q134 205 125 217Q104 241 80 231Q108 236 130 207Z"/>
+<path class="paper" d="M138 237Q124 271 93 275Q65 279 49 296Q69 270 93 268Q118 264 138 237Z"/>
+<path class="ink" d="M167 158Q178 147 188 155L193 174L178 187L165 179Z"/>
+<path class="red" d="M173 158L185 160L186 172L176 180L171 173Z"/>
+</g>
+<g id="wooden-body">
+<path class="ink" d="M220 89Q402 96 641 145Q680 152 702 183Q720 206 711 235L706 255Q700 276 670 283L207 372Q171 378 163 352Q157 333 166 301L193 123Q198 94 220 89Z"/>
+<path class="paper" d="M221 104Q401 111 638 158Q672 166 691 191Q708 212 696 235Q690 247 667 253L207 345Q181 350 179 330Q176 319 183 292L207 123Q210 105 221 104Z"/>
+<path class="ink" d="M223 114Q401 121 635 168Q667 175 685 198Q702 219 688 240Q680 249 661 254L213 341Q189 347 186 331Q182 320 190 284L211 132Q213 118 223 114Z"/>
+<path class="paper" d="M224 125Q401 132 631 179Q657 185 674 206Q683 219 676 230Q671 237 655 242L214 328Q199 331 199 321L219 142Q220 127 224 125Z"/>
+<path class="paper" d="M183 350Q193 359 210 355L673 266Q687 262 695 253Q690 271 669 275L210 364Q188 370 183 350Z"/>
+</g>
+<g id="bridge-and-tuning-rail" class="ink">
+<path d="M228 135L237 137L214 314L205 317Z"/>
+<path d="M625 192Q650 196 661 210Q665 217 660 225L651 229Q659 216 648 210L623 202Z"/>
+</g>
+<g id="strings" fill="none" stroke="#272623" stroke-width="2.5" stroke-linecap="round" clip-path="url(#soundboard-clip)">
+<path d="M234 149L626 192M232 164L633 197M230 179L640 203M228 194L646 209M226 209L650 215M224 224L647 220M222 239L635 226M220 254L599 232M218 269L551 241M216 284L497 252M214 299L441 264"/>
+</g>
+<!-- The rosette interrupts the strings, as a sound hole in the wooden soundboard. -->
+<g id="resonator-rosette">
+<path class="paper" d="M403 173Q444 163 476 185Q506 209 494 244Q482 273 446 275Q410 277 388 249Q369 221 385 193Z"/>
+<g class="ink">
+<path d="M441 211Q427 190 441 179Q455 191 446 211Z"/>
+<path d="M451 214Q460 191 477 195Q477 212 454 220Z"/>
+<path d="M457 224Q480 215 488 231Q476 242 457 230Z"/>
+<path d="M452 236Q474 242 470 258Q453 258 447 239Z"/>
+<path d="M438 240Q448 260 434 268Q422 257 432 239Z"/>
+<path d="M426 233Q414 254 399 246Q402 230 423 228Z"/>
+<path d="M423 219Q401 224 394 209Q407 199 426 213Z"/>
+<path d="M431 211Q412 197 420 185Q436 188 437 209Z"/>
+<circle cx="440" cy="225" r="7"/>
+</g>
+</g>
+<g id="pegs-and-end-ornament" class="ink">
+<path d="M249 146Q241 142 240 149Q239 155 247 155Q254 154 249 146ZM246 162Q238 159 238 165Q237 172 244 171Q251 169 246 162ZM244 178Q237 175 236 182Q236 188 242 187Q249 186 244 178ZM242 195Q235 191 234 198Q234 204 241 203Q247 201 242 195ZM240 211Q233 207 232 214Q232 220 239 219Q245 217 240 211ZM238 227Q231 223 230 230Q230 236 237 235Q243 233 238 227ZM236 243Q229 239 228 246Q228 252 235 251Q241 249 236 243ZM234 259Q227 255 226 262Q226 268 233 267Q239 265 234 259ZM232 275Q225 271 224 278Q224 284 231 283Q237 281 232 275ZM230 291Q223 287 222 294Q222 300 229 299Q235 297 230 291Z"/>
+<path d="M648 185Q666 187 674 203Q679 215 669 226Q676 208 660 202Q650 199 648 185Z"/>
+<circle cx="678" cy="224" r="3.5"/>
+</g>
+<g id="red-carved-inlay" class="red">
+<path d="M273 127L281 130L273 133L265 130ZM297 131L305 134L297 137L289 134ZM321 135L329 138L321 141L313 138ZM345 139L353 142L345 145L337 142ZM369 143L377 146L369 149L361 146Z"/>
+<path d="M541 165L549 168L541 171L533 168ZM565 170L573 173L565 176L557 173ZM589 175L597 178L589 181L581 178Z"/>
+<path d="M259 328L268 323L276 325L267 330ZM285 323L294 318L302 320L293 325ZM311 318L320 313L328 315L319 320Z"/>
+</g>
+</g>
+</svg>

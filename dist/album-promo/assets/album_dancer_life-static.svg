@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="720" viewBox="0 0 600 720" role="img" aria-labelledby="dancer-title dancer-desc" focusable="false">
+<title id="dancer-title">Танцовщица — Песни Земли</title>
+<desc id="dancer-desc">Танцовщица в народном платье с вышивкой. Одна рука раскрыта в сторону, другая держит красный платок. Расклешённая юбка, руки и платок мягко движутся в танце. Прозрачный фон. Бесшовный цикл четыре секунды. При уменьшении движения в настройках устройства иллюстрация неподвижна.</desc>
+<style>
+.ink{fill:#272623}.paper{fill:#f5f0ea}.red{fill:#b82719}.line{fill:none;stroke:#272623;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+.dance{transform-origin:305px 606px;animation:dance 4s ease-in-out infinite}
+.skirt{transform-origin:311px 336px;animation:skirt 4s ease-in-out infinite}
+.arm-left{transform-origin:271px 230px;animation:arm-left 4s ease-in-out infinite}
+.arm-right{transform-origin:331px 216px;animation:arm-right 4s ease-in-out infinite}
+.scarf{transform-origin:433px 137px;animation:scarf 4s ease-in-out infinite}
+.foot-left{transform-origin:263px 559px;animation:step 4s ease-in-out infinite}
+@keyframes dance{0%,100%{transform:rotate(-1deg) translateY(0)}50%{transform:rotate(1deg) translateY(-3px)}}
+@keyframes skirt{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-2deg)}}
+@keyframes arm-left{0%,100%{transform:rotate(0deg)}50%{transform:rotate(3deg)}}
+@keyframes arm-right{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-2deg)}}
+@keyframes scarf{0%,100%{transform:rotate(0deg) skewY(0deg)}50%{transform:rotate(4deg) skewY(-2deg)}}
+@keyframes step{0%,100%{transform:rotate(0deg)}50%{transform:rotate(5deg)}}
+@media(prefers-reduced-motion:reduce){.dance,.skirt,.arm-left,.arm-right,.scarf,.foot-left{animation:none;transform:none}}
+</style>
+<defs>
+<g id="rosette" class="red"><path d="M0-15Q7-11 4-4Q12-9 15-3Q10 4 4 2Q12 8 8 13Q1 12 0 5Q-1 13-8 13Q-12 7-4 2Q-12 5-15-3Q-11-9-4-4Q-7-12 0-15Z"/><circle r="2" class="paper"/></g>
+<g id="diamond" class="red"><path d="M0-7L5 0L0 7L-5 0Z"/></g>
+</defs>
+<g id="dancing-figure" class="dance">
+<!-- Feet remain behind the moving hem. -->
+<g id="left-leg-and-shoe" class="foot-left">
+<path class="ink" d="M250 550Q244 580 229 603L212 618Q196 621 192 632Q202 643 225 638L248 624Q269 601 279 565Z"/>
+<path class="paper" d="M256 566L266 570Q253 600 239 612L232 609Q248 588 256 566Z"/>
+<path class="paper" d="M205 631Q218 632 231 625L226 632Q211 639 205 631Z"/>
+</g>
+<g id="right-leg-and-shoe">
+<path class="ink" d="M379 562L387 598Q390 613 404 623Q417 640 410 655Q399 670 379 675Q369 672 377 661L387 648Q384 639 375 631Q364 613 359 577Z"/>
+<path class="paper" d="M371 585L378 583L390 617L384 624Q376 606 371 585Z"/>
+<path class="paper" d="M390 655Q397 649 400 643Q405 654 389 663Z"/>
+</g>
+<g id="left-arm" class="arm-left">
+<path class="ink" d="M278 217Q253 211 233 230Q205 251 175 254Q135 259 102 242L84 266Q126 293 175 290Q226 291 271 261L291 242Z"/>
+<path class="paper" d="M257 228Q229 245 213 253Q175 271 137 262Q177 279 217 263Q241 254 262 240Z"/>
+<path class="paper" d="M106 249L99 260L113 266L119 255Z"/>
+<path class="red" d="M119 250L113 270L122 274L131 255Z"/>
+<path class="paper" d="M143 272L151 275L155 266L147 265ZM169 276L179 276L180 268L171 268ZM195 272L204 268L201 260L193 264ZM218 261L227 256L222 249L215 253Z"/>
+<path class="ink" d="M104 246Q91 237 88 225L85 208Q79 201 76 212L76 225L70 213Q65 207 63 215L66 234Q59 228 56 232Q55 239 69 253L88 268Z"/>
+<path class="paper" d="M76 234Q83 243 93 248L88 256Q76 250 71 241Z"/>
+<path class="line" stroke-width="2.8" d="M81 226L86 240"/>
+</g>
+<g id="right-arm" class="arm-right">
+<g id="red-scarf" class="scarf">
+<path class="ink" d="M426 136C444 119 448 87 474 87C503 86 504 131 526 139C546 147 563 126 578 105C576 136 563 174 538 179C506 185 497 151 481 130C467 113 450 143 436 151Z"/>
+<path class="red" d="M431 139C448 122 452 96 474 96C497 96 499 138 523 147C544 157 561 141 570 128C560 155 551 170 535 170C510 175 504 143 484 122C465 101 447 136 436 145Z"/>
+<path class="paper" d="M451 119C459 104 468 99 478 103C468 102 460 112 457 123Z"/>
+<path class="paper" d="M517 158C529 171 544 166 554 155C544 162 532 163 521 155Z"/>
+<path class="red" d="M569 126L577 111L573 137L578 128L571 148L568 143Z"/>
+</g>
+<path class="ink" d="M324 215Q346 199 373 198Q396 190 413 160L437 172Q422 214 393 230Q368 244 339 246Z"/>
+<path class="paper" d="M345 220Q376 221 395 203Q407 192 419 170L412 187Q396 225 349 231Z"/>
+<path class="red" d="M405 170L427 182L432 172L411 160Z"/>
+<path class="paper" d="M361 210L370 207L373 214L364 218ZM382 203L389 198L394 204L386 210Z"/>
+<path class="ink" d="M411 161Q414 150 418 145L427 135Q430 133 432 137L429 145L438 137Q442 136 443 141L437 151Q446 146 448 150Q448 156 439 163L436 176Z"/>
+<path class="paper" d="M423 151L429 148L434 155L428 164L420 160Z"/>
+</g>
+<g id="head-hair-and-neck">
+<path class="ink" d="M255 96Q261 75 287 73Q311 74 324 95Q331 111 326 124Q337 142 321 152L310 158L270 155Q251 152 250 139Q240 128 248 117Q243 106 255 96Z"/>
+<path class="paper" d="M267 108Q276 98 290 100Q307 98 316 110L316 131Q313 149 301 158L301 184L325 208Q310 224 292 220L276 206L283 185L282 160Q268 151 264 134L263 121Z"/>
+<path class="ink" d="M260 123Q260 106 276 100Q285 96 292 100Q282 112 268 115L268 130ZM291 100Q305 98 317 111L320 127L313 119Q303 115 291 100Z"/>
+<!-- Both eyes, the nose and mouth share the frontal centre line. -->
+<path class="ink" d="M272 119Q278 115 284 119L283 121Q278 119 273 122ZM297 119Q303 115 309 119L308 122Q303 119 298 121Z"/>
+<path class="line" style="stroke-width:2.4" d="M273 127Q278 131 284 127M297 127Q303 131 308 127M291 130L289 139L293 140M284 147Q291 151 299 146"/>
+<path class="red" d="M255 102Q270 83 290 86Q309 85 321 103L316 109Q303 95 290 95Q274 94 259 110Z"/>
+<path class="paper" d="M266 97L272 93L276 96L270 100ZM286 90L293 90L293 94L286 94ZM304 94L310 98L308 102L302 98Z"/>
+<path class="ink" d="M259 140Q248 147 253 158Q260 167 274 157L275 149Z"/>
+<path class="red" d="M257 153Q238 161 229 179Q245 170 262 170L274 159Z"/>
+<path class="ink" d="M284 164Q292 169 299 163L298 167Q292 174 285 169Z"/>
+</g>
+<g id="bodice">
+<path class="ink" d="M276 205L291 214L309 216L328 204Q344 214 349 234Q342 262 337 290L339 328L313 350L284 335Q292 311 286 290L265 257Q257 234 266 220Z"/>
+<path class="paper" d="M276 214L293 228L308 231L328 215L324 236L307 248L284 239Z"/>
+<path class="red" d="M284 231L303 242L326 227L324 237L306 253L285 241Z"/>
+<path class="paper" d="M275 249Q287 274 296 289L300 310Q297 285 282 265Z"/>
+<use href="#diamond" x="312" y="264"/><use href="#diamond" x="315" y="284"/><use href="#diamond" x="318" y="305"/>
+<path class="red" d="M288 322Q313 334 339 319L343 334Q318 351 283 337Z"/>
+</g>
+<g id="skirt-and-apron" class="skirt">
+<path class="ink" d="M286 336Q265 365 243 390Q215 417 186 418Q163 417 149 400Q141 431 147 459Q150 500 182 536Q228 581 300 594Q374 611 470 573Q456 546 440 516Q419 467 393 420Q365 373 337 336Q315 348 286 336Z"/>
+<path class="paper" d="M285 354Q262 392 231 417Q197 440 161 426L165 443Q202 451 240 429Q270 405 285 354Z"/>
+<path class="paper" d="M288 373Q271 425 239 465Q214 489 179 483L190 501Q228 502 255 463Q278 429 288 373Z"/>
+<path class="paper" d="M302 358Q292 411 282 455Q271 499 239 529L263 542Q296 501 301 454Q306 410 302 358Z"/>
+<path class="paper" d="M319 359Q326 413 322 466Q319 522 300 555L323 558Q342 520 339 464Q337 405 319 359Z"/>
+<path class="paper" d="M339 365Q369 420 386 474Q400 516 400 549L420 542Q411 498 393 457Q370 403 339 365Z"/>
+<path class="paper" d="M359 380Q399 426 423 479Q440 518 449 551L456 555Q448 508 425 464Q397 411 359 380Z"/>
+<path class="paper" d="M312 379Q303 431 294 475Q287 508 277 530L290 538Q304 504 309 466Q315 422 312 379Z"/>
+<path class="paper" d="M161 459Q170 505 213 538Q259 572 316 579Q387 587 456 561L460 570Q388 600 313 590Q251 583 204 549Q168 520 155 480Z"/>
+<path class="red" d="M171 486L180 488L185 502L176 498ZM190 515L200 520L207 531L197 527ZM219 542L229 547L237 556L226 553ZM250 559L260 562L267 570L256 568ZM282 570L293 572L300 579L289 578ZM319 576L330 576L337 582L326 583ZM354 576L365 575L373 581L361 583ZM389 571L400 569L409 574L397 578ZM424 560L434 557L444 561L433 566Z"/>
+<path class="red" d="M319 345Q354 361 379 389Q351 380 332 374Q345 398 346 418Q325 398 308 367Z"/>
+<path class="paper" d="M326 354L343 365L351 373L338 369Z"/>
+<use href="#rosette" x="218" y="457" transform="rotate(-25 218 457) scale(1)"/>
+<use href="#rosette" x="365" y="508"/>
+</g>
+</g>
+<style>*{animation:none!important}</style></svg>

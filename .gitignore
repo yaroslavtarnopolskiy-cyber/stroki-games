@@ -1,0 +1,14 @@
+.DS_Store
+.AppleDouble/
+.openai/
+.sites-checkout/
+node_modules/
+.env
+.env.*
+!.env.example
+*.log
+__pycache__/
+.venv/
+/output/
+/previews/
+/*.jpg

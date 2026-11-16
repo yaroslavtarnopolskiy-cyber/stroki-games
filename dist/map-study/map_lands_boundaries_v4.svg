@@ -1,0 +1,15 @@
+<svg class="selection-art" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1536 1024" aria-hidden="true"><style>.region-fills path{fill:none}</style><defs><mask id="map-land-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="1536" height="1024" style="mask-type:alpha"><image href="map_life_west_v4.png" width="1536" height="1024"/></mask></defs><g mask="url(#map-land-mask)"><g class="region-fills"><path class="land-region" data-land="kalyazin" d="M 0 0 H 760 C 740 150 680 220 610 350 C 450 380 250 440 0 435 Z"/>
+<path class="land-region" data-land="komi" d="M 760 0 H 1536 V 300 C 1340 320 1250 440 1100 370 C 950 290 790 370 610 350 C 680 220 740 150 760 0 Z"/>
+<path class="land-region" data-land="moscow" d="M 0 435 C 250 440 450 380 610 350 C 630 470 590 520 630 610 C 450 690 300 670 0 700 Z"/>
+<path class="land-region" data-land="chuvashia" d="M 610 350 C 790 420 840 450 920 535 C 850 650 740 590 630 610 C 590 520 630 470 610 350 Z"/>
+<path class="land-region" data-land="udmurtia" d="M 610 350 C 790 370 950 290 1100 370 C 1250 440 1340 320 1536 300 V 580 C 1150 550 1100 500 920 535 C 840 450 790 420 610 350 Z"/>
+<path class="land-region" data-land="kazan" d="M 920 535 C 1100 500 1150 550 1536 580 V 1024 H 850 C 740 800 730 670 630 610 C 740 590 850 650 920 535 Z"/>
+<path class="land-region" data-land="caucasus" d="M 0 700 C 300 670 450 690 630 610 C 730 670 740 800 850 1024 H 0 Z"/></g><g class="land-boundaries" fill="none" stroke="#7d7165" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M 760 0 C 740 150 680 220 610 350"/>
+<path d="M 0 435 C 250 440 450 380 610 350"/>
+<path d="M 610 350 C 630 470 590 520 630 610"/>
+<path d="M 630 610 C 450 690 300 670 0 700"/>
+<path d="M 610 350 C 790 370 950 290 1100 370 C 1250 440 1340 320 1536 300"/>
+<path d="M 610 350 C 790 420 840 450 920 535"/>
+<path d="M 630 610 C 740 590 850 650 920 535"/>
+<path d="M 920 535 C 1100 500 1150 550 1536 580"/>
+<path d="M 630 610 C 730 670 740 800 850 1024"/></g></g></svg>

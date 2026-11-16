@@ -1,0 +1,58 @@
+/* Let the selected book lead; keep question choices quiet. */
+.story-matcher .matcher-answer{border-color:color-mix(in srgb,var(--rule) 42%,transparent)}
+.story-matcher .matcher-answer:hover{border-color:color-mix(in srgb,var(--matcher-accent) 55%,var(--rule))}
+.story-matcher .matcher-answer[aria-pressed=true]{border-color:var(--matcher-accent);background:transparent}
+.story-matcher .matcher-answer[aria-pressed=true] span{color:var(--ink)}
+.story-matcher .matcher-symbols svg{transition:opacity .65s ease}
+.story-matcher .matcher-reveal h2{font:400 var(--text-note)/1.2 Glanz,Georgia,serif;color:var(--muted);letter-spacing:0}
+.story-matcher .matcher-cover.is-recommended img{outline:none}
+.story-matcher .matcher-story{opacity:1}
+.story-matcher[data-phase=resolving] .matcher-story,.story-matcher[data-phase=retargeting] .matcher-story{opacity:.35}
+.story-matcher .matcher-story h3{font:400 var(--text-body)/1.15 Glanz,Georgia,serif;color:var(--ink);margin:0 0 7px;text-wrap:balance}
+.story-matcher .matcher-story .matcher-author{font:400 var(--text-note)/1.2 Glanz,Georgia,serif;color:var(--muted);margin:0 0 10px}
+.story-matcher .matcher-story .matcher-read{font:400 var(--text-note)/1.2 Glanz,Georgia,serif;border:0;border-radius:0;padding:6px 0;color:var(--ink);gap:13px;background:none;min-height:32px;text-decoration:underline;text-decoration-thickness:.5px;text-underline-offset:4px;text-decoration-color:var(--rule)}
+.story-matcher .matcher-story .matcher-read:hover{color:var(--matcher-accent);background:none;text-decoration-color:currentColor}
+.story-matcher .matcher-browse{gap:27px}
+@media(prefers-reduced-motion:reduce){.story-matcher .matcher-symbols svg{transition:none}}
+/* A separate round shortcut below the existing navigation pill. */
+.journey-tools{position:fixed;left:7px;top:50%;transform:translateY(-50%);z-index:30;display:flex;flex-direction:column;align-items:center;gap:8px}
+.journey-tools .journey-controls{position:static;inset:auto;transform:none}
+.journey-jump{width:48px;height:48px;display:grid;place-items:center;border:1px solid var(--rule);border-radius:50%;background:var(--paper);color:var(--ink);box-shadow:0 3px 14px #00000012;padding:10px}
+.journey-jump:hover{background:var(--pill)}.journey-jump svg{width:21px;height:21px;transition:transform .25s}.journey-jump.jump-to-top svg{transform:rotate(180deg)}
+@media(max-width:760px){.journey-tools{left:5px;top:auto;bottom:18px;transform:none;gap:7px}.journey-jump{width:38px;height:38px;padding:8px}.journey-jump svg{width:18px;height:18px}}
+@media(prefers-reduced-motion:reduce){.journey-jump svg{transition:none}}
+
+/* Calm hierarchy: shared reading scale, compact navigation and deliberate accents. */
+.journey-tools[hidden]{display:none}
+.down-cue{display:flex;flex-direction:column;align-items:center;gap:5px;white-space:nowrap}
+.down-cue>span{font:400 12px/1.2 Glanz,Georgia,serif;color:var(--ink)}
+.voices-section .map-instruction{font-size:13px;line-height:1.25}
+.voices-section .land-panel #question{max-width:none;min-height:0;font:400 var(--text-body)/1.28 Glanz,Georgia,serif;margin:0 0 20px;text-wrap:pretty}
+.voices-section .land-card.has-artwork{align-items:start}
+.voices-section .land-card .story-link{display:inline-flex;flex-direction:column;align-items:flex-start;gap:1px;border:0;border-radius:0;min-width:116px;opacity:1;color:var(--red);cursor:default}
+.story-link .story-flow{width:135px;height:16px;stroke:currentColor;stroke-width:1.2;overflow:visible}
+.story-flow path:first-child{stroke-width:2.2}
+.story-matcher .matcher-story .matcher-read{font-size:var(--text-body)}
+.header .desktop-nav button{font-size:20px}
+@media(max-width:1000px) and (min-width:701px){.header .desktop-nav button{font-size:17px}}
+@media(max-width:700px){.header .desktop-nav button{font-size:16px}.voices-section .land-panel #question{margin-bottom:16px}}
+@media(max-width:370px){.header .desktop-nav button{font-size:15px}}
+
+.voices-section .land-card .story-link>span{font:inherit}
+/* Keep questions close to the heading instead of centering them against the taller carousel. */
+@media(min-width:1000px){
+ .matcher-inner{align-items:start}
+ .matcher-heading{margin-bottom:18px}
+ .matcher-questions,.matcher-display{align-self:start}
+ .story-matcher{padding-bottom:22px}
+}
+
+/* Avoid full-page text repaints during palette changes; animate the artwork layers instead. */
+body{transition:background-color .35s ease}
+.life,.death{transition:opacity .4s ease}
+.album-processions{contain:layout paint;content-visibility:auto;contain-intrinsic-block-size:auto 113px}
+.river-stage{contain:layout paint}
+.link-arrow{width:24px;height:16px;flex:none;fill:none;stroke:currentColor;stroke-width:1.4;vertical-align:middle}
+.album-listen,.footer-links a{display:inline-flex;align-items:center;gap:12px}
+.world-switch-art>g{filter:none}
+@media(max-width:760px){.album-processions{contain-intrinsic-block-size:auto 83px}.river-lines>g[filter]{filter:none}}

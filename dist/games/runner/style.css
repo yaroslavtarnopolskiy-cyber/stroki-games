@@ -1,0 +1,463 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+:root {
+  /* Панорамы 3000 × 1080 масштабируются по динамической высоте видимой области. */
+  --location-width: 277.7778dvh;
+  /* Верхняя линия дороги на панорамах — примерно 81.6% высоты сцены. */
+  --run-line-bottom: 18.4dvh;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #111;
+  touch-action: none;
+}
+
+#game {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  background: #000000;
+}
+
+/* При проигрыше экран затемняется почти сразу. Класс falling уже ставится game.js. */
+#game::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: #000;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.10s ease, visibility 0.10s ease;
+}
+
+#game:has(#hero.falling)::after {
+  opacity: 0.9;
+  visibility: visible;
+}
+
+#world {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  width: max-content;
+  height: 100vh;
+  height: 100dvh;
+  background: #fff;
+  will-change: transform;
+}
+
+.location-scene {
+  position: relative;
+  flex: 0 0 var(--location-width);
+  width: var(--location-width);
+  top: 0;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+.location-scene img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ===== СОСТАВНОЙ КУРГАН =====
+   Оба файла одной части кургана накладываются на один и тот же холст 3000×1080.
+   Нижний слой остаётся внутри flex-секции. Верхний вынесен в #world отдельным
+   абсолютным слоем, поэтому глобальные препятствия с z-index 3–4 действительно
+   находятся между двумя PNG. */
+.location-scene--mound {
+  overflow: hidden;
+  background: #fff;
+}
+
+.location-scene--mound .mound-layer--back {
+  position: absolute;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: fill;
+  z-index: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.mound-front-overlay {
+  position: absolute;
+  top: 0;
+  width: var(--location-width) !important;
+  height: 100vh !important;
+  height: 100dvh !important;
+  max-width: none;
+  object-fit: fill;
+  z-index: 8;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Перед курганом идут: берлога + три лесных секции = 4 ширины локации. */
+.mound-front-overlay--start {
+  left: calc(var(--location-width) + var(--location-width) + var(--location-width) + var(--location-width));
+}
+
+.mound-front-overlay--center {
+  left: calc(var(--location-width) + var(--location-width) + var(--location-width) + var(--location-width) + var(--location-width));
+}
+
+.mound-front-overlay--end {
+  left: calc(var(--location-width) + var(--location-width) + var(--location-width) + var(--location-width) + var(--location-width) + var(--location-width));
+}
+
+/* ===== СТАРТОВЫЙ ЭКРАН ===== */
+
+#start-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+#start-screen.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* ===== ОБУЧЕНИЕ ===== */
+
+#tutorial-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 95;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: clamp(42px, 8vh, 92px);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.58), rgba(0, 0, 0, 0.08) 48%, transparent 72%);
+  opacity: 1;
+  visibility: visible;
+  cursor: pointer;
+  transition: opacity 0.22s ease, visibility 0.22s ease;
+}
+
+#tutorial-overlay.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.tutorial-card {
+  width: min(720px, 78vw);
+  padding: clamp(18px, 2.4vw, 30px) clamp(24px, 3.2vw, 42px);
+  border: 1px solid rgba(244, 231, 204, 0.52);
+  background: rgba(26, 21, 17, 0.82);
+  color: #f5ead5;
+  text-align: center;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.tutorial-title {
+  margin-bottom: 14px;
+  font: 700 clamp(22px, 2.4vw, 36px)/1 Georgia, "Times New Roman", serif;
+}
+
+.tutorial-controls {
+  display: flex;
+  justify-content: center;
+  gap: clamp(18px, 4vw, 52px);
+  flex-wrap: wrap;
+  font: 400 clamp(14px, 1.35vw, 20px)/1.4 Arial, sans-serif;
+}
+
+.tutorial-controls b {
+  font-weight: 700;
+}
+
+.tutorial-controls--touch {
+  display: none;
+}
+
+.tutorial-gesture-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  min-width: 140px;
+}
+
+.tutorial-gesture-card--desktop {
+  min-width: 180px;
+}
+
+.tutorial-gesture-icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 88px;
+  height: 138px;
+}
+
+.tutorial-gesture-icon-wrap--desktop {
+  width: 150px;
+  height: 118px;
+}
+
+.tutorial-gesture-icon {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 72px;
+  max-height: 72px;
+  pointer-events: none;
+  user-select: none;
+}
+
+.tutorial-gesture-icon--desktop {
+  max-width: 132px;
+  max-height: 96px;
+  transform-origin: 50% 50%;
+  animation: tutorialDesktopPulse 1.15s ease-in-out infinite;
+}
+
+.tutorial-gesture-card--desktop:nth-child(2) .tutorial-gesture-icon--desktop {
+  animation-delay: 0.12s;
+}
+
+.tutorial-gesture-label {
+  text-align: center;
+  font: 400 clamp(14px, 1.35vw, 20px)/1.35 Arial, sans-serif;
+}
+
+.tutorial-gesture-icon--jump {
+  animation: tutorialSwipeJump 1.4s ease-in-out infinite;
+}
+
+.tutorial-gesture-icon--tap {
+  animation: tutorialTapPulse 1s ease-in-out infinite;
+}
+
+@keyframes tutorialSwipeJump {
+  0% {
+    transform: translateY(25px);
+  }
+  40% {
+    transform: translateY(-25px);
+  }
+  60% {
+    transform: translateY(-25px);
+  }
+  100% {
+    transform: translateY(25px);
+  }
+}
+
+@keyframes tutorialTapPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(0.82);
+  }
+  65% {
+    transform: scale(1.08);
+  }
+}
+
+@keyframes tutorialDesktopPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(0.88);
+  }
+  70% {
+    transform: scale(1.08);
+  }
+}
+
+.tutorial-continue {
+  margin-top: 16px;
+  font: 400 clamp(11px, 1vw, 14px)/1.3 Arial, sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.68;
+}
+
+@media (pointer: coarse) {
+  .tutorial-controls--desktop {
+    display: none;
+  }
+
+  .tutorial-controls--touch {
+    display: flex;
+    gap: 28px;
+    align-items: flex-start;
+    justify-content: center;
+  }
+}
+
+.obstacle {
+  position: absolute;
+  z-index: 3;
+  bottom: var(--run-line-bottom);
+  width: auto !important;
+  max-width: none;
+  height: auto;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+/* Препятствия показываются в исходном размере PNG. */
+.obstacle--ravine {
+  bottom: 20.1dvh;
+  transform: translate(-50%, 60%);
+  z-index: 4;
+}
+.obstacle--tree { bottom: 16.8dvh; }
+.obstacle--passage { bottom: 13.1dvh; }
+.obstacle--river {
+  bottom: 15.8dvh;
+  transform: translate(-50%, 68%);
+  z-index: 4;
+}
+.obstacle--rubble {
+  bottom: 14.6dvh;
+  z-index: 4;
+}
+.obstacle--bush {
+  bottom: 17.3dvh;
+  z-index: 4;
+}
+.obstacle--bridge {
+  bottom: 18.5dvh;
+  transform: translate(-50%, 48%);
+  z-index: 4;
+}
+
+.form-indicator-bush {
+  width: auto !important;
+  max-width: none;
+  height: auto;
+}
+
+/* Низкий проход/колонна должен уходить под верхний слой кургана.
+   Обрезаем только его верхнюю часть примерно по линии грунта — визуально
+   колонна начинается уже внутри пещеры и не торчит поверх поверхности. */
+.obstacle--cave-low-passage {
+  clip-path: inset(21% 0 0 0);
+}
+
+/* Текстовые подсказки над препятствиями отключены. */
+.obstacle-hint {
+  display: none !important;
+}
+
+#speed-control {
+  position: fixed;
+  z-index: 20;
+  top: 12px;
+  right: 14px;
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 2px 10px;
+  align-items: center;
+  padding: 7px 10px;
+  border: 1px solid #555;
+  border-radius: 6px;
+  color: #222;
+  background: #ffffffd9;
+  font: 12px Arial, sans-serif;
+}
+#speed-slider { grid-column: 1 / -1; width: 140px; }
+
+/* ===== ГЕРОЙ ===== */
+
+#hero {
+  position: absolute;
+  left: 18vw;
+  bottom: calc(var(--run-line-bottom) - 12px);
+  z-index: 10;
+  transition: width 0.15s ease;
+}
+
+#hero-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 0.72;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+  transform-origin: 50% 100%;
+}
+
+/* Первый кадр показывается до первого обновления анимации из game.js. */
+#hero.human #hero-image {
+  background-image: url("assets/characters/human-1.png");
+}
+#hero.bear #hero-image {
+  background-image: url("assets/characters/bear-1.png");
+}
+
+/* Вместо анимации падения герой остаётся на месте, пока экран затемняется. */
+#hero.falling-human #hero-image,
+#hero.falling-bear #hero-image {
+  animation: none;
+  transform: none;
+}
+
+/* человек */
+#hero.human {
+  width: clamp(66px, 8.4vw, 114px);
+}
+
+/* медведь */
+#hero.bear {
+  width: clamp(86px, 12vw, 162px);
+}
+
+/* сообщение о повороте телефона */
+#rotate-message {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  text-align: center;
+  color: white;
+  background: #111;
+  font-size: 22px;
+  font-family: Arial, sans-serif;
+}
+
+@media (orientation: portrait) and (max-width: 900px) {
+  #game {
+    display: none;
+  }
+
+  #rotate-message {
+    display: flex;
+  }
+}

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 240 240" fill="none" role="img" aria-labelledby="tree-title tree-desc" focusable="false">
+<title id="tree-title">Дерево — орнамент для Песен Земли</title>
+<desc id="tree-desc">Красный геометрический мотив «Дерево» по предоставленному образцу: четыре яруса треугольных ветвей на общем вертикальном стволе. Прозрачный фон.</desc>
+<g stroke="#d92b1b" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M120 25V216"/>
+<path d="M120 25L72 68H168Z"/>
+<path d="M120 67L62 111H178Z"/>
+<path d="M120 109L62 154H178Z"/>
+<path d="M120 152L60 198H180Z"/>
+</g>
+<style>*{animation:none!important}</style></svg>
