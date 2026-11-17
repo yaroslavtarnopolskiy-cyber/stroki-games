@@ -8,12 +8,17 @@ function fixture(){let now=0,serial=0,frames=[],checkpoints=0;const timers=new M
  return {c,tick,bubble,checkpoints:()=>checkpoints,act(name,code){let prevented=false;events[name]({code,target:{closest:()=>false},preventDefault(){prevented=true},stopPropagation(){}});return prevented}};
 }
 for(const [name,code] of [['pointerdown'],['touchstart'],['keydown','ArrowUp'],['keydown','ArrowDown'],['keydown','Space'],['keydown','KeyE']]){
- const f=fixture();f.tick(1999);assert(f.act(name,code));assert.equal(f.bubble.style.opacity,'1');assert.equal(f.checkpoints(),0);
- f.tick(1);f.act(name,code);assert.equal(f.bubble.style.opacity,'0');assert.equal(f.checkpoints(),1);assert.equal(f.c.running,false);f.tick(850);assert.equal(f.c.running,true);assert.equal(f.c.lastFrameAt,2850);
- f.act(name,code);assert.equal(f.checkpoints(),1);
+ const f=fixture();f.tick(100);assert(f.act(name,code));assert.equal(f.bubble.style.opacity,'0');assert.equal(f.checkpoints(),1);assert.equal(f.c.running,false);
+ f.tick(850);assert.equal(f.c.running,true);assert.equal(f.c.lastFrameAt,950);
+ f.act(name,code);f.tick(2000);assert.equal(f.checkpoints(),1,'No second continuation from the old timer');
 }
 {
- const f=fixture();f.tick(10000);assert.equal(f.bubble.style.opacity,'1','No auto-dismiss');assert.equal(f.c.runnerContinueWitchScene(),true);assert.equal(f.bubble.style.opacity,'0');f.tick(850);assert(f.c.running);assert.equal(f.c.runnerContinueWitchScene(),false);
+ const f=fixture();f.tick(1999);assert.equal(f.bubble.style.opacity,'1');assert.equal(f.checkpoints(),0);
+ f.tick(1);assert.equal(f.bubble.style.opacity,'0');assert.equal(f.checkpoints(),1);f.tick(850);assert(f.c.running);
+ assert.equal(f.c.runnerContinueWitchScene(),false);
  for(const [width,height] of [[320,180],[667,375],[844,390],[1920,1080]]){f.c.innerWidth=width;f.c.innerHeight=height;f.act('resize');assert(parseFloat(f.bubble.style.width)<=width);assert(parseFloat(f.bubble.style.top)+parseFloat(f.bubble.style.maxHeight)<=height)}
 }
-console.log('PASS: witch dialogue cannot skip first two seconds, resumes on pointer/touch/controls or host routing, creates one checkpoint, does not auto-dismiss');
+{
+ const f=fixture();assert.equal(f.c.runnerContinueWitchScene(),true);f.c.runnerCancelWitchScene();f.tick(5000);assert.equal(f.c.running,false,'Exit cancels pending resume');
+}
+console.log('PASS: witch continues on the first pointer/touch/control or automatically at 2 s, resumes once, fits small screens, cancels on exit');

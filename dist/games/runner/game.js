@@ -710,7 +710,12 @@ function gameLoop(now) {
       return;
     }
 
-    if (worldX >= maxScroll) running = false;
+    if (worldX >= maxScroll) {
+      running = false;
+      // Hand off in this frame: the finale watcher must not depend on running
+      // after the camera has reached its last position.
+      window.runnerStartFinalScene?.();
+    }
   }
 
   requestAnimationFrame(gameLoop);

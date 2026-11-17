@@ -549,7 +549,7 @@
   ChooseHusbandPlugin.prototype.onCall = function () {
     var game = this.game;
     var canvas = game.canvas;
-    var QUESTION = 'Кто, по-вашему, станет мужем Амипат?';
+    var QUESTION = 'Как думаешь, кто станет мужем Амипат?';
     var hover = null;
     var picked = null; // выбран, ждёт подтверждения
     var done = false;

@@ -11,7 +11,7 @@
  const loading=document.createElement('p');loading.className='runner-loading';loading.setAttribute('role','status');loading.hidden=true;stage.append(loading);
  const mobile=matchMedia('(max-width:760px), (pointer:coarse)'),note=section.querySelector('.game-window-note');
  note.innerHTML='<span class="runner-desktop-tip">клик или пробел — дальше · стрелки — выбор · H — история диалогов</span><span class="runner-touch-tip">касайся предметов и выбирай, кому достанется сердце Амипат</span>';
- function launchLabel(){if(stage.dataset.state==='idle')launch.textContent=mobile.matches&&matchMedia('(orientation:portrait)').matches?'Нажмите и поверните телефон, чтобы играть':'Играть'}launchLabel();mobile.addEventListener('change',launchLabel);matchMedia('(orientation:portrait)').addEventListener('change',launchLabel);
+ function launchLabel(){if(stage.dataset.state==='idle')launch.textContent=mobile.matches&&matchMedia('(orientation:portrait)').matches?'Нажми и поверни телефон, чтобы играть':'Играть'}launchLabel();mobile.addEventListener('change',launchLabel);matchMedia('(orientation:portrait)').addEventListener('change',launchLabel);
  let frame=null,ready=false,inView=false,userPaused=false,expanded=false,menuOpen=false,finishPending=false,timeout=0,previousFocus=null;
  function post(type,extra={}){frame?.contentWindow?.postMessage({channel:'pesni-gifts',type,...extra},location.origin)}
  function configure(){post('configure',{shareUrl:location.origin+location.pathname+'#game-gifts'})}

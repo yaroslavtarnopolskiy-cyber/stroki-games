@@ -936,7 +936,7 @@
       }
       s.dug[dig.id] = true;
       if (dig.treasure) s.justSpawned = 'treasure';
-      else hint('Здесь пусто. Проверьте другую метку.');
+      else hint('Здесь пусто. Проверь другую метку.');
       if (dig.screen === 'market') renderMarket();
       else renderForest();
       return;

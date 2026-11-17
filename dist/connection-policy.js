@@ -15,7 +15,7 @@
  // One discreet notice on the first visit, without blocking navigation.
  let show=true;try{show=!localStorage.getItem('pesni-vpn-notice-seen')}catch{}
  if(show){const host=document.querySelector('.hero-bottom');if(host){
-  const note=document.createElement('p');note.className='vpn-notice';note.textContent='отключите VPN для корректной работы';note.hidden=true;host.append(note);
+  const note=document.createElement('p');note.className='vpn-notice';note.textContent='отключи VPN для корректной работы';note.hidden=true;host.append(note);
   function reveal(){
    note.hidden=false;
    try{localStorage.setItem('pesni-vpn-notice-seen','1')}catch{}

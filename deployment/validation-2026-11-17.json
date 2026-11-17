@@ -1,0 +1,55 @@
+{
+  "source_tests": {
+    "passed": 26,
+    "failed": 0
+  },
+  "package_browsers": [
+    {
+      "browser": "chromium",
+      "game": "games",
+      "status": "PASS"
+    },
+    {
+      "browser": "chromium",
+      "game": "game-gifts",
+      "status": "PASS"
+    },
+    {
+      "browser": "chromium",
+      "game": "game-human-beast",
+      "status": "PASS"
+    },
+    {
+      "browser": "chromium",
+      "subfolder": true,
+      "share": true,
+      "errors": [],
+      "missing": [],
+      "badPaths": []
+    },
+    {
+      "browser": "webkit",
+      "game": "games",
+      "status": "PASS"
+    },
+    {
+      "browser": "webkit",
+      "game": "game-gifts",
+      "status": "PASS"
+    },
+    {
+      "browser": "webkit",
+      "game": "game-human-beast",
+      "status": "PASS"
+    },
+    {
+      "browser": "webkit",
+      "subfolder": true,
+      "share": true,
+      "errors": [],
+      "missing": [],
+      "badPaths": []
+    }
+  ],
+  "s3_upload_performed": false
+}

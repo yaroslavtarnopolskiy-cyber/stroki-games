@@ -1,6 +1,6 @@
 /* Встреча с ведьмой на выходе из пещеры.
    Герой останавливается, камера приближается, появляется бабл ведьмы.
-   После двух секунд чтения игровое действие отдаляет камеру и продолжает бег. */
+   Любое игровое действие или две секунды без действий продолжают бег. */
 (() => {
   const witch = document.createElement("img");
   witch.id = "witch-midpoint";
@@ -58,7 +58,6 @@
   positionWitchAndBubble();
 
   let triggered = false;
-  let waitingForInteraction = false;
   let completed = false;
   const zoomDuration = 850;
   const readingDuration = 2000;
@@ -67,6 +66,7 @@
   function showBubble() {
     positionWitchAndBubble();
     requestAnimationFrame(() => {
+      if(completed||!triggered)return;
       bubble.style.opacity = "1";
       bubble.style.transform = "translate(-50%, 0) scale(1)";
     });
@@ -99,12 +99,11 @@
     showBubble();
 
     requestAnimationFrame(() => {
+      if(completed||!triggered)return;
       game.style.transform = "scale(1.42)";
     });
 
-    readingTimer=window.setTimeout(() => {
-      if (!completed) waitingForInteraction = true;
-    }, readingDuration);
+    readingTimer=window.setTimeout(() => continueAfterWitch(), readingDuration);
   }
 
   function continueAfterWitch(event) {
@@ -112,11 +111,8 @@
     if (event?.target?.closest?.('button,a,input,#speed-control,#result-screen')) return false;
     event?.preventDefault?.();
     event?.stopPropagation?.();
-    // Early actions do not skip the two-second reading window or queue a jump.
-    if (!waitingForInteraction) return true;
-
     completed = true;
-    waitingForInteraction = false;
+    clearTimeout(readingTimer);
     hideBubble();
     game.style.transform = "scale(1)";
 
@@ -140,13 +136,10 @@
     if (["ArrowUp", "ArrowDown", "Space", "KeyE", "Enter"].includes(event.code)) continueAfterWitch(event);
   }, true);
   window.runnerCancelWitchScene=()=>{
-    clearTimeout(readingTimer);clearTimeout(resumeTimer);waitingForInteraction=false;completed=true;hideBubble();
+    clearTimeout(readingTimer);clearTimeout(resumeTimer);completed=true;hideBubble();
   };
   window.runnerResetWitchScene=()=>{
     window.runnerCancelWitchScene();triggered=false;completed=false;game.style.transform='scale(1)';
-  };
-  window.runnerResetWitchScene=()=>{
-    window.runnerCancelWitchScene();triggered=false;completed=false;waitingForInteraction=false;
   };
   // The landing routes controls here when focus is outside the iframe.
   window.runnerContinueWitchScene = continueAfterWitch;

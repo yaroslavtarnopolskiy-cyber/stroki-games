@@ -12,12 +12,12 @@ async function toggleSound(){
  const action=++audioAction;
  soundButton.disabled=true;
  try{if(isPlaying){audio.pause();showAudioState(false)}else{await audio.play();if(action===audioAction)showAudioState(true)}}
- catch{if(action!==audioAction)return;showAudioState(false);document.querySelector('.audio-status').textContent='Не удалось включить музыку. Попробуйте ещё раз.'}
+ catch{if(action!==audioAction)return;showAudioState(false);document.querySelector('.audio-status').textContent='Не удалось включить музыку. Попробуй ещё раз.'}
  finally{if(action===audioAction)soundButton.disabled=false}
 }
 soundButton.addEventListener('click',toggleSound);
 document.addEventListener('pesni:game-activate',()=>{audioAction++;audio.pause();showAudioState(false);soundButton.disabled=false});
-audio.addEventListener('error',()=>{showAudioState(false);document.querySelector('.audio-status').textContent='Музыка недоступна. Попробуйте позже.'});
+audio.addEventListener('error',()=>{showAudioState(false);document.querySelector('.audio-status').textContent='Музыка недоступна. Попробуй позже.'});
 document.addEventListener('visibilitychange',()=>{if(document.hidden)audio.pause();else if(isPlaying)audio.play().catch(()=>showAudioState(false))});
 const menu=document.querySelector('#menu'),menuButton=document.querySelector('.menu-button'),menuNote=document.querySelector('.menu-note');
 function openMenu(){if(!menu.open)menu.showModal();menuButton?.setAttribute('aria-expanded','true')}

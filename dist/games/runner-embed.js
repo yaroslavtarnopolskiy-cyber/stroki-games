@@ -6,9 +6,9 @@
  stage.querySelector('.game-window-top')?.remove();stage.querySelector('.game-window-caption')?.remove();
  const launch=document.createElement('button');launch.type='button';launch.className='runner-launch';stage.append(launch);
  const mobileLaunch=matchMedia('(max-width:760px), (pointer:coarse)');
- function launchLabel(){if(stage.dataset.state==='idle')launch.textContent=mobileLaunch.matches&&matchMedia('(orientation:portrait)').matches?'Нажмите и поверните телефон, чтобы играть':'Играть'}
+ function launchLabel(){if(stage.dataset.state==='idle')launch.textContent=mobileLaunch.matches&&matchMedia('(orientation:portrait)').matches?'Нажми и поверни телефон, чтобы играть':'Играть'}
  launchLabel();mobileLaunch.addEventListener('change',launchLabel);matchMedia('(orientation:portrait)').addEventListener('change',launchLabel);
- const poster=stage.querySelector('.game-scene');poster.src='games/runner/assets/UI/start-screen.png';poster.alt='Стартовый экран игры «Маска человека»';
+ const poster=stage.querySelector('.game-scene');poster.src='games/runner/assets/UI/landing-scene.webp';poster.alt='Первая сцена игры «Добеги до любимой»';
  const loading=document.createElement('p');loading.className='runner-loading';loading.setAttribute('role','status');loading.hidden=true;stage.append(loading);
  const pauseToggle=document.createElement('button');pauseToggle.type='button';pauseToggle.className='runner-toggle';pauseToggle.setAttribute('aria-label','Поставить игру на паузу');pauseToggle.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6v12M15 6v12"/></svg>';pauseToggle.hidden=true;stage.append(pauseToggle);
  const pause=document.createElement('button');pause.type='button';pause.className='runner-pause';pause.textContent='Продолжить игру';pause.hidden=true;stage.append(pause);
@@ -40,8 +40,8 @@
    loading.hidden=false;loading.textContent='Загружаем игру…';launch.hidden=true;
    frame=document.createElement('iframe');frame.className='runner-frame';frame.title='Игра «Путь Кудым-Оша»';frame.allow='fullscreen; web-share; clipboard-write';
    frame.setAttribute('sandbox','allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-modals');
-   frame.src='games/runner/index.html?embedded=1&v=20261116-touch14';stage.append(frame);
-   loadTimer=setTimeout(()=>{if(!ready){loading.textContent='Загрузка занимает больше времени. Проверьте соединение или попробуйте ещё раз.';launch.textContent='Повторить загрузку';launch.hidden=false}},45000);
+   frame.src='games/runner/index.html?embedded=1&v=20261117-finale15';stage.append(frame);
+   loadTimer=setTimeout(()=>{if(!ready){loading.textContent='Загрузка занимает больше времени. Проверь соединение или попробуй ещё раз.';launch.textContent='Повторить загрузку';launch.hidden=false}},45000);
   }else if(!ready){frame.remove();frame=null;clearTimeout(loadTimer);return launchGame(full)}
   if(full)expandGame();else sync();
  }

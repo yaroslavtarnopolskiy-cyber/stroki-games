@@ -10,6 +10,7 @@
 
   let triggered = false;
   let finalImageReady = false;
+  let animationFrame=0,revealTimer=null,sequence=0;
   window.finalSequenceActive = false;
 
   const overlay = document.createElement("div");
@@ -52,9 +53,9 @@
     overlay.style.visibility = "visible";
     overlay.style.background = "rgba(0, 0, 0, 1)";
 
-    window.setTimeout(() => {
-      if(!window.finalSequenceActive)return;
-      if(!window.finalSequenceActive)return;
+    const token=sequence;
+    revealTimer=window.setTimeout(() => {
+      if(token!==sequence||!window.finalSequenceActive||window.runnerResultVisible)return;
       finalImageReady = true;
       overlay.style.pointerEvents = "auto";
       image.style.opacity = "1";
@@ -65,6 +66,7 @@
 
   function showWinScreen(event) {
     if (!finalImageReady) return;
+    finalImageReady=false;
     event.preventDefault();
     event.stopPropagation();
 
@@ -83,6 +85,7 @@
     if (triggered) return;
     triggered = true;
     window.finalSequenceActive = true;
+    const token=++sequence;
 
     /* Фон уже дошёл до конца — фиксируем его и продолжаем только бег героя. */
     running = false;
@@ -101,15 +104,14 @@
     const startedAt = performance.now();
 
     function moveHero(now) {
-      if(!window.finalSequenceActive||window.runnerResultVisible)return;
-      if(!window.finalSequenceActive)return;
+      if(token!==sequence||!window.finalSequenceActive||window.runnerResultVisible)return;
       const progress = Math.max(0, Math.min((now - startedAt) / duration, 1));
       const left = startLeft + distance * progress;
       hero.style.left = `${left}px`;
       updateHeroAnimation(now);
 
       if (progress < 1) {
-        requestAnimationFrame(moveHero);
+        animationFrame=requestAnimationFrame(moveHero);
         return;
       }
 
@@ -117,29 +119,32 @@
       revealFinalImage();
     }
 
-    requestAnimationFrame(moveHero);
+    animationFrame=requestAnimationFrame(moveHero);
   }
+
+  // Called by the game loop before the stopped camera can strand the hero.
+  window.runnerStartFinalScene=()=>{
+    if(triggered||window.infiniteMode||!gameStarted||window.runnerResultVisible||tutorialActive)return false;
+    runHeroToRightEdge();return true;
+  };
 
   function watchFinalScene() {
     if (!triggered && !window.infiniteMode && gameStarted && running && !window.runnerResultVisible && !tutorialActive) {
       const maxScroll = Math.max(0, world.scrollWidth - game.clientWidth);
       const backgroundAtEnd = maxScroll > 0 && worldX >= maxScroll - 1;
 
-      if (backgroundAtEnd) runHeroToRightEdge();
+      if (backgroundAtEnd) window.runnerStartFinalScene();
     }
 
     if (!triggered) requestAnimationFrame(watchFinalScene);
   }
 
   window.runnerResetFinalScene=()=>{
-    const wasTriggered=triggered;triggered=false;finalImageReady=false;window.finalSequenceActive=false;
-    overlay.style.visibility='hidden';overlay.style.pointerEvents='none';overlay.style.background='rgba(0,0,0,0)';
-    image.style.opacity='0';hero.style.left='';
-    if(wasTriggered)requestAnimationFrame(watchFinalScene);
-  };
-  window.runnerResetFinalScene=()=>{
-    const wasTriggered=triggered;triggered=false;finalImageReady=false;window.finalSequenceActive=false;
-    hero.style.left='';overlay.style.visibility='hidden';overlay.style.pointerEvents='none';overlay.style.background='rgba(0,0,0,0)';image.style.opacity='0';
+    const wasTriggered=triggered;
+    ++sequence;cancelAnimationFrame(animationFrame);clearTimeout(revealTimer);
+    triggered=false;finalImageReady=false;window.finalSequenceActive=false;
+    hero.style.left='';overlay.style.visibility='hidden';overlay.style.pointerEvents='none';overlay.style.background='rgba(0,0,0,0)';
+    image.style.opacity='0';image.style.transform='scale(1.035)';image.style.filter='blur(9px)';
     if(wasTriggered)requestAnimationFrame(watchFinalScene);
   };
   requestAnimationFrame(watchFinalScene);
