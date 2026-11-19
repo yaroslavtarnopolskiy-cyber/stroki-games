@@ -30,6 +30,7 @@ const markers=document.querySelector('#markers'),dots=document.querySelector('#o
 const engravingCrops={"komi": [25, 30, 380, 400], "kalyazin": [435, 25, 320, 410], "chuvashia": [727, 60, 430, 365], "caucasus": [1200, 0, 310, 435], "moscow": [45, 505, 470, 430], "udmurtia": [555, 515, 420, 420], "kazan": [1015, 525, 485, 410]};
 function engravingIcon(id){
  const [x,y,w,h]=engravingCrops[id];
+ if(id==='udmurtia') return `<svg viewBox="0 0 1200 1320" aria-hidden="true" class="engraved-marker italmas-marker"><image class="engraving-life" href="map-study/assets/markers/udmurtia-italmas.png" width="1200" height="1320"/><image class="engraving-death" href="map-study/assets/markers/udmurtia-italmas.png" width="1200" height="1320"/></svg>`;
  return `<svg viewBox="0 0 ${w} ${h}" aria-hidden="true" class="engraved-marker"><image class="engraving-life" href="map-study/assets/markers/${id}-life-baked.webp" width="${w}" height="${h}"/><image class="engraving-death" href="map-study/assets/markers/${id}-death-baked.webp" width="${w}" height="${h}"/></svg>`;
 }
 
@@ -50,6 +51,26 @@ if('IntersectionObserver' in window){
 const mapSvg=document.querySelector('.selection-art');
 const mapDefs=mapSvg.querySelector('defs');
 mapDefs.insertAdjacentHTML('beforeend',`<radialGradient id="water-front"><stop offset="0" stop-color="white"/><stop offset=".72" stop-color="white"/><stop offset="1" stop-color="white" stop-opacity="0"/></radialGradient><filter id="water-ripple" x="-15%" y="-15%" width="130%" height="130%"><feTurbulence type="fractalNoise" baseFrequency=".012 .018" numOctaves="2" seed="8" result="grain"/><feDisplacementMap in="SourceGraphic" in2="grain" scale="26" xChannelSelector="R" yChannelSelector="G"/></filter>`);
+// SVG masks affect painting, but do not exclude transparent pixels from hit testing.
+const landSilhouette = document.querySelector('.map-life-image');
+let landPixels;
+mapSvg.parentElement.addEventListener('click', event => {
+ if (event.target.closest('button') || !landSilhouette.naturalWidth) return;
+ const point = new DOMPoint(event.clientX,event.clientY).matrixTransform(mapSvg.getScreenCTM().inverse());
+ const x = Math.floor(point.x), y = Math.floor(point.y);
+ if (x < 0 || x >= 1536 || y < 0 || y >= 1024) return;
+ if (!landPixels) {
+  const canvas = document.createElement('canvas');
+  canvas.width = 1536;
+  canvas.height = 1024;
+  const context = canvas.getContext('2d', {willReadFrequently:true});
+  context.drawImage(landSilhouette, 0, 0, canvas.width, canvas.height);
+  landPixels = context.getImageData(0, 0, canvas.width, canvas.height).data;
+ }
+ if (landPixels[(y * 1536 + x) * 4 + 3] < 32) return;
+ const index = lands.findIndex(land => waterRegions.get(land.id).isPointInFill(point));
+ if (index >= 0) select(index, true);
+});
 const waterCircles=new Map(),waterRegions=new Map();
 lands.forEach(land=>{
  const ns='http://www.w3.org/2000/svg';

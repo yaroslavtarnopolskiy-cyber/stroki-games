@@ -251,3 +251,12 @@
 .voices-section .map-column>.world-switch{max-width:100%;min-height:0;aspect-ratio:400/106}
 .voices-section .map-column>.world-switch .world-switch-art{height:100%}
 .voices-section .map-column>.world-switch .world-mode-option{min-height:0}
+
+/* Use the same region outlines for taps and the existing animated fill. */
+.voices-section .selection-art .land-region{pointer-events:fill;cursor:pointer}
+@media(min-width:761px){
+ .voices-section .marker[data-index="4"] .marker-label{left:calc(50% - 24px)}
+}
+
+.voices-section .italmas-marker .engraving-life{filter:grayscale(1)}
+.voices-section .italmas-marker .engraving-death{filter:grayscale(1) invert(1)}

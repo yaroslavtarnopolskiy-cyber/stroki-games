@@ -30,7 +30,7 @@
   if(!frame){
    ready=false;menuOpen=false;loading.hidden=false;loading.textContent='Загружаем «Три дара»…';launch.hidden=true;
    frame=document.createElement('iframe');frame.className='runner-frame';frame.title='Игра «Три дара»';frame.allow='fullscreen; web-share; clipboard-write';frame.setAttribute('sandbox','allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-modals');
-   frame.addEventListener('load',()=>{configure();sync()});frame.src='games/three-gifts/index.html?embedded=1&v=site5';stage.append(frame);
+   frame.addEventListener('load',()=>{configure();sync()});frame.src='games/three-gifts/index.html?embedded=1&v=site7';stage.append(frame);
    watchLoad();
   }else if(!ready){frame.remove();frame=null;clearTimeout(timeout);return load(full)}
   if(full)expandGame();else sync();

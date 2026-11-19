@@ -40,7 +40,7 @@
    loading.hidden=false;loading.textContent='Загружаем игру…';launch.hidden=true;
    frame=document.createElement('iframe');frame.className='runner-frame';frame.title='Игра «Путь Кудым-Оша»';frame.allow='fullscreen; web-share; clipboard-write';
    frame.setAttribute('sandbox','allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-modals');
-   frame.src='games/runner/index.html?embedded=1&v=20261117-finale15';stage.append(frame);
+   frame.src='games/runner/index.html?embedded=1&v=20261119-jump16';stage.append(frame);
    loadTimer=setTimeout(()=>{if(!ready){loading.textContent='Загрузка занимает больше времени. Проверь соединение или попробуй ещё раз.';launch.textContent='Повторить загрузку';launch.hidden=false}},45000);
   }else if(!ready){frame.remove();frame=null;clearTimeout(loadTimer);return launchGame(full)}
   if(full)expandGame();else sync();

@@ -365,8 +365,8 @@ function startJump() {
   jump = {
     takeoffAt: performance.now() + jumpPreparationMs,
     form,
-    duration: (form === "bear" ? 1.12 : 0.55) / Number(speedSlider.value),
-    height: innerHeight * (form === "bear" ? 0.24 : 0.16)
+    duration: (form === "bear" ? 1.12 : 0.66) / Number(speedSlider.value),
+    height: innerHeight * (form === "bear" ? 0.24 : 0.25)
   };
   hero.classList.remove("running");
   hero.classList.add("jumping");
@@ -493,22 +493,40 @@ game.addEventListener("touchstart", (event) => {
   if (event.target.closest("#speed-control, #start-screen, #tutorial-overlay, #result-screen, button, a, input")) return;
   if (!gameStarted || !running) return;
   const touch = event.changedTouches[0];
-  touchStart = { x: touch.clientX, y: touch.clientY, time: performance.now() };
+  if (event.touches.length !== 1) { touchStart = null; return; }
+  touchStart = { id:touch.identifier, x:touch.clientX, y:touch.clientY, time:performance.now() };
   event.preventDefault();
 }, { passive: false });
 
-game.addEventListener("touchend", (event) => {
-  if (event.target.closest("#speed-control, #start-screen, #tutorial-overlay, #result-screen, button, a, input")) return;
-  if (!touchStart || !gameStarted || !running) return;
-  const touch = event.changedTouches[0];
-  const dx = touch.clientX - touchStart.x;
-  const dy = touch.clientY - touchStart.y;
-  const elapsed = performance.now() - touchStart.time;
-  const isUpSwipe = dy < -45 && Math.abs(dy) > Math.abs(dx) * 1.15 && elapsed < 650;
+function isJumpSwipe(touch, start, elapsed) {
+  const dx = touch.clientX - start.x;
+  const dy = touch.clientY - start.y;
+  const threshold = Math.max(22, Math.min(32, innerHeight * .075));
+  return dy <= -threshold && -dy > Math.abs(dx) * 1.15 && elapsed < 650;
+}
+
+game.addEventListener("touchmove", event => {
+  if (!touchStart || !running) return;
+  const touch = Array.from(event.changedTouches).find(t => t.identifier === touchStart.id);
+  if (!touch || !isJumpSwipe(touch, touchStart, performance.now() - touchStart.time)) return;
   touchStart = null;
   event.preventDefault();
-  if (isUpSwipe) window.runnerTouchInput.swipeUp();
-  else if(Math.abs(dx)<28&&Math.abs(dy)<28&&elapsed<450) window.runnerTouchInput.tap(touch.clientX,touch.clientY);
+  window.runnerTouchInput.swipeUp();
+}, { passive: false });
+
+game.addEventListener("touchend", event => {
+  if (!touchStart) return;
+  const touch = Array.from(event.changedTouches).find(t => t.identifier === touchStart.id);
+  if (!touch) return;
+  const start = touchStart;
+  touchStart = null;
+  if (!gameStarted || !running) return;
+  const elapsed = performance.now() - start.time;
+  event.preventDefault();
+  if (isJumpSwipe(touch, start, elapsed)) window.runnerTouchInput.swipeUp();
+  else if (Math.abs(touch.clientX - start.x) < 18 && Math.abs(touch.clientY - start.y) < 18 && elapsed < 450) {
+    window.runnerTouchInput.tap(touch.clientX, touch.clientY);
+  }
 }, { passive: false });
 
 window.addEventListener("keydown", (event) => {
