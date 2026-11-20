@@ -27,6 +27,7 @@ function render(direction=0){
  stopVisuals();clearPreview();$('card').style.transform='';$('card').style.opacity='1';$('card').dataset.dragging='false';const c=game.current,copy=endingCopy(c.type);$('story').textContent=copy?copy.text:formatCardText(c);$('ending-lead').hidden=!copy;$('ending-lead').textContent=copy?.lead||'';$('name').textContent=c.cardName||'';$('portrait').src=c.choice_number===1&&!game.inEnding?'assets/girl-figure-only-v1.png':c.portraitUrl;$('portrait').draggable=false;$('balance').value=game.stats;$('balance-ribbon').style.setProperty('--balance',game.stats+'%');
  $('card').setAttribute('aria-label',c.cardName||'Сюжетная карточка');
  const ending=(c.type||'').startsWith('ending');
+ if(ending)send('screen',{screen:'result'});
  const choices=!!(c.left?.label?.trim()||c.right?.label?.trim());
  $('ending-title').hidden=!ending;$('ending-title').textContent=ending?(c.cardName||'').replace(/^Концовка:\s*/,''):'';$('next').textContent='дальше →';$('ending-actions').hidden=!ending;$('ending-read').href=collectionUrl;
  $('card').style.opacity='1';$('card').dataset.ornament=c.choice_number%2?'bear':'rhombus';$('card').dataset.mode=ending?'ending':choices?'choice':'story';$('card').dataset.opening=String(c.choice_number===1&&!game.inEnding);$('card').dataset.direction='';$('phase-title').textContent=ending?'твой выбор привёл тебя сюда':choices?'твой выбор':'история';$('hint').textContent=ending?'продолжение — в рассказе «Маска человека»':choices?'листай влево или вправо, чтобы выбирать':'коснись, чтобы продолжить';

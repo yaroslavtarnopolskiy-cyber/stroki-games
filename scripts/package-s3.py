@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Prepare separate static RC/PROD folders. Never uploads or changes source assets."""
-import argparse,csv,hashlib,json,mimetypes,re,shutil,zipfile
+import argparse,csv,hashlib,json,mimetypes,re,shutil,zipfile,subprocess
+from functools import lru_cache
 from pathlib import Path
 from urllib.parse import urljoin
 
@@ -9,6 +10,10 @@ HOSTS={'rc':'https://landings.rc.stage.books.mts.ru/','prod':'https://landings.s
 TEXT={'.html','.js','.mjs','.css','.json','.yaml','.yml','.svg','.txt','.xml'}
 SKIP_EXT={'.md','.psd','.zip','.bak','.log','.map'}
 MIME={'.js':'application/javascript','.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json','.svg':'image/svg+xml','.webp':'image/webp','.mp4':'video/mp4','.mp3':'audio/mpeg','.otf':'font/otf','.ttf':'font/ttf','.yaml':'application/yaml','.yml':'application/yaml'}
+@lru_cache(maxsize=None)
+def inline_modules(source):
+ return subprocess.check_output(['node',str(ROOT/'scripts/inline-modules.mjs'),str(source)]).decode('utf-8')
+
 def digest(b):return hashlib.sha256(b).hexdigest()
 def build(out,slug,env):
  dest=out/env/slug
@@ -28,12 +33,15 @@ def build(out,slug,env):
    try:text=body.decode('utf-8')
    except UnicodeDecodeError:text=None
    if text is not None:
+    if source.suffix=='.html':text=inline_modules(source)
+    text=text.replace('https://pesni-zemli-hero.neonpersimmon.chatgpt.site/',base)
+    if str(rel)=='robots.txt':text='User-agent: *\n'+('Disallow: /'+slug+'/\n' if env=='rc' else 'Allow: /'+slug+'/\nSitemap: '+base+'sitemap.xml\n')
     text=text.replace('.mjs','.js')
     if str(rel)=='index.html':
      text=text.replace('https://pesni-zemli-hero.neonpersimmon.chatgpt.site/',base)
      text=text.replace('<head>', '<head>\n<script>if(location.pathname.endsWith("/'+slug+'"))location.replace(location.pathname+"/"+location.search+location.hash);</script>',1)
-     text=text.replace('</head>','<link rel="canonical" href="'+base+'">\n</head>',1)
-     if env=='rc':text=text.replace('<head>','<head>\n<meta name="robots" content="noindex,nofollow">',1)
+     text=re.sub(r'<link rel="canonical"[^>]*>', '<link rel="canonical" href="'+base+'">',text)
+     if env=='rc':text=re.sub(r'<meta name="robots"[^>]*>', '<meta name="robots" content="noindex,nofollow">',text)
     body=text.encode('utf-8')
   else:
    assert original==digest(body)
@@ -52,7 +60,7 @@ def build(out,slug,env):
  with zipfile.ZipFile(archive) as z:
   assert z.testzip() is None
   assert slug+'/index.html' in z.namelist()
- summary={'environment':env,'url':base,'index_url':base+'index.html','folder':str(dest),'archive':str(archive),'files':len(rows),'unpacked_bytes':sum(r['bytes'] for r in rows),'archive_bytes':archive.stat().st_size,'archive_sha256':digest(archive.read_bytes()),'binary_assets_unchanged':binary_unchanged,'mjs_adapted_to_js':True,'uploaded':False}
+ summary={'environment':env,'url':base,'index_url':base+'index.html','folder':str(dest),'archive':str(archive),'files':len(rows),'unpacked_bytes':sum(r['bytes'] for r in rows),'archive_bytes':archive.stat().st_size,'archive_sha256':digest(archive.read_bytes()),'binary_assets_unchanged':binary_unchanged,'mjs_adapted_to_js':True,'module_scripts_inlined':True,'uploaded':False}
  return summary
 if __name__=='__main__':
  a=argparse.ArgumentParser();a.add_argument('--output',required=True);a.add_argument('--slug',default='pesni-zemli');args=a.parse_args()

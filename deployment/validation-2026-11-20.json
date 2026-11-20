@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "wrongMime": true,
+  "landingModules": true,
+  "cardsGame": true,
+  "sharingDialog": true,
+  "metrikaForwarding": true,
+  "canonical": true,
+  "errors": [],
+  "missing": [],
+  "moduleRequests": [],
+  "goals": [
+    "story_quiz_complete",
+    "land_open",
+    "game_launch_click",
+    "game_ready",
+    "album_promo_view",
+    "story_quiz_answer",
+    "story_quiz_answer",
+    "story_quiz_answer",
+    "story_quiz_complete",
+    "story_quiz_result_view",
+    "story_share_preview",
+    "story_share_copy"
+  ]
+}

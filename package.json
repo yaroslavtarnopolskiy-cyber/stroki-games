@@ -1,0 +1,10 @@
+{
+  "name": "pesni-zemli-landing",
+  "private": true,
+  "scripts": {
+    "package:s3": "python3 scripts/package-s3.py --output output/releases/current"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2"
+  }
+}

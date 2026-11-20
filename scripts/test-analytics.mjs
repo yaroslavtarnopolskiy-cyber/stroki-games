@@ -1,0 +1,13 @@
+import vm from 'node:vm';import fs from 'node:fs';import assert from 'node:assert/strict';
+const events={},windowEvents={},goals=[],frameWindow={},frame={contentWindow:frameWindow};
+const context={document:{documentElement:{dataset:{theme:'life'}},addEventListener:(n,fn)=>events[n]=fn,querySelector:()=>frame},window:{ym:(...args)=>goals.push(args),addEventListener:(n,fn)=>windowEvents[n]=fn},location:{hostname:'landings.stroki.mts.ru',origin:'https://landings.stroki.mts.ru'}};
+vm.runInNewContext(fs.readFileSync(new URL('../dist/analytics.js',import.meta.url),'utf8'),context);
+events['pesni:analytics']({detail:{name:'story_quiz_complete',answers:[0,1,2],secret:'excluded'}});
+assert.equal(goals[0][1],'reachGoal');assert.equal(goals[0][2],'story_quiz_complete');assert.equal(goals[0][3].environment,'prod');assert.equal(goals[0][3].secret,undefined);
+events['pesni:analytics']({detail:{name:'unapproved'}});assert.equal(goals.length,1);
+const data={channel:'pesni-cards',type:'ready'};
+windowEvents.message({origin:'https://other.example',source:frameWindow,data});assert.equal(goals.length,1);
+windowEvents.message({origin:context.location.origin,source:{},data});assert.equal(goals.length,1);
+windowEvents.message({origin:context.location.origin,source:frameWindow,data});windowEvents.message({origin:context.location.origin,source:frameWindow,data});assert.equal(goals.length,2);assert.equal(goals[1][2],'game_ready');
+context.window.ym=()=>{throw Error('blocked')};events['pesni:land-selected']({detail:{land:'komi'}});
+console.log('PASS: allowed events forwarded, unknown fields filtered, trusted iframe origin/source verified, readiness deduplicated, analytics cannot break UI');

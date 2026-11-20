@@ -32,9 +32,11 @@ python3 -m http.server 4173 --directory dist
 
 ## Проверки
 
-Нужен Node.js; внешние npm-пакеты для этих тестов не требуются.
+Нужен Node.js. Перед сборкой S3-пакета и проверкой встроенных модулей выполни `npm ci` (esbuild закреплён в package-lock.json). Остальные проверки используют стандартные модули Node.js.
 
 ```bash
+node scripts/test-analytics.mjs
+node scripts/test-inline-modules.mjs
 node scripts/test-cards-engine.mjs
 node scripts/test-cards-host.mjs
 node scripts/test-cards-ui.mjs
@@ -98,3 +100,5 @@ python3 scripts/package-s3.py --output output/releases/current
 Подробная инструкция и порядок передачи на PROD: [deployment/RC-PROD.md](deployment/RC-PROD.md). Корпоративный GitLab используется по процессу Строк для хранения опубликованной PROD-версии; это обновление относится к GitHub и не публикует сайт в S3.
 
 Последние изменения включают арт-карточки земель для шэринга, компактный результат подбора с мягким раскрытием, выравнивание сборника по сетке, исправленный финал раннера и продолжение встречи с колдуньей по действию или через две секунды.
+
+Актуальные события Метрики, SEO и защита модулей от неверного MIME описаны в [deployment/ANALYTICS-SEO.md](deployment/ANALYTICS-SEO.md).

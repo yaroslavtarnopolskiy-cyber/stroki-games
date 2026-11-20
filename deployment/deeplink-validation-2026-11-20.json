@@ -1,0 +1,178 @@
+{
+  "date": "2026-11-20",
+  "method": "HTTP GET with desktop, iPhone and Android User-Agent; no physical devices or installed apps",
+  "source_checks": "All 28 suites passed; RC and PROD ZIP contain the eight exact supplied links; three games point to collection",
+  "desktop": [
+    {
+      "code": "t75hb4td",
+      "status": 200,
+      "destination": "https://stroki.mts.ru/book/pesni-zemli-388360",
+      "title": "Электронная библиотека МТС - читайте и слушайте книги онлайн в Строках"
+    },
+    {
+      "code": "2y5x9p54",
+      "status": 200,
+      "destination": "https://stroki.mts.ru/book/maska-cheloveka-388654",
+      "title": "Электронная библиотека МТС - читайте и слушайте книги онлайн в Строках"
+    },
+    {
+      "code": "jce0jbvp",
+      "status": 200,
+      "destination": "https://stroki.mts.ru/book/sladki-yagodki-da-smertyu-pakhnut-388656",
+      "title": "Электронная библиотека МТС - читайте и слушайте книги онлайн в Строках"
+    },
+    {
+      "code": "j74qgr6x",
+      "status": 200,
+      "destination": "https://stroki.mts.ru/book/svadba-vody-388657",
+      "title": "Электронная библиотека МТС - читайте и слушайте книги онлайн в Строках"
+    },
+    {
+      "code": "2ui31gw4",
+      "status": 200,
+      "destination": "https://stroki.mts.ru/book/radi-tebya-lyubov-nelyubov-388658",
+      "title": "Электронная библиотека МТС - читайте и слушайте книги онлайн в Строках"
+    },
+    {
+      "code": "t8zxvuww",
+      "status": 200,
+      "destination": "https://stroki.mts.ru/book/gde-derevya-do-nebes-388659",
+      "title": "Электронная библиотека МТС - читайте и слушайте книги онлайн в Строках"
+    },
+    {
+      "code": "53p6oe0h",
+      "status": 200,
+      "destination": "https://stroki.mts.ru/book/ostaneshsya-so-mnoy-388660",
+      "title": "Электронная библиотека МТС - читайте и слушайте книги онлайн в Строках"
+    },
+    {
+      "code": "y2t4ofj7",
+      "status": 200,
+      "destination": "https://stroki.mts.ru/book/zolotaya-kazna-388661",
+      "title": "Электронная библиотека МТС - читайте и слушайте книги онлайн в Строках"
+    }
+  ],
+  "mobile_http": [
+    {
+      "device": "ios",
+      "code": "t75hb4td",
+      "result": "app_store_handoff",
+      "http_status": 301,
+      "verification_limit": "HTTP client cannot open external itms-appss scheme",
+      "diagnostic": "HTTP Error 301: Apple WebObjects 5.9.9-2 - Redirection to url 'itms-appss://apps.apple.com/RU/app/id1035268144?mt=8' is not allowed"
+    },
+    {
+      "device": "ios",
+      "code": "2y5x9p54",
+      "result": "app_store_handoff",
+      "http_status": 301,
+      "verification_limit": "HTTP client cannot open external itms-appss scheme",
+      "diagnostic": "HTTP Error 301: Apple WebObjects 5.9.9-2 - Redirection to url 'itms-appss://apps.apple.com/RU/app/id1035268144?mt=8' is not allowed"
+    },
+    {
+      "device": "ios",
+      "code": "jce0jbvp",
+      "result": "app_store_handoff",
+      "http_status": 301,
+      "verification_limit": "HTTP client cannot open external itms-appss scheme",
+      "diagnostic": "HTTP Error 301: Apple WebObjects 5.9.9-2 - Redirection to url 'itms-appss://apps.apple.com/RU/app/id1035268144?mt=8' is not allowed"
+    },
+    {
+      "device": "ios",
+      "code": "j74qgr6x",
+      "result": "app_store_handoff",
+      "http_status": 301,
+      "verification_limit": "HTTP client cannot open external itms-appss scheme",
+      "diagnostic": "HTTP Error 301: Apple WebObjects 5.9.9-2 - Redirection to url 'itms-appss://apps.apple.com/RU/app/id1035268144?mt=8' is not allowed"
+    },
+    {
+      "device": "ios",
+      "code": "2ui31gw4",
+      "result": "app_store_handoff",
+      "http_status": 301,
+      "verification_limit": "HTTP client cannot open external itms-appss scheme",
+      "diagnostic": "HTTP Error 301: Apple WebObjects 5.9.9-2 - Redirection to url 'itms-appss://apps.apple.com/RU/app/id1035268144?mt=8' is not allowed"
+    },
+    {
+      "device": "ios",
+      "code": "t8zxvuww",
+      "result": "app_store_handoff",
+      "http_status": 301,
+      "verification_limit": "HTTP client cannot open external itms-appss scheme",
+      "diagnostic": "HTTP Error 301: Apple WebObjects 5.9.9-2 - Redirection to url 'itms-appss://apps.apple.com/RU/app/id1035268144?mt=8' is not allowed"
+    },
+    {
+      "device": "ios",
+      "code": "53p6oe0h",
+      "result": "app_store_handoff",
+      "http_status": 301,
+      "verification_limit": "HTTP client cannot open external itms-appss scheme",
+      "diagnostic": "HTTP Error 301: Apple WebObjects 5.9.9-2 - Redirection to url 'itms-appss://apps.apple.com/RU/app/id1035268144?mt=8' is not allowed"
+    },
+    {
+      "device": "ios",
+      "code": "y2t4ofj7",
+      "result": "app_store_handoff",
+      "http_status": 301,
+      "verification_limit": "HTTP client cannot open external itms-appss scheme",
+      "diagnostic": "HTTP Error 301: Apple WebObjects 5.9.9-2 - Redirection to url 'itms-appss://apps.apple.com/RU/app/id1035268144?mt=8' is not allowed"
+    },
+    {
+      "device": "android",
+      "code": "t75hb4td",
+      "status": 200,
+      "destination": "https://mtsbooks.onelink.me/zdZb/t75hb4td",
+      "result": "smartlink_page_available"
+    },
+    {
+      "device": "android",
+      "code": "2y5x9p54",
+      "status": 200,
+      "destination": "https://mtsbooks.onelink.me/zdZb/2y5x9p54",
+      "result": "smartlink_page_available"
+    },
+    {
+      "device": "android",
+      "code": "jce0jbvp",
+      "status": 200,
+      "destination": "https://mtsbooks.onelink.me/zdZb/jce0jbvp",
+      "result": "smartlink_page_available"
+    },
+    {
+      "device": "android",
+      "code": "j74qgr6x",
+      "status": 200,
+      "destination": "https://mtsbooks.onelink.me/zdZb/j74qgr6x",
+      "result": "smartlink_page_available"
+    },
+    {
+      "device": "android",
+      "code": "2ui31gw4",
+      "status": 200,
+      "destination": "https://mtsbooks.onelink.me/zdZb/2ui31gw4",
+      "result": "smartlink_page_available"
+    },
+    {
+      "device": "android",
+      "code": "t8zxvuww",
+      "status": 200,
+      "destination": "https://mtsbooks.onelink.me/zdZb/t8zxvuww",
+      "result": "smartlink_page_available"
+    },
+    {
+      "device": "android",
+      "code": "53p6oe0h",
+      "status": 200,
+      "destination": "https://mtsbooks.onelink.me/zdZb/53p6oe0h",
+      "result": "smartlink_page_available"
+    },
+    {
+      "device": "android",
+      "code": "y2t4ofj7",
+      "status": 200,
+      "destination": "https://mtsbooks.onelink.me/zdZb/y2t4ofj7",
+      "result": "smartlink_page_available"
+    }
+  ],
+  "limit": "Opening the exact story inside an installed iOS/Android app was not verified."
+}
